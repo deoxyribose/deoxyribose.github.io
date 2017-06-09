@@ -16,5 +16,11 @@ Here it is in all its matplotlib glory:
 
 
 ![Dimension 1 vs 2, Blue rhymes with True, Green rhymes with Dream!]({{ site.url }}/images/it_keeps_failing_in_new_and_surprising_ways1.png)
+![Dimension 2 vs 3]({{ site.url }}/images/it_keeps_failing_in_new_and_surprising_ways1.png)
+![Dimension 3 vs 4]({{ site.url }}/images/it_keeps_failing_in_new_and_surprising_ways1.png)
+![Dimension 4 vs 5]({{ site.url }}/images/it_keeps_failing_in_new_and_surprising_ways1.png)
+![Dimension 5 vs 6]({{ site.url }}/images/it_keeps_failing_in_new_and_surprising_ways1.png)
+![Dimension 6 vs 7]({{ site.url }}/images/it_keeps_failing_in_new_and_surprising_ways1.png)
+![Dimension 7 vs 8]({{ site.url }}/images/it_keeps_failing_in_new_and_surprising_ways1.png)
 
 
