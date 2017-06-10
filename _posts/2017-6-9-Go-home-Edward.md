@@ -3,7 +3,13 @@ layout: post
 title: Stochastic gradient descent, and a lesson in patience
 ---
 
-Today, I want to show the difference that tuning learning parameters such as number of iterations and number of samples can make. I'm using Stochastic Gradient Descent<sup>1</sup> to minimize the KLqp divergence between a Gaussian factor model and its variational model. The mean is sparse, the components are sparse, the component weights are sparse; only the noise variances are dense, and increasing for every component. The latent variable is a unit Gaussian.
+Today, I want to show the difference that tuning learning hyperparameters can do. Learning hyperparameters are the input that the user gives to the optimizer besides the loss function, such as the number of iterations, minibatch size, the number of samples in any Monte Carlo approximations, the initial learning rate, and learning rate decay.
+
+I'm using stochastic gradient descent to minimize the KLqp divergence between a Gaussian factor model and its variational model. 
+
+A little about the factor model and how to train it.
+We observe points drawn from a D-dimensional Gaussian, and we think $$a^2 + b^2 = c^2$$
+The mean is sparse, the components are sparse, the component weights are sparse; only the noise variances are dense, and increasing for every component. The latent variable is a unit Gaussian.
 
 Here it is in all its matplotlib glory:
 
