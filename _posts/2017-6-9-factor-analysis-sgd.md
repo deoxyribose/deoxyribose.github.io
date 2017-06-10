@@ -1,14 +1,15 @@
 ---
 layout: post
-title: Stochastic gradient descent, and a lesson in patience
+title: Variational factor analysis, doubly stochastic estimation, and a lesson in patience.
 ---
 
 Today, I want to show the difference that tuning learning hyperparameters can do. Learning hyperparameters are the input that the user gives to the optimizer besides the loss function, such as the number of iterations, minibatch size, the number of samples in any Monte Carlo approximations, the initial learning rate, and learning rate decay.
 
 I'm using stochastic gradient descent to minimize the KLqp divergence between a Gaussian factor model and its variational model. 
 
-A little about the factor model and how to train it.
-We observe points drawn from a D-dimensional Gaussian, and we think $$a^2 + b^2 = c^2$$
+Say we observe N points drawn from a D-dimensional Gaussian, but we don't want to fit all D*(D+1)/2 + D parameters. We'd still like to model the covariances, so we need more than the 2*D parameters needed for a fully factorized Gaussian, where the joint distribution is a product of one-dimensional Gaussians. 
+
+$$a^2 + b^2 = c^2$$
 The mean is sparse, the components are sparse, the component weights are sparse; only the noise variances are dense, and increasing for every component. The latent variable is a unit Gaussian.
 
 Here it is in all its matplotlib glory:
