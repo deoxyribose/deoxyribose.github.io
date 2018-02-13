@@ -22,14 +22,16 @@ What characters live in latent spaces? There are two kinds - continous and discr
 
 <pre><code>
 #### Example 
-Say you have a dataset of cars, their model name, price, engine specs, size and more. A continous latent variable model like PCA, might find latent spaces in which moving in a direction called "Family - Sports" reveals Fiats on one side and Ferraris on the other. Cars in the middle would interpolate between the two, maybe like a Ford. A discrete latent variable model might find clusters or communities, where every member share enough properties to make them distinct from other cars. Say all Japanese cars are produced in the same three kinds of factories. The discrete latent variable might then "unwittingly" represent those factories.
+Say you have a dataset of cars, their model name, price, engine specs, size 
+and more. 
+A continous latent variable model like PCA, might find latent spaces in which moving in a direction called "Family - Sports" reveals Fiats on one side and Ferraris on the other. Cars in the middle would interpolate between the two, maybe like a Ford. 
+A discrete latent variable model might find clusters or communities, where every member share enough properties to make them distinct from other cars. Say all Japanese cars are produced in the same three kinds of factories. The discrete latent variable might then "unwittingly" represent those factories.
 </code></pre>
 
 Combing back to the tree search, a search move consists of growing the tree by building an extension of the model on the current leaf, by applying a composition rule. More technically, when applying a production rule P to a matrix S, sample from the posterior for P’s generative model conditioned
 on it evaluating (exactly) to S. Each production rule has its own MCMC sampler. Sampling a finished model would consist of ancestral sampling, where each ancestor has his own sampling method. Here comes the exciting part:
 <pre><code>
-"""This procedure
-allows us to reuse computations between different structures.
+"""This procedureallows us to reuse computations between different structures.
 Most of the computation time is in the initialization
 steps. Each of these steps only needs to be run once on the
 full matrix, specifically when the first production rule is applied.
@@ -43,16 +45,18 @@ For example, we might extend a low rank factorization by modelling its latent va
 We could compose the reverse by adding a factor model to each component in the mixture and get a mixture of factor models, a very general density estimator (think balloon-animals, but the segments don't need to connected or have the same size and shape). Those would be level-2 in the tree. 
 
 In general any factorization can be used to extend any of the factors in the current level-n composition. This presents us with a decision: what rule should we use, and where should we apply it?
-CSS applies all composition rules to the K models that had the best predictive likelihood on held-out data. Finding the predictive likelihood is challenging in itself, a problem Grosse et al. tackle by expanding out the products in the expression, we
-can write the decomposition uniquely in the form
-X = U1V1 + · · · + UnVn + E, (1)
+CSS applies all composition rules to the K models that had the best predictive likelihood on held-out data. Finding the predictive likelihood is challenging in itself, a problem Grosse et al. tackle by expanding out the products in the expression X = U1V1 + · · · + UnVn + E, (1)
 where E is an i.i.d. Gaussian “noise” matrix and the Ui’s
 are any of the following: (1) a component matrix G, M,
 or B, (2) some number of Cs followed by G, (3) a Gaussian
 scale mixture.  The held-out row x can therefore be
 represented as:
 x = VT1 u1 + · · · + VTn un + e. (2)
+
+
 The predictive likelihood is given by:
 p(x|XO) = int p(UO, V |XO)p(u|UO)p(x|u, V ) dUO du dV (3)
 where UO is shorthand for (UO1, . . . , UOn) and u is shorthand
-for (u1, . . . , un). In order to evaluate this integral, we generate samples from the posterior p(UO, V |X) using the MCMC samplers, and compute the sample average of ppred(x), int p(u|UO)p(x|u, V ) du
+for (u1, . . . , un). 
+
+In order to evaluate this integral, we generate samples from the posterior p(UO, V |X) using the MCMC samplers, and compute the sample average of ppred(x), int p(u|UO)p(x|u, V ) du
