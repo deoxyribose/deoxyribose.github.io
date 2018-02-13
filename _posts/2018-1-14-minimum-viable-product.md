@@ -38,14 +38,14 @@ on it evaluating (exactly) to S. Each production rule has its own MCMC sampler. 
 
 Here comes the exciting part:
 <pre><code>
-"""This procedure allows us to reuse computations between different structures.
+This procedure allows us to reuse computations between different structures.
 Most of the computation time is in the initialization
 steps. Each of these steps only needs to be run once on the
 full matrix, specifically when the first production rule is applied.
 Subsequent initialization steps are performed on the
 component matrices, which are considerably smaller. This
 allows a large number of high level structures to be fit for a
-fraction of the cost of fitting them from scratch."""
+fraction of the cost of fitting them from scratch.
 </code></pre>
 
 For example, we might extend a low rank factorization by modelling its latent variable matrix as Gaussian mixture. We compose a low rank factor model with a mixture model to get a mixture-prior low rank model. Perhaps we are looking for brain regions in EEG data. 
