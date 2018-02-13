@@ -24,8 +24,13 @@ What characters live in latent spaces? There are two kinds - continous and discr
 #### Example 
 Say you have a dataset of cars, their model name, price, engine specs, size 
 and more. 
-A continous latent variable model like PCA, might find latent spaces in which moving in a direction called "Family - Sports" reveals Fiats on one side and Ferraris on the other. Cars in the middle would interpolate between the two, maybe like a Ford. 
-A discrete latent variable model might find clusters or communities, where every member share enough properties to make them distinct from other cars. Say all Japanese cars are produced in the same three kinds of factories. The discrete latent variable might then "unwittingly" represent those factories.
+A continous latent variable model like PCA, might find latent spaces in which 
+moving in a direction called "Family - Sports" reveals Fiats on one side and 
+Ferraris on the other. Cars in the middle would interpolate between the two, 
+maybe like a Ford. 
+A discrete latent variable model might find clusters or communities, where 
+every member share enough properties to make them distinct from other cars. Say all Japanese cars are produced in the same three kinds of factories. 
+The discrete latent variable might then "unwittingly" represent those factories.
 </code></pre>
 
 Combing back to the tree search, a search move consists of growing the tree by building an extension of the model on the current leaf, by applying a composition rule. More technically, when applying a production rule P to a matrix S, sample from the posterior for P’s generative model conditioned
@@ -33,7 +38,7 @@ on it evaluating (exactly) to S. Each production rule has its own MCMC sampler. 
 
 Here comes the exciting part:
 <pre><code>
-"""This procedureallows us to reuse computations between different structures.
+"""This procedure allows us to reuse computations between different structures.
 Most of the computation time is in the initialization
 steps. Each of these steps only needs to be run once on the
 full matrix, specifically when the first production rule is applied.
