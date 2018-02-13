@@ -29,7 +29,9 @@ A discrete latent variable model might find clusters or communities, where every
 </code></pre>
 
 Combing back to the tree search, a search move consists of growing the tree by building an extension of the model on the current leaf, by applying a composition rule. More technically, when applying a production rule P to a matrix S, sample from the posterior for P’s generative model conditioned
-on it evaluating (exactly) to S. Each production rule has its own MCMC sampler. Sampling a finished model would consist of ancestral sampling, where each ancestor has his own sampling method. Here comes the exciting part:
+on it evaluating (exactly) to S. Each production rule has its own MCMC sampler. Sampling a finished model would consist of ancestral sampling, where each ancestor has his own sampling method. 
+
+Here comes the exciting part:
 <pre><code>
 """This procedureallows us to reuse computations between different structures.
 Most of the computation time is in the initialization
