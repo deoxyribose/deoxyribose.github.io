@@ -17,7 +17,7 @@ Linked under Research, one finds the paper "Exploiting compositionality to explo
 
 ### Many models are factorizations
 
-A number of machine learning models are matrix factorizations. A simpler version of a factor model that assumes equal noise variance in all variables, PCA factorizes a data matrix into a product of orthogonal directions of greatest variance in the data and coordinates along these directions so as to place each data point in the latent space. These coordinates are the latent variable.
+A number of machine learning models are matrix factorizations. A simpler version of a factor model that assumes equal noise variance in all variables, probabilistic PCA, factorizes the mean of the observed Gaussian into a product of orthogonal directions of greatest variance in the data and coordinates along these directions so as to place each data point in the latent space. These coordinates are the latent variable. The directions of greaters variance, or principal components, would be considered parameters, not latent variables. The difference is that different parameters from a parameter distribution yield different models, while different latent variables from a latent distribution yield different data points.
 What characters live in latent spaces? There are two kinds - continous and discrete. Discrete latent variables are usually objects and events, say "apple" or "seizure" or "walking". Continous latent variables can vary in degree, like size, shape, color and direction, so we might have "300 meters long", "Flat", "Yellow" and ". Discrete variables tend to be concepts, continous ones tend to be percepts.
 
 <pre><code>
@@ -29,7 +29,8 @@ moving in a direction called "Family - Sports" reveals Fiats on one side and
 Ferraris on the other. Cars in the middle would interpolate between the two, 
 maybe like a Ford. 
 A discrete latent variable model might find clusters or communities, where 
-every member share enough properties to make them distinct from other cars. Say all Japanese cars are produced in the same three kinds of factories. 
+every member share enough properties to make them distinct from other cars. 
+Say all Japanese cars are produced in the same three kinds of factories. 
 The discrete latent variable might then "unwittingly" represent those factories.
 </code></pre>
 
@@ -66,4 +67,10 @@ p(x|XO) = int p(UO, V |XO)p(u|UO)p(x|u, V ) dUO du dV (3)
 where UO is shorthand for (UO1, . . . , UOn) and u is shorthand
 for (u1, . . . , un). 
 
-In order to evaluate this integral, we generate samples from the posterior p(UO, V |X) using the MCMC samplers, and compute the sample average of ppred(x), int p(u|UO)p(x|u, V ) du
+In order to evaluate this integral, we generate samples from the posterior 
+p(O, V |X) using the MCMC samplers, and compute the sample average of ppred(x), int p(u|UO)p(x|u, V ) du
+
+Me and my supervisor think that predictive likelihood is only one relevant measure of model quality. An orthogonal measure is robustness: how much do parameters vary between different training sets? 
+Consider this figure from Kevin Murphy's book Machine Learning, A Probablistic Perspective:
+(figure of ring scatter plot and a mixture of factors fit)
+No matter
