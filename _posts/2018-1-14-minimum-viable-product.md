@@ -73,4 +73,4 @@ p(O, V |X) using the MCMC samplers, and compute the sample average of ppred(x), 
 Me and my supervisor think that predictive likelihood is only one relevant measure of model quality. An orthogonal measure is robustness: how much do parameters vary between different training sets? 
 Consider this figure from Kevin Murphy's book Machine Learning, A Probablistic Perspective:
 (figure of ring scatter plot and a mixture of factors fit)
-No matter
+No matter how we draw a sample from the ring, a model that captures the ring structure, would always fit more or less the same ring. But a mixture of factors would yield different orientations, sizes and numbers of the individual factors. The ring model is hard to vary while maintaining the same goodness of fit. The mixture model is easy to vary while maintaining the same goodness of fit.
