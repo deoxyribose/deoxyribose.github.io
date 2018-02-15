@@ -3,6 +3,9 @@ layout: post
 title: A minimally viable machine learning service
 ---
 
+>For the theory-practice iteration to work, the scientist must be, as it were, mentally ambidextrous; fascinated equally on the one hand by possible meanings, theories, and tentative models to be induced from data and the practical reality of the real world, and on the other with the factual implications deducible from tentative theories, models and hypotheses.
+    - George E. P. Box
+
 A canonical virtue of science and engineering is simplicity. Between two theories that explain a phenomenon equally well, a scientist chooses the simpler one. Why? 
 
 Occam's razor says not to "multiply causes", and its 20th century [Bayesian update](http://mlg.eng.cam.ac.uk/zoubin/papers/05occam/occam.pdf) says that hypotheses that are "hard to vary" are preferred. I borrow the "hard to vary" phrase from David Deutsch, who builds his epistemology on this principle (see [this TED talk](https://www.ted.com/talks/david_deutsch_a_new_way_to_explain_explanation) for a quick exposition). 
