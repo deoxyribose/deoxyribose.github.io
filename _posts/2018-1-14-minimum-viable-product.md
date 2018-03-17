@@ -6,7 +6,7 @@ title: A minimally viable machine learning service
 >For the theory-practice iteration to work, the scientist must be, as it were, mentally ambidextrous; fascinated equally on the one hand by possible meanings, theories, and tentative models to be induced from data and the practical reality of the real world, and on the other with the factual implications deducible from tentative theories, models and hypotheses.
     - George E. P. Box
 
-A canonical virtue of science and engineering is simplicity. Between two theories that explain a phenomenon equally well, a scientist chooses the simpler one. Why? 
+A canonical virtue of science and engineering is simplicity. Between two hypotheses that fit observations equally well, a scientist chooses the simpler one. Why? 
 
 Occam's razor says not to "multiply causes", and its 20th century [Bayesian update](http://mlg.eng.cam.ac.uk/zoubin/papers/05occam/occam.pdf) says that hypotheses that are "hard to vary" are preferred. I borrow the "hard to vary" phrase from David Deutsch, who builds his epistemology on this principle (see [this TED talk](https://www.ted.com/talks/david_deutsch_a_new_way_to_explain_explanation) for a quick exposition). 
 
@@ -23,8 +23,8 @@ Linked under Research, one finds the paper "Exploiting compositionality to explo
 A number of machine learning models are matrix factorizations. A simpler version of a factor model that assumes equal noise variance in all variables, probabilistic PCA, factorizes the mean of the observed Gaussian into a product of orthogonal directions of greatest variance in the data and coordinates along these directions so as to place each data point in the latent space. These coordinates are the latent variable. The directions of greaters variance, or principal components, would be considered parameters, not latent variables. The difference is that different parameters from a parameter distribution yield different models, while different latent variables from a latent distribution yield different data points.
 What characters live in latent spaces? There are two kinds - continous and discrete. Discrete latent variables are usually objects and events, say "apple" or "seizure" or "walking". Continous latent variables can vary in degree, like size, shape, color and direction, so we might have "300 meters long", "Flat", "Yellow" and ". Discrete variables tend to be concepts, continous ones tend to be percepts.
 
-<pre><code>
-#### Example 
+
+>#### Example 
 Say you have a dataset of cars, their model name, price, engine specs, size 
 and more. 
 A continous latent variable model like PCA, might find latent spaces in which 
@@ -35,14 +35,13 @@ A discrete latent variable model might find clusters or communities, where
 every member share enough properties to make them distinct from other cars. 
 Say all Japanese cars are produced in the same three kinds of factories. 
 The discrete latent variable might then "unwittingly" represent those factories.
-</code></pre>
 
 Combing back to the tree search, a search move consists of growing the tree by building an extension of the model on the current leaf, by applying a composition rule. More technically, when applying a production rule P to a matrix S, sample from the posterior for P’s generative model conditioned
 on it evaluating (exactly) to S. Each production rule has its own MCMC sampler. Sampling a finished model would consist of ancestral sampling, where each ancestor has his own sampling method. 
 
 Here comes the exciting part:
-<pre><code>
-This procedure allows us to reuse computations between different structures.
+
+>This procedure allows us to reuse computations between different structures.
 Most of the computation time is in the initialization
 steps. Each of these steps only needs to be run once on the
 full matrix, specifically when the first production rule is applied.
@@ -50,7 +49,6 @@ Subsequent initialization steps are performed on the
 component matrices, which are considerably smaller. This
 allows a large number of high level structures to be fit for a
 fraction of the cost of fitting them from scratch.
-</code></pre>
 
 For example, we might extend a low rank factorization by modelling its latent variable matrix as Gaussian mixture. We compose a low rank factor model with a mixture model to get a mixture-prior low rank model. Perhaps we are looking for brain regions in EEG data. 
 We could compose the reverse by adding a factor model to each component in the mixture and get a mixture of factor models, a very general density estimator (think balloon-animals, but the segments don't need to connected or have the same size and shape). Those would be level-2 in the tree. 
