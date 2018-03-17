@@ -10,6 +10,11 @@ A canonical virtue of science and engineering is simplicity. Between two hypothe
 
 Occam's razor says not to "multiply causes", and its 20th century [Bayesian update](http://mlg.eng.cam.ac.uk/zoubin/papers/05occam/occam.pdf) says that hypotheses that are "hard to vary" are preferred. I borrow the "hard to vary" phrase from David Deutsch, who builds his epistemology on this principle (see [this TED talk](https://www.ted.com/talks/david_deutsch_a_new_way_to_explain_explanation) for a quick exposition). 
 
+My preferred justification for simplicity is this:
+>It is clear that, in a world with computable processes, patterns which result from simple processes are relatively likely, while patterns that can only be produced by very complex processes are relatively unlikely. 
+
+I took this quote from the Scholarpedia article on [Solomonoff induction](http://www.scholarpedia.org/article/Algorithmic_probability#Discrete_Universal_A_Priori_Probability), which unifies and formalizes Bayes, Occam and Epicurus (Epicurus said, presumably in ancient Greek, "keep all hypotheses that are consistent with the data").
+
 For years, I didn't fully appreciate the other great benefit of simplicity, which is that simple things are easier to build and maintain. My supervisor instructed me to always cut things down to their essence, to break problems down to their smallest components, as in the very word "analysis". And yet simplifying things is somehow so counter-intuitive that I must constantly remind myself to do it.
 
 ## Compositional Structure Search
