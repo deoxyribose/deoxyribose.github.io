@@ -29,7 +29,7 @@ A: “Intelligence is the ability to achieve goals in a wide range of environmen
 
 or formally:
 
-![Shane Legg's definition of intelligence]({{ site.url }}/images/universal_intelligence.jpg)
+![Shane Legg's definition of intelligence]({{ site.url }}/images/universal_intelligence.png)
 
 The early programs of artificial intelligence were solutions that didn’t really involve intelligence. They were cases of narrow intelligence, just as the intelligences we build today. But the field of AI has switched focus from the discrete and deterministic regime of old fashioned, “innately-gifted” AIs, to AIs that learn, based on probability, information and optimization theory. While still very narrow compared to humans, the AIs we build today are much more general. No matter how clever its design, no graph-search algorithm can learn to play Go, Chess and Shogi better than humans through self-play in three days. But AlphaZero can apparently learn any perfect-information game to superhuman levels very fast. Maybe soon we’ll have one program that can learn all the tasks of early AI.
 
