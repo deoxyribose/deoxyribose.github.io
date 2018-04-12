@@ -26,10 +26,10 @@ Linked under Research, one finds the paper "Exploiting compositionality to explo
 ### Many models are factorizations
 
 A number of machine learning models are matrix factorizations. A simpler version of a factor model that assumes equal noise variance in all variables, probabilistic PCA, factorizes the mean of the observed Gaussian into a product of orthogonal directions of greatest variance in the data and coordinates along these directions so as to place each data point in the latent space. These coordinates are the latent variable. The directions of greaters variance, or principal components, would be considered parameters, not latent variables. The difference is that different parameters from a parameter distribution yield different models, while different latent variables from a latent distribution yield different data points.
-What characters live in latent spaces? There are two kinds - continous and discrete. Discrete latent variables are usually objects and events, say "apple" or "seizure" or "walking". Continous latent variables can vary in degree, like size, shape, color and direction, so we might have "300 meters long", "Flat", "Yellow" and ". Discrete variables tend to be concepts, continous ones tend to be percepts.
+What characters live in latent spaces? There are two kinds - continous and discrete. Discrete latent variables are usually objects and events, say "apple" or "seizure" or "walking". Continous latent variables can vary in degree, like size, shape, color and direction, so we might have "300 meters long", "Flat", "Yellow" and "from above". Discrete variables tend to be concepts, continous ones tend to be percepts.
 
 
->#### Example 
+#### Example 
 Say you have a dataset of cars, their model name, price, engine specs, size 
 and more. 
 A continous latent variable model like PCA, might find latent spaces in which 
