@@ -40,28 +40,28 @@ Similarly, we’re constantly sensing our environment, and acting in the environ
 
 To generalize across a range of environments, an AGI must learn not only what actions give it value in a specific environment, it must learn what actions are useful in virtually all environments. Here is my list of some abilities crucial to an AGI:
 
-    Paying selective attention to different environments, subsets of environment and memory at a given time, without having to scan the whole environment and memory at every instant before it decides what to pay attention to.
+1. Paying selective attention to different environments, subsets of environment and memory at a given time, without having to scan the whole environment and memory at every instant before it decides what to pay attention to.
 
 
-    Breaking the model of its actions and environment down into modular chunks, and combine the chunks into simulations of imagined environments, that is, build very general generative models.
+2. Breaking the model of its actions and environment down into modular chunks, and combine the chunks into simulations of imagined environments, that is, build very general generative models.
 
 
-    Transferring relevant learned percepts/concepts/chunks between environments.
+3. Transferring relevant learned percepts/concepts/chunks between environments.
 
 
-    Planning and improvising, i.e. modeling the causal network of possible states of the environment (including other agents), break down goals into subgoals, and navigate the causal network to a particular goal state via various paths.
+4. Planning and improvising, i.e. modeling the causal network of possible states of the environment (including other agents), break down goals into subgoals, and navigate the causal network to a particular goal state via various paths.
 
 
-    Organizing its own computation in a formal system like code, math or language, so that it can communicate and cooperate with other agents.
+5. Organizing its own computation in a formal system like code, math or language, so that it can communicate and cooperate with other agents.
 
 All these together would form something we could recognize as “common sense”. In some ways, AGI simply is common sense, or more accurately, common sense is the main aspect of human-like AGI.
 
 However, conspicuously absent from the list are other abilities we take for granted:
 
-    Experiencing a self as separate from the environment and other agents. Although it has an episodic memory and is aware of what actions it can perform at any given time, an AGI doesn’t need to label any set of objects or events as itself, because doing so adds no information: label or no label, its ability to achieve goals in a wide array of environments is unchanged. Try to think of a counter-example, it’s a good philosophical exercise!
+1. Experiencing a self as separate from the environment and other agents. Although it has an episodic memory and is aware of what actions it can perform at any given time, an AGI doesn’t need to label any set of objects or events as itself, because doing so adds no information: label or no label, its ability to achieve goals in a wide array of environments is unchanged. Try to think of a counter-example, it’s a good philosophical exercise!
 
 
-    Chunking the environment into temporally and spatially stable grammars, categories, symbols and individuals like we humans do. This is the other side of the coin shown in point 2 of the above list. It means that an AGI wouldn’t wonder whether a tomato is a vegetable or a fruit, or whether a whale is a fish or a mammal. It might not consider the front part of your eyeball as fundamentally the same object as the back part of your eyeball, if the distinction would somehow be useful (don’t ask me how). Neither would it consider a fixed set of learned skills to be the total action space at its disposal. It could instead always maintain uncertainty and room for improvement in the way it models the environment. Indeed, improving its own source code or computational substrate, is far from being as counter-intuitive to most generally intelligent agents as it is to us humans. By the Shane Legg’s definition, in most environments, goals are expedited by more intelligence.
+2. Chunking the environment into temporally and spatially stable grammars, categories, symbols and individuals like we humans do. This is the other side of the coin shown in point 2 of the above list. It means that an AGI wouldn’t wonder whether a tomato is a vegetable or a fruit, or whether a whale is a fish or a mammal. It might not consider the front part of your eyeball as fundamentally the same object as the back part of your eyeball, if the distinction would somehow be useful (don’t ask me how). Neither would it consider a fixed set of learned skills to be the total action space at its disposal. It could instead always maintain uncertainty and room for improvement in the way it models the environment. Indeed, improving its own source code or computational substrate, is far from being as counter-intuitive to most generally intelligent agents as it is to us humans. By the Shane Legg’s definition, in most environments, goals are expedited by more intelligence.
 
 ## Conclusion
 
