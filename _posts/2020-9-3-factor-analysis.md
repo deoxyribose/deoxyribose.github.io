@@ -19,8 +19,11 @@ $$f(x) = \int_{-\infty}^\infty \hat f(\xi)\,e^{2 \pi i \xi x} \,d\xi$$
 $$
 \mathbf{z}_{n} & \sim \mathcal{N}_{k}(\mathbf{0}, \mathbf{I}) \\
 \mathbf{x}_{n} | \mathbf{z}_{n} & \sim \mathcal{N}_{d}\left(\mathbf{W} \mathbf{z}_{n}, \operatorname{Diag}\left(\bm{\sigma}^{2}\right)\right)  \quad \text { for } n=1, \cdots, N
-\end{aligned}
 $$
+
+
+$$\mathbf{z}_{n} & \sim \mathcal{N}_{k}(\mathbf{0}, \mathbf{I})$$
+$$\mathbf{x}_{n} | \mathbf{z}_{n} & \sim \mathcal{N}_{d}\left(\mathbf{W} \mathbf{z}_{n}, \operatorname{Diag}\left(\bm{\sigma}^{2}\right)\right)  \quad \text { for } n=1, \cdots, N$$
 
 ![PPCA generative process]({{ site.url }}/images/ppca.png "Generative process for factor analysis.[^2]")
 
