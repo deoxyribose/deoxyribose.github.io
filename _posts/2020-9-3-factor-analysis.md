@@ -13,11 +13,13 @@ The statistical tool used to model such structure is called factor analysis. It 
 
 To start us of, here is how to generate data from a factor analysis model.
 
-$$\[\begin{aligned}
+$$
 \mathbf{z}_{n} & \sim \mathcal{N}_{k}(\mathbf{0}, \mathbf{I}) \\
 \mathbf{x}_{n} | \mathbf{z}_{n} & \sim \mathcal{N}_{d}\left(\mathbf{W} \mathbf{z}_{n}, \operatorname{Diag}\left(\bm{\sigma}^{2}\right)\right)  \quad \text { for } n=1, \cdots, N
 \end{aligned}
-\]$$
+$$
+
+
 
 
 
