@@ -12,8 +12,7 @@ Now let the students rank 50 different movies on a 1-5 scale, according to how m
 
 The statistical tool used to model such structure is called factor analysis. It is one of the workhorses of probabilistic machine learning. To understand it more fully, we will look at it from two different viewpoints; a probabilistic one, and a linear algebra one. Then, we will go through the steps of implementing the model in Pyro, a probabilisitc programming language, and show how to perform inference and evaluate the results. Finally, we will see some ways in which factor analysis can be modified, in order to express different modelling assumptions.
 
-To start us of, here is how to generate data from a factor analysis model.
-
+To start us of, here is how to generate data from a factor analysis model. We want to end up with $$D$$ variables observed $$N$$ times, giving us a matrix of observations $$\mathbf{X} \in \mathbb{R}^{N \times D}$$. 
 
 $$f(x) = \int_{-\infty}^\infty \hat f(\xi)\,e^{2 \pi i \xi x} \,d\xi$$
 
