@@ -15,6 +15,7 @@ $lightGray: #eee;
 $white: #fff;
 
 // Font stacks
+$lato: Lato Regular, Lato, sans-serif;
 $maquette: ARS Maquette, Arial, sans-serif;
 $akkurat: AkkuratPro, Arial, sans-serif;
 $helvetica: Helvetica, Arial, sans-serif;
@@ -26,4 +27,10 @@ $georgia: Georgia, serif;
   @media screen and (max-width: 640px) {
     @content;
   }
+}
+
+@font-face {
+  font-family: "Lato";
+  //src: url("{{ site.url }}/_assets/Lato-Regular.ttf");
+  src: url("../assets/Lato-Regular.ttf") format("TrueType");
 }
