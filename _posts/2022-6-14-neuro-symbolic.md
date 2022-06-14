@@ -73,7 +73,13 @@ The difference between the first and second level of Bayes, is that the first le
 
 Before this probabilistic perspective bears its first fruit, let's briefly relate this probabilistic perspective to deep learning. Not counting Bayesian deep learning, regular DL, with all its successes, doesn't even bother with the first Bayes level, let alone the second. Rather than computing or approximating the posterior over the weights, SGD simply finds the single value of weights that maximize the likelihood p(X | w, m) [^1] The derogatory term for this among Bayesians is "point-estimate" - the posterior distribution is approximated by a single point. The prior p(w | M) also appears in deep learning, as a regularization term in the loss function.[^2]
 
+
 Apart from providing a unifying framework for seemingly disparate techniques and phenomena, a probabilistic perspective on ML formalizes the notions of generalization, bias-variance decomposition and Occam's razor in a single concept.
+
+![tufa]({{ site.url }}/images/probabilistic_generalization_wilson_izmailov.png "A probabilistic perspective of generalization.")
+<center> A probabilistic perspective of generalization.</center>
+[Credit: Bayesian Deep Learning and a Probabilistic Perspective of Generalization, Andrew Gordon Wilson and Pavel Izmailov](https://arxiv.org/pdf/2002.08791.pdf)
+
 
 - A probabilistic perspective of generalization
 - Universal approximation theorem - what kinds of functions can NNs represent?
