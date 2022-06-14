@@ -69,7 +69,7 @@ $$
 
 In a real sense, the posterior gives us not one model, but an entire set of models, with various posterior probabilities. There may not be a single most likely model - the posterior distribution could have many modes. Especially in deep learning, the likelihood, and consequently the posterior, may be high for a wide variety of different weights, corresponding to different functions. 
 
-Thus, to make predictions about future data $$\mathbf{x}$$, we want to ensemble all of the models, weighted by their posterior probability. This is done in the posterior predictive, $$p(\mathbf{x} | \mathbf{X}, \mathcal{M}). We get it by *marginalizing* w out, over the posterior:
+Thus, to make predictions about future data $$\mathbf{x}$$, we want to ensemble all of the models, weighted by their posterior probability. This is done in the posterior predictive, $$p(\mathbf{x} | \mathbf{X}, \mathcal{M})$$. We get it by _marginalizing_ $$\mathbf{w}$$ out, over the posterior:
 
 $$
 \begin{aligned}
