@@ -89,21 +89,21 @@ Evaluating the prior predictive at the data we observed, $$p(\mathbf{X} | m)$$, 
 
 $$
 \begin{aligned}
-p(m | \mathbf{X}) = p(\mathbf{X} | m)p(m)/$$p(\mathbf{X})
+p(\mathcal{M} | \mathbf{X}) = \frac{p(\mathbf{X} | \mathcal{M})p(\mathcal{M})}{p(\mathbf{X})}
 \end{aligned}
 $$
 
 
-Of course, we still can't view $$p(\mathbf{X})$$ through a truly perfect, universal lens, merely a wider one. So let's consider a set of models, M:
+Of course, we still can't view $$p(\mathbf{X})$$ through a truly perfect, universal lens, merely a wider one. So let's consider a set of models, $$\mathbb{M}$$:
 
 $$
 \begin{aligned}
-p(m | \mathbf{X}, M) = p(\mathbf{X} | m, M)p(m | M)/p(\mathbf{X} | M)
+p(\mathcal{M} | \mathbf{X}, \mathbb{M}) = \frac{p(\mathbf{X} | \mathcal{M}, \mathbb{M})p(\mathcal{M} | \mathbb{M})}{p(\mathbf{X} | \mathbb{M})}
 \end{aligned}
 $$
 
 
-The difference between the first and second level of Bayes, is that the first level tells us which parameters for the model are made likely by conditioning on the observed data. But the second level tells us which model, each of which may be entirely different in nature, is made likely by conditioning on the data. Bayes' theorem itself works exactly the same on the second level, so there's new here mathematically. What's interesting is that we have a principled way of assigning probabilities to models. The catch is that the model evidence is notoriously hard to compute - in fact, it's the main difficulty already in the first level, where it appears as the normalizing constant in the denominator. That difficulty is why Bayesian inference is approximated for all but the simplest models (or models with carefully chosen structure and distributions).
+The difference between the first and second level of Bayes, is that the first level tells us how meach each parameter setting for a model is made likely by conditioning on the observed data. But the second level tells us how much each model, which may be entirely different in nature from the others, is made likely by conditioning on the data. Bayes' theorem itself works exactly the same on the second level, so there's new here mathematically. What's interesting is that we have a principled way of assigning probabilities to models. The catch is that the model evidence is notoriously hard to compute - in fact, it's the main difficulty already in the first level, where it appears as the normalizing constant in the denominator. That difficulty is why Bayesian inference is approximated for all but the simplest models (or models with carefully chosen structure and distributions).
 
 Before this probabilistic perspective bears its first fruit, let's briefly relate this probabilistic perspective to deep learning. Not counting Bayesian deep learning, DL doesn't even bother with the first Bayes level, let alone the second. Rather than computing or approximating the posterior over the weights, SGD simply finds the single value of weights that maximize the likelihood p(X | w, m) [[^1]] The derogatory term for this among Bayesians is "point-estimate" - the posterior distribution is approximated by a single point. The prior p(w | M) also appears in deep learning, as a regularization term in the loss function.[[^2]]
 
