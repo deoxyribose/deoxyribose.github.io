@@ -59,19 +59,19 @@ In unsupervised learning, we seek to estimate p(X), often by positing additional
 
 We need some way of representing p(X). We do this by selecting a model, m, which usually is parametrized by weights, w: p(y, X, w | m). The m to the right of the conditioning bar reminds us that we're not accessing raw reality. Rather, we're looking at it through a particular lens, constituted by our choice of hyperparameters and whatever domain knowledge and inductive biases we bring to bear on the problem. This lens reveals only p(X | m), which, if our model is a good representation of reality, is similar to p(X). But where did w go? 
 Bayesian inference gives us the posterior of w:
-p(w | X, m) = p(X | w, m)p(w | m) / p(X | m)
+$$p(w | X, m) = p(X | w, m)p(w | m) / p(X | m)$$
 To make predictions about future data, we're interested in the posterior predictive, p(x | X, m). We get it by *marginalizing* w out, over the posterior:
-p(x | X, m) = int p(x | X, w, m)p(w | X, m) dw
+$$p(x | X, m) = int p(x | X, w, m)p(w | X, m) dw$$
 We can also marginalize w out over the prior, which gives us the posterior predictive's lesser known little brother, the prior predictive:
-p(x | m) = int p(x | w, m)p(w | m) dw
-Evaluating the prior predictive at the data we observed, p(X | m)
+$$p(x | m) = int p(x | w, m)p(w | m) dw$$
+Evaluating the prior predictive at the data we observed, $$p(X | m)$$
 gives us that rare and coveted quantity, the marginal likelihood, aka model evidence. The model evidence unlocks a second level to Bayes' theorem:
-p(m | X) = p(X | m)p(m)/p(X)
+$$p(m | X) = p(X | m)p(m)/p(X)$$
 Of course, we still can't view p(X) through a truly perfect, universal lens, merely a wider one. So let's consider a set of models, M:
-p(m | X, M) = p(X | m, M)p(m | M)/p(X | M)
+$$p(m | X, M) = p(X | m, M)p(m | M)/p(X | M)$$
 The difference between the first and second level of Bayes, is that the first level tells us which parameters for the model are made likely by conditioning on the observed data. But the second level tells us which model, each of which may be entirely different in nature, is made likely by conditioning on the data. Bayes' theorem itself works exactly the same on the second level, so there's nothing to see here mathematically. What's interesting is the fact that we have a principled way of assigning probabilities to models. The catch is that the model evidence is notoriously hard to compute - in fact, it's the main difficulty already in the first level, where it appears as the normalizing constant in the denominator. 
 
-Before this probabilistic perspective bears its first fruit, let's briefly relate this probabilistic perspective to deep learning. Not counting Bayesian deep learning, regular DL, with all its successes, doesn't even bother with the first Bayes level, let alone the second. Rather than computing or approximating the posterior over the weights, SGD simply finds the single value of weights that maximize the likelihood p(X | w, m) FOOTNOTE: Most loss functions are log-likelihoods. The derogatory term for this among Bayesians is "point-estimate" - the posterior distribution, with all its spaciousness and complexity, has been reduced to a single, ugly spike of infinite probability density, with a name straight out of Mordor: the Dirac delta. The prior p(w | M) also appears in deep learning, as a regularization term in the loss function. FOOTNOTE: Briefly, a Gaussian prior on the weights, corresponds to weight decay/L2 regularization, when your point-estimate is the mode of the posterior (MAP), found by minimizing - log p(X | w, m)p(w | m)  = - log p(X | w, m) - log p(w | m) = MSE + L2norm(w)
+Before this probabilistic perspective bears its first fruit, let's briefly relate this probabilistic perspective to deep learning. Not counting Bayesian deep learning, regular DL, with all its successes, doesn't even bother with the first Bayes level, let alone the second. Rather than computing or approximating the posterior over the weights, SGD simply finds the single value of weights that maximize the likelihood p(X | w, m) [^1] The derogatory term for this among Bayesians is "point-estimate" - the posterior distribution, with all its spaciousness and complexity, has been reduced to a single, ugly spike of infinite probability density, with a name straight out of Mordor: the Dirac delta. The prior p(w | M) also appears in deep learning, as a regularization term in the loss function.[^2]
 
 Apart from providing a unifying framework for seemingly disparate techniques and phenomena, a probabilistic perspective on ML formalizes the notions of generalization, bias-variance decomposition and Occam's razor in a single concept.
 
@@ -109,3 +109,6 @@ Apart from providing a unifying framework for seemingly disparate techniques and
 - Aligning next generation AI
 	- Explainability and fairness need causality
 	- Reward maximization vs CIRL
+
+[^1] Most loss functions are log-likelihoods.
+[^2] Briefly, a Gaussian prior on the weights, corresponds to weight decay/L2 regularization, when your point-estimate is the mode of the posterior (MAP), found by minimizing - log p(X | w, m)p(w | m)  = - log p(X | w, m) - log p(w | m) = MSE + L2norm(w)
