@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The paradigm shift has already begun
+title: 
 katex: True
 ---
 
@@ -19,6 +19,16 @@ Supporting arguments:
 3. DL requires a dense sampling of the latent manifold, and a large compute budget.
 
 
+
+Take a look at the following objects:
+![tufa]({{ site.url }}/images/tufa.png "Various novel objects.")
+[[^2]]
+<center> Various novel objects, some of them are tufas. Credit [Josh Tenenbaum](https://www.slideserve.com/victoria/ucsd07-powerpoint-ppt-presentation)  </center>
+The ones highlighted in red are tufas. Can you spot other tufas among the objects? What would a tufa look like if you viewed it from above? What if the lighting was coming from below, and blue in color? How would you divide a tufa into parts, and how can the parts move, if at all? If you held a tufa by the "roots" and spun around in a circle, what would happen to the other end?
+Most likely you can answer all these questions without too much trouble. How do you do that? How 
+
+
+
 Deep learning is amazing. Tasks that once required specialized methods, or were impossible to even approach, are now routinely solved with a single method:
 1. Gather a large training dataset of input -> output examples
 2. Initialize a large neural network (NN), a function composed of layers of differentiable transformations parameterized by weights
@@ -29,7 +39,7 @@ This method gives us superhuman performance at the game of Go, computer vision t
 2. have lots of parameters
 3. perform lots of SGD iterations (compute)
 
-Scale is often the only difference between not being able to solve a task at all, to achieving superhuman performance. Some researchers, including heavyweights like Richard Sutton, Nando de Freitas and Ilya Sutskever, believe scale will take deep learning all the way to AGI: a system that can learn not just a single narrow task at a time, but any task a human can learn, from perception to board games to engineering to even AI research itself. The scaling hypothesis, as argued by Gwern here, "has only looked more and more plausible every year since 2010.".
+Scale is often the only difference between not being able to solve a task at all, to achieving superhuman performance. Some researchers, including heavyweights like Richard Sutton, Nando de Freitas and Ilya Sutskever, believe scale will take deep learning all the way to AGI: a system that can learn not just a single narrow task at a time, but any task a human can learn, from perception to board games to engineering to even AI research itself. The scaling hypothesis, as argued by Gwern [here](https://www.gwern.net/Scaling-hypothesis#scaling-hypothesis), "has only looked more and more plausible every year since 2010.".
 Others disagree. Most vocally Gary Marcus, but also Francois Chollet and Joshua Tenenbaum, argue that while deep learning certainly is an important advance, general intelligence involves abilities that deep learning alone is incapable of producing, by design. They point out that where deep learning fails, it needs to be complemented by symbolic representations, discrete abstractions or a "language of thought", resulting in a neuro-symbolic apporach.
 
 In this post, I will explain what is lacking in deep learning, why it matters, why scale doesn't help and how neuro-symbolic approaches already have helped and will continue to do so.
