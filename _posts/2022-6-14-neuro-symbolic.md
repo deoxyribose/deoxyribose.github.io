@@ -25,12 +25,16 @@ Take a look at the following objects:
 <center> Various novel objects.</center>
 
 [Credit: Josh Tenenbaum](https://www.slideserve.com/victoria/ucsd07-powerpoint-ppt-presentation)
-The ones highlighted in red are tufas. Can you spot other tufas among the objects? What would a tufa look like if you viewed it from above? What if the lighting was coming from below, and was blue in color? If you held a tufa by the "roots" (I'm sure you know what I mean) and spun it around in a circle, what would happen to the other end? What sound would a tufa make if you dropped it on the floor?
-Most likely you can answer all these questions without too much trouble. Perhaps you're not certain exactly what the answers are, but you have a rough idea. How are you doing that? 
+
+The ones highlighted in red are tufas. Can you spot other tufas among the objects? What would a tufa look like viewed from above? What if the lighting was coming from below, and was blue in color? If you held a tufa by the "roots" (I'm sure you know what I mean) and spun it around in a circle, what would happen to the other end? What sound would a tufa make if you dropped it on the floor?
+Most likely you can answer all these questions without too much trouble. Perhaps you're not certain exactly what the answers are, but you have a rough idea. Probably you have many more rough ideas about what properties tufas are likely to have.  
+
+In recent debates about building artificial intelligence, two viewpoints dominate. Proponents of the scaling hypothesis argue that deep learning is on track to acquiring all the cognitive abilities that characterize human intelligence, all you need is to scale it up. Others argue that deep learning is lacking in some fundamental ways, which mere scale cannot overcome. According to them, adding symbolic reasoning, causality, and program induction are the next step. 
+
+I think the latter viewpoint is correct. But the best arguments for it haven't been part of the debate. The tufa example above, borrowed from cognitive scientist Joshua Tenenbaum, is meant to showcase some of the abilities that we all possess, which form a good portion of our intelligence but which are not within the scope of deep learning. However, the scaling hypothesis is not easily falsified. As large as modern neural networks are, they are still insect-sized. By analogy, wouldn't a much larger network naturally acquire all the abilities that _our_ giant neural network has? I will argue that while the analogy is compelling, by reasoning from the first principles of machine learning, abilities like extrapolation, generalizing out-of-distribution, few-shot-learning and causal reasoning cannot emerge from scaling DL. Indeed, many of the empirical successes of DL are being misinterpreted. 
 
 
-
-
+### 
 Deep learning is amazing. Tasks that once required specialized methods, or were impossible to even approach, are now routinely solved with a single method:
 1. Gather a large training dataset of input -> output examples
 2. Initialize a large neural network (NN), a function composed of layers of differentiable transformations parameterized by weights
