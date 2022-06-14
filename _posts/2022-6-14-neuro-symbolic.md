@@ -85,7 +85,7 @@ p(\mathbf{x} | \mathcal{M}) = \int p(\mathbf{x} | \mathbf{w}, \mathcal{M})p(\mat
 \end{aligned}
 $$
 
-Evaluating the prior predictive at the data we observed, $$p(\mathbf{X} | m)$$, however, gives us that rare and coveted quantity, the marginal likelihood, aka model evidence. The model evidence unlocks a second level to Bayes' theorem:
+Evaluating the prior predictive at the data we observed, $$p(\mathbf{X} | \mathcal{M})$$ gives us that rare and coveted quantity, the marginal likelihood, aka model evidence. The model evidence unlocks a second level to Bayes' theorem:
 
 $$
 \begin{aligned}
