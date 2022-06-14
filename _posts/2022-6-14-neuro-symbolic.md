@@ -52,12 +52,12 @@ Scale is often the only difference between not being able to solve a task at all
 
 ### Machine learing: a probabilistic perspective
 
-To see deep learning from a broader perspective, we need a quick primer of machine learning 101. I will assume some familiarity with basic ML and probability theory, and present a probabilistic perspective on ML. This will later allow us to see what deep learning is missing, and help us bridge the gap between the neural and the symbolic.
+To examine deep learning from a broader perspective, we need a quick primer of machine learning. I'll assume some familiarity with probability theory, and present a probabilistic perspective on ML. This will later allow us to see what deep learning is missing, and help us bridge the gap between the neural and the symbolic.
 
 Nature generates some data, $$\mathbf{X}$$, by sampling it from the data distribution $$p(\mathbf{X})$$. $$\mathbf{X}$$ can be a matrix of numbers representing, say, the height and weight of people, a collection of images, a text corpus, a time series, etc.
 In unsupervised learning, we seek to estimate $$p(\mathbf{X})$$, often by positing additional hidden variables $$\mathbf{Z}$$, which capture some underlying regularities in $$\mathbf{X}$$, such as clusters or latent factors. In supervised learning, we think of one of the variables as the output $$\mathbf{y}$$, and want to estimate p(\mathbf{y}|\mathbf{X}), i.e. the posterior probability of getting \mathbf{y} given that we observed X. To keep notation clean, let's stick with the unsupervised case for now.
 
-We need some way of representing $$p(\mathbf{X})$$, a model $$\mathcal{M}$$, parametrized by weights, $$\mathbf{w}$$: $$p(y, \mathbf{X}, \mathbf{w} | \mathcal{M})$$. The "$$\mathcal{M}$$" reminds us that we're not accessing raw reality. Rather, we're looking at it through a particular lens, constituted by our choice of hyperparameters and whatever domain knowledge and inductive biases we bring to bear on the problem. This lens reveals only $$p(\mathbf{X} | \mathcal{M})$$, which, if our model is a good representation of reality, is similar to $$p(\mathbf{X})$$. 
+We need some way of representing $$p(\mathbf{X})$$, a model $$\mathcal{M}$$, parametrized by weights, $$\mathbf{w}$$: $$p(y, \mathbf{X}, \mathbf{w} | \mathcal{M})$$. The "$$\mathcal{M}$$" reminds us that we're looking at the problem through a particular lens, constituted by our choice of hyperparameters and whatever domain knowledge and inductive biases we bring to bear on the problem. This lens can only reveal $$p(\mathbf{X} | \mathcal{M})$$, which is similar to $$p(\mathbf{X})$$ if our model is able to describe the problem well.
 Usually in ML, fitting a model means finding a value of $$\mathbf{w}$$ that agrees with the prior and the data in some formal way.
 In Bayesian inference, we get an entire probability distribution over \mathbf{w}, the posterior:
 
