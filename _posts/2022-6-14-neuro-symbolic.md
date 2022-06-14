@@ -28,9 +28,9 @@ Take a look at the following objects:
 
 The ones highlighted in red are _tufas_. Can you spot other tufas among the objects? What would a tufa look like viewed from above? What if the lighting was coming from below, and was blue in color? If you held a tufa by the "roots" (I'm sure you know what I mean) and spun it around in a circle, what would happen to the other end? What sound would a tufa make if you dropped it on the floor?
 
-Most likely you can answer all these questions without too much trouble. Perhaps you're not certain exactly what the answers are, but you have a rough idea. Probably you have many more rough ideas about what properties tufas are likely to have.  
+Most likely you can answer all these questions without too much trouble. Perhaps you're not certain exactly what the answers are, but you have a rough idea. In general, you can probably make quite educated guesses about various properties of tufas.  
 
-In recent debates about building artificial intelligence, two viewpoints dominate. Proponents of the scaling hypothesis argue that deep learning is on track to acquiring all the cognitive abilities that characterize human intelligence, all you need is to scale it up. Others argue that deep learning is lacking in some fundamental ways, which mere scale cannot overcome. According to them, adding symbolic reasoning, causality, and program induction are the next step. 
+In recent debates about how to develop artificial intelligence, two viewpoints dominate. Proponents of the scaling hypothesis argue that deep learning is on track to acquire all the cognitive abilities featured by human intelligence, all we need is to scale it up. Opponents argue that deep learning is lacking in some fundamental ways, which mere scale cannot overcome. According to them, adding symbolic reasoning, causality, and program induction are the next step. 
 
 I think the latter viewpoint is correct. But the best arguments for it haven't been part of the debate. The tufa example above, borrowed from cognitive scientist Joshua Tenenbaum, is meant to showcase some of the abilities that we all possess, that form a good portion of our intelligence but which are not within the scope of deep learning. Present-day deep learning has not produced anything like it. However, the scaling hypothesis is not easily falsified. As large as modern neural networks are, they are still insect-sized. By analogy, wouldn't a much larger network naturally acquire all the abilities that _our_ giant neural network has? I will argue that while the analogy is compelling in some contexts, reasoning from the first principles of machine learning supports the other view: abilities like extrapolation, generalizing out-of-distribution, few-shot-learning and causal reasoning cannot emerge from scaling DL. Indeed, many of the apparent empirical successes of DL are being misinterpreted. 
 
@@ -57,28 +57,52 @@ To see deep learning from a broader perspective, we need a quick primer of machi
 Nature generates some data, $$\mathbf{X}$$, by sampling it from the data distribution $$p(\mathbf{X})$$. X can be a matrix of numbers representing, say, the height and weight of people, a collection of images, a text corpus, a time series, etc.
 In unsupervised learning, we seek to estimate $$p(\mathbf{X})$$, often by positing additional hidden variables Z, which capture some underlying regularities in X, such as clusters or latent factors. In supervised learning, we think of one of the variables as the output y, and want to estimate p(y|\mathbf{X}), i.e. the posterior probability of getting y given that we've observed X. To keep notation clean, let's stick with the unsupervised case for now.
 
-We need some way of representing $$p(\mathbf{X})$$. We do this by selecting a model, m, which usually is parametrized by weights, w: p(y, \mathbf{X}, w | \mathcal{M}). The $$\mathcal{M}$$ to the right of the conditioning bar reminds us that we're not accessing raw reality. Rather, we're looking at it through a particular lens, constituted by our choice of hyperparameters and whatever domain knowledge and inductive biases we bring to bear on the problem. This lens reveals only p(X | m), which, if our model is a good representation of reality, is similar to $$p(\mathbf{X})$$. But where did w go? 
+We need some way of representing $$p(\mathbf{X})$$. We do this by selecting a model, m, which usually is parametrized by weights, w: $$p(y, \mathbf{X}, w | \mathcal{M})$$. The $$\mathcal{M}$$ to the right of the conditioning bar reminds us that we're not accessing raw reality. Rather, we're looking at it through a particular lens, constituted by our choice of hyperparameters and whatever domain knowledge and inductive biases we bring to bear on the problem. This lens reveals only $$p(\mathbf{X} | \mathcal{M})$$, which, if our model is a good representation of reality, is similar to $$p(\mathbf{X})$$. But where did w go? 
 Bayesian inference gives us the posterior of w:
+
+\begin{aligned}
 $$p(w | \mathbf{X}, m) = p(\mathbf{X} | w, m)p(w | m) / p(\mathbf{X} | m)$$
+\end{aligned}
+
+
 To make predictions about future data, we're interested in the posterior predictive, p(x | X, m). We get it by *marginalizing* w out, over the posterior:
+
+\begin{aligned}
 $$p(x | \mathbf{X}, m) = int p(\mathbf{x} | \mathbf{X}, w, m)p(w | \mathbf{X}, m) dw$$
+\end{aligned}
+
+
 We can also marginalize w out over the prior, which gives us the posterior predictive's lesser known little brother, the prior predictive:
+
+\begin{aligned}
 $$p(\mathbf{x} | m) = int p(\mathbf{x} | w, m)p(w | m) dw$$
+\end{aligned}
+
 Evaluating the prior predictive at the data we observed, $$p(\mathbf{X} | m)$$
 gives us that rare and coveted quantity, the marginal likelihood, aka model evidence. The model evidence unlocks a second level to Bayes' theorem:
+
+\begin{aligned}
 $$p(m | \mathbf{X}) = p(\mathbf{X} | m)p(m)/$$p(\mathbf{X})$$$$
+\end{aligned}
+
+
 Of course, we still can't view $$p(\mathbf{X})$$ through a truly perfect, universal lens, merely a wider one. So let's consider a set of models, M:
+
+\begin{aligned}
 $$p(m | \mathbf{X}, M) = p(\mathbf{X} | m, M)p(m | M)/p(\mathbf{X} | M)$$
+\end{aligned}
+
+
 The difference between the first and second level of Bayes, is that the first level tells us which parameters for the model are made likely by conditioning on the observed data. But the second level tells us which model, each of which may be entirely different in nature, is made likely by conditioning on the data. Bayes' theorem itself works exactly the same on the second level, so there's nothing to see here mathematically. What's interesting is the fact that we have a principled way of assigning probabilities to models. The catch is that the model evidence is notoriously hard to compute - in fact, it's the main difficulty already in the first level, where it appears as the normalizing constant in the denominator. 
 
-Before this probabilistic perspective bears its first fruit, let's briefly relate this probabilistic perspective to deep learning. Not counting Bayesian deep learning, regular DL, with all its successes, doesn't even bother with the first Bayes level, let alone the second. Rather than computing or approximating the posterior over the weights, SGD simply finds the single value of weights that maximize the likelihood p(X | w, m) [^1] The derogatory term for this among Bayesians is "point-estimate" - the posterior distribution is approximated by a single point. The prior p(w | M) also appears in deep learning, as a regularization term in the loss function.[^2]
+Before this probabilistic perspective bears its first fruit, let's briefly relate this probabilistic perspective to deep learning. Not counting Bayesian deep learning, regular DL, with all its successes, doesn't even bother with the first Bayes level, let alone the second. Rather than computing or approximating the posterior over the weights, SGD simply finds the single value of weights that maximize the likelihood p(X | w, m) [[^1]] The derogatory term for this among Bayesians is "point-estimate" - the posterior distribution is approximated by a single point. The prior p(w | M) also appears in deep learning, as a regularization term in the loss function.[[^2]]
 
 
-Apart from providing a unifying framework for seemingly disparate techniques and phenomena, a probabilistic perspective on ML formalizes the notions of generalization, bias-variance decomposition and Occam's razor in a single concept.
+Apart from providing a unifying framework for disparate techniques and phenomena, a probabilistic perspective on ML sheds light on the notions of generalization, bias-variance decomposition and Occam's razor in a single concept.
 
 ![tufa]({{ site.url }}/images/probabilistic_generalization_wilson_izmailov.png "A probabilistic perspective of generalization.")
 <center> A probabilistic perspective of generalization.</center>
-[Credit: Bayesian Deep Learning and a Probabilistic Perspective of Generalization, Andrew Gordon Wilson and Pavel Izmailov](https://arxiv.org/pdf/2002.08791.pdf)
+[Credit: Andrew Gordon Wilson and Pavel Izmailov](https://arxiv.org/pdf/2002.08791.pdf)
 
 
 - A probabilistic perspective of generalization
@@ -116,5 +140,5 @@ Apart from providing a unifying framework for seemingly disparate techniques and
 	- Explainability and fairness need causality
 	- Reward maximization vs CIRL
 
-[^1] Most loss functions are log-likelihoods.
-[^2] Briefly, a Gaussian prior on the weights, corresponds to weight decay/L2 regularization, when your point-estimate is the mode of the posterior (MAP), found by minimizing - log p(X | w, m)p(w | m)  = - log p(X | w, m) - log p(w | m) = MSE + L2norm(w)
+[^1]: Most loss functions are log-likelihoods.
+[^2]: Briefly, a Gaussian prior on the weights, corresponds to weight decay/L2 regularization, when your point-estimate is the mode of the posterior (MAP), found by minimizing - log p(X | w, m)p(w | m)  = - log p(X | w, m) - log p(w | m) = MSE + L2norm(w)
