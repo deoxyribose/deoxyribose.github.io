@@ -54,44 +54,54 @@ Scale is often the only difference between not being able to solve a task at all
 
 To see deep learning from a broader perspective, we need a quick primer of machine learning 101. I will assume some familiarity with basic ML and probability theory, and present a probabilistic perspective on ML. This will later allow us to see what deep learning is missing, and help us bridge the gap between the neural and the symbolic.
 
-Nature generates some data, $$\mathbf{X}$$, by sampling it from the data distribution $$p(\mathbf{X})$$. X can be a matrix of numbers representing, say, the height and weight of people, a collection of images, a text corpus, a time series, etc.
-In unsupervised learning, we seek to estimate $$p(\mathbf{X})$$, often by positing additional hidden variables Z, which capture some underlying regularities in X, such as clusters or latent factors. In supervised learning, we think of one of the variables as the output y, and want to estimate p(y|\mathbf{X}), i.e. the posterior probability of getting y given that we've observed X. To keep notation clean, let's stick with the unsupervised case for now.
+Nature generates some data, $$\mathbf{X}$$, by sampling it from the data distribution $$p(\mathbf{X})$$. $$\mathbf{X}$$ can be a matrix of numbers representing, say, the height and weight of people, a collection of images, a text corpus, a time series, etc.
+In unsupervised learning, we seek to estimate $$p(\mathbf{X})$$, often by positing additional hidden variables $$\mathbf{Z}$$, which capture some underlying regularities in $$\mathbf{X}$$, such as clusters or latent factors. In supervised learning, we think of one of the variables as the output $$\mathbf{y}$$, and want to estimate p(\mathbf{y}|\mathbf{X}), i.e. the posterior probability of getting \mathbf{y} given that we observed X. To keep notation clean, let's stick with the unsupervised case for now.
 
 We need some way of representing $$p(\mathbf{X})$$, a model $$\mathcal{M}$$, parametrized by weights, $$\mathbf{w}$$: $$p(y, \mathbf{X}, \mathbf{w} | \mathcal{M})$$. The "$$\mathcal{M}$$" reminds us that we're not accessing raw reality. Rather, we're looking at it through a particular lens, constituted by our choice of hyperparameters and whatever domain knowledge and inductive biases we bring to bear on the problem. This lens reveals only $$p(\mathbf{X} | \mathcal{M})$$, which, if our model is a good representation of reality, is similar to $$p(\mathbf{X})$$. 
 Usually in ML, fitting a model means finding a value of $$\mathbf{w}$$ that agrees with the prior and the data in some formal way.
 In Bayesian inference, we get an entire probability distribution over \mathbf{w}, the posterior:
 
+$$
 \begin{aligned}
-$$p(\mathbf{w} | \mathbf{X}, \mathcal{M}) = p(\mathbf{X} | \mathbf{w}, \mathcal{M})p(\mathbf{w} | \mathcal{M}) / p(\mathbf{X} | \mathcal{M})$$
+p(\mathbf{w} | \mathbf{X}, \mathcal{M}) = \frac{p(\mathbf{X} | \mathbf{w}, \mathcal{M})p(\mathbf{w} | \mathcal{M})}{p(\mathbf{X} | \mathcal{M})}
 \end{aligned}
+$$
 
 In a real sense, the posterior gives us not one model, but an entire set of models, with various posterior probabilities. There may not be a single most likely model - the posterior distribution could have many modes. Especially in deep learning, the likelihood, and consequently the posterior, may be high for a wide variety of different weights, corresponding to different functions. 
 
 Thus, to make predictions about future data $$\mathbf{x}$$, we want to ensemble all of the models, weighted by their posterior probability. This is done in the posterior predictive, $$p(\mathbf{x} | \mathbf{X}, \mathcal{M}). We get it by *marginalizing* w out, over the posterior:
 
+$$
 \begin{aligned}
-$$p(\mathbf{x} | \mathbf{X}, \mathcal{M}) = \int p(\mathbf{x} | \mathbf{X}, \mathbf{w}, \mathcal{M})p(\mathbf{w} | \mathbf{X}, \mathcal{M}) d\mathbf{w}$$
+p(\mathbf{x} | \mathbf{X}, \mathcal{M}) = \int p(\mathbf{x} | \mathbf{X}, \mathbf{w}, \mathcal{M})p(\mathbf{w} | \mathbf{X}, \mathcal{M}) d\mathbf{w}
 \end{aligned}
+$$
 
 
 We can also marginalize \mathbf{w} out over the prior, which gives us the posterior predictive's lesser known little brother, the prior predictive:
 
+$$
 \begin{aligned}
-$$p(\mathbf{x} | m) = int p(\mathbf{x} | w, m)p(w | m) dw$$
+p(\mathbf{x} | m) = int p(\mathbf{x} | w, m)p(w | m) dw
 \end{aligned}
+$$
 
 Evaluating the prior predictive at the data we observed, $$p(\mathbf{X} | m)$$, however, gives us that rare and coveted quantity, the marginal likelihood, aka model evidence. The model evidence unlocks a second level to Bayes' theorem:
 
+$$
 \begin{aligned}
-$$p(m | \mathbf{X}) = p(\mathbf{X} | m)p(m)/$$p(\mathbf{X})$$$$
+p(m | \mathbf{X}) = p(\mathbf{X} | m)p(m)/$$p(\mathbf{X})
 \end{aligned}
+$$
 
 
 Of course, we still can't view $$p(\mathbf{X})$$ through a truly perfect, universal lens, merely a wider one. So let's consider a set of models, M:
 
+$$
 \begin{aligned}
-$$p(m | \mathbf{X}, M) = p(\mathbf{X} | m, M)p(m | M)/p(\mathbf{X} | M)$$
+p(m | \mathbf{X}, M) = p(\mathbf{X} | m, M)p(m | M)/p(\mathbf{X} | M)
 \end{aligned}
+$$
 
 
 The difference between the first and second level of Bayes, is that the first level tells us which parameters for the model are made likely by conditioning on the observed data. But the second level tells us which model, each of which may be entirely different in nature, is made likely by conditioning on the data. Bayes' theorem itself works exactly the same on the second level, so there's nothing to see here mathematically. What's interesting is the fact that we have a principled way of assigning probabilities to models. The catch is that the model evidence is notoriously hard to compute - in fact, it's the main difficulty already in the first level, where it appears as the normalizing constant in the denominator. 
