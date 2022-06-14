@@ -43,15 +43,16 @@ Deep learning is amazing. Tasks that once required specialized methods, or were 
 3. Minimize a loss function wrt. all the weights using stochastic gradient descent (SGD)
 
 This method gives us superhuman performance at the game of Go, computer vision that 10 years ago would've been unimaginable, speech recognition, machine translation and now, apparently, mastery of natural language. The secret to powerful deep learning is simply scaling up the basic method, meaning
-1. train on lots of data
-2. have lots of parameters
-3. perform lots of SGD iterations (compute)
 
-Scale is often the only difference between not being able to solve a task at all, to achieving superhuman performance. Some researchers, including heavyweights like Richard Sutton, Nando de Freitas and Ilya Sutskever, believe scale will take deep learning all the way to AGI: a system that can learn not just a single narrow task at a time, but any task a human can learn, from perception to board games to engineering to even AI research itself. The scaling hypothesis, as argued by Gwern [here](https://www.gwern.net/Scaling-hypothesis#scaling-hypothesis), "has only looked more and more plausible every year since 2010.". The bitter part of the lesson is that most of the intellectual effort that has been poured into AI has seemingly been for nought. Scale is boring, but practical.
+1. Train on lots of data
+2. Have lots of parameters
+3. Perform lots of SGD iterations on lots of GPUs (compute)
+
+Scale is often the only difference between not being able to solve a task at all, to achieving superhuman performance. Some researchers, including heavyweights like Richard Sutton, Nando de Freitas and Ilya Sutskever, believe scale will take deep learning all the way to AGI: a system that can learn not just a single narrow task at a time, but any task a human can learn, from perception to board games to engineering to even AI research itself. The scaling hypothesis, as argued by Gwern [here](https://www.gwern.net/Scaling-hypothesis#scaling-hypothesis), "has only looked more and more plausible every year since 2010". The bitter part of the lesson is that most of the intellectual effort poured into AI has seemingly been for nought. Scale is boring, but practical.
 
 ### Machine learing: a probabilistic perspective
 
-To start us off, we need a quick primer of machine learning 101. I will assume some familiarity with basic ML and probability theory, and present a probabilistic perspective on ML. This will later allow us to see what deep learning is missing, and help us bridge the gap between the neural and the symbolic.
+To see deep learning from a broader perspective, we need a quick primer of machine learning 101. I will assume some familiarity with basic ML and probability theory, and present a probabilistic perspective on ML. This will later allow us to see what deep learning is missing, and help us bridge the gap between the neural and the symbolic.
 
 Nature generates some data, X, by sampling it from the data distribution p(X). X can be a matrix of numbers representing, say, the height and weight of people, a collection of images, a text corpus, a time series, etc.
 In unsupervised learning, we seek to estimate p(X), often by positing additional hidden variables Z, which capture some underlying regularities in X, such as clusters or latent factors. In supervised learning, we think of one of the variables as the output y, and want to estimate p(y|X), i.e. the posterior probability of getting y given that we've observed X. To keep notation clean, let's stick with the unsupervised case for now.
