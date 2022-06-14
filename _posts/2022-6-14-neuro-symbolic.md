@@ -57,29 +57,30 @@ To see deep learning from a broader perspective, we need a quick primer of machi
 Nature generates some data, $$\mathbf{X}$$, by sampling it from the data distribution $$p(\mathbf{X})$$. X can be a matrix of numbers representing, say, the height and weight of people, a collection of images, a text corpus, a time series, etc.
 In unsupervised learning, we seek to estimate $$p(\mathbf{X})$$, often by positing additional hidden variables Z, which capture some underlying regularities in X, such as clusters or latent factors. In supervised learning, we think of one of the variables as the output y, and want to estimate p(y|\mathbf{X}), i.e. the posterior probability of getting y given that we've observed X. To keep notation clean, let's stick with the unsupervised case for now.
 
-We need some way of representing $$p(\mathbf{X})$$. We do this by selecting a model, m, which usually is parametrized by weights, w: $$p(y, \mathbf{X}, w | \mathcal{M})$$. The $$\mathcal{M}$$ to the right of the conditioning bar reminds us that we're not accessing raw reality. Rather, we're looking at it through a particular lens, constituted by our choice of hyperparameters and whatever domain knowledge and inductive biases we bring to bear on the problem. This lens reveals only $$p(\mathbf{X} | \mathcal{M})$$, which, if our model is a good representation of reality, is similar to $$p(\mathbf{X})$$. But where did w go? 
-Bayesian inference gives us the posterior of w:
+We need some way of representing $$p(\mathbf{X})$$, a model $$\mathcal{M}$$, parametrized by weights, $$\mathbf{w}$$: $$p(y, \mathbf{X}, \mathbf{w} | \mathcal{M})$$. The "$$\mathcal{M}$$" reminds us that we're not accessing raw reality. Rather, we're looking at it through a particular lens, constituted by our choice of hyperparameters and whatever domain knowledge and inductive biases we bring to bear on the problem. This lens reveals only $$p(\mathbf{X} | \mathcal{M})$$, which, if our model is a good representation of reality, is similar to $$p(\mathbf{X})$$. 
+Usually in ML, fitting a model means finding a value of $$\mathbf{w}$$ that agrees with the prior and the data in some formal way.
+In Bayesian inference, we get an entire probability distribution over \mathbf{w}, the posterior:
 
 \begin{aligned}
-$$p(w | \mathbf{X}, m) = p(\mathbf{X} | w, m)p(w | m) / p(\mathbf{X} | m)$$
+$$p(\mathbf{w} | \mathbf{X}, \mathcal{M}) = p(\mathbf{X} | \mathbf{w}, \mathcal{M})p(\mathbf{w} | \mathcal{M}) / p(\mathbf{X} | \mathcal{M})$$
+\end{aligned}
+
+In a real sense, the posterior gives us not one model, but an entire set of models, with various posterior probabilities. There may not be a single most likely model - the posterior distribution could have many modes. Especially in deep learning, the likelihood, and consequently the posterior, may be high for a wide variety of different weights, corresponding to different functions. 
+
+Thus, to make predictions about future data $$\mathbf{x}$$, we want to ensemble all of the models, weighted by their posterior probability. This is done in the posterior predictive, $$p(\mathbf{x} | \mathbf{X}, \mathcal{M}). We get it by *marginalizing* w out, over the posterior:
+
+\begin{aligned}
+$$p(\mathbf{x} | \mathbf{X}, \mathcal{M}) = \int p(\mathbf{x} | \mathbf{X}, \mathbf{w}, \mathcal{M})p(\mathbf{w} | \mathbf{X}, \mathcal{M}) d\mathbf{w}$$
 \end{aligned}
 
 
-To make predictions about future data, we're interested in the posterior predictive, p(x | X, m). We get it by *marginalizing* w out, over the posterior:
-
-\begin{aligned}
-$$p(x | \mathbf{X}, m) = int p(\mathbf{x} | \mathbf{X}, w, m)p(w | \mathbf{X}, m) dw$$
-\end{aligned}
-
-
-We can also marginalize w out over the prior, which gives us the posterior predictive's lesser known little brother, the prior predictive:
+We can also marginalize \mathbf{w} out over the prior, which gives us the posterior predictive's lesser known little brother, the prior predictive:
 
 \begin{aligned}
 $$p(\mathbf{x} | m) = int p(\mathbf{x} | w, m)p(w | m) dw$$
 \end{aligned}
 
-Evaluating the prior predictive at the data we observed, $$p(\mathbf{X} | m)$$
-gives us that rare and coveted quantity, the marginal likelihood, aka model evidence. The model evidence unlocks a second level to Bayes' theorem:
+Evaluating the prior predictive at the data we observed, $$p(\mathbf{X} | m)$$, however, gives us that rare and coveted quantity, the marginal likelihood, aka model evidence. The model evidence unlocks a second level to Bayes' theorem:
 
 \begin{aligned}
 $$p(m | \mathbf{X}) = p(\mathbf{X} | m)p(m)/$$p(\mathbf{X})$$$$
