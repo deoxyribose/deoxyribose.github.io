@@ -22,10 +22,12 @@ Supporting arguments:
 
 Take a look at the following objects:
 ![tufa]({{ site.url }}/images/tufa.png "Various novel objects.")
-[[^2]]
-<center> Various novel objects, some of them are tufas. Credit [Josh Tenenbaum](https://www.slideserve.com/victoria/ucsd07-powerpoint-ppt-presentation)  </center>
-The ones highlighted in red are tufas. Can you spot other tufas among the objects? What would a tufa look like if you viewed it from above? What if the lighting was coming from below, and blue in color? How would you divide a tufa into parts, and how can the parts move, if at all? If you held a tufa by the "roots" and spun around in a circle, what would happen to the other end?
-Most likely you can answer all these questions without too much trouble. How do you do that? How 
+<center> Various novel objects.</center>
+
+[Credit: Josh Tenenbaum](https://www.slideserve.com/victoria/ucsd07-powerpoint-ppt-presentation)
+The ones highlighted in red are tufas. Can you spot other tufas among the objects? What would a tufa look like if you viewed it from above? What if the lighting was coming from below, and was blue in color? If you held a tufa by the "roots" (I'm sure you know what I mean) and spun it around in a circle, what would happen to the other end? What sound would a tufa make if you dropped it on the floor?
+Most likely you can answer all these questions without too much trouble. Perhaps you're not certain exactly what the answers are, but you have a rough idea. How are you doing that? 
+
 
 
 
