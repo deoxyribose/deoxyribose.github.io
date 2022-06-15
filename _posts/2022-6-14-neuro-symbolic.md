@@ -50,7 +50,7 @@ This method gives us superhuman performance at the game of Go, computer vision t
 
 Scale is often the only difference between not being able to solve a task at all, to achieving superhuman performance. Some researchers, including heavyweights like Richard Sutton, Nando de Freitas and Ilya Sutskever, believe scale will take deep learning all the way to AGI: a system that can learn not just a single narrow task at a time, but any task a human can learn, from perception to board games to engineering to even AI research itself. The scaling hypothesis, as argued by Gwern [here](https://www.gwern.net/Scaling-hypothesis#scaling-hypothesis), "has only looked more and more plausible every year since 2010". The bitter part of the lesson is that most of the intellectual effort poured into AI has seemingly been for nought. Scale is boring, but practical.
 
-### Machine learing: a probabilistic perspective
+### Machine learning: a probabilistic perspective in 5 minutes
 
 To examine deep learning from a broader perspective, we need a quick primer of machine learning. I'll assume some familiarity with probability theory, and present a probabilistic perspective on ML. This will later allow us to see what deep learning is missing, and help us bridge the gap between the neural and the symbolic.
 
@@ -107,8 +107,21 @@ The difference between the first and second level of Bayes, is that the first le
 
 Before this probabilistic perspective bears its first fruit, let's briefly relate this probabilistic perspective to deep learning. Not counting Bayesian deep learning, DL doesn't bother with even the first Bayes level, let alone the second. Rather than computing or approximating the posterior over the weights, SGD simply finds the single value of weights that maximize the likelihood $$p(\mathbf{X} | \mathbf{w}, \mathcal{M})$$ [[^1]] The derogatory term for this among Bayesians is "point-estimate" - the posterior distribution is approximated by a single point. The prior p(w | M) is also present behind the scenes in deep learning, as a regularization term in the loss function.[[^2]]
 
+### Generalization: From hashtables to AGI
 
 Apart from providing a unifying framework for disparate techniques and phenomena, a probabilistic perspective on ML sheds light on the notions of generalization, bias-variance decomposition and Occam's razor in a single concept.
+
+Informally, generalization is the ability to use past experience to perform in novel situations. In supervised learning, we can estimate generalization by how well the model performs on a held-out dataset, that is, data which didn't appear in the training set. If the training set and test set are independent and representative samples from the data distribution, we have an unbiased estimate. It is just an estimate - usually we can't _measure_ generalization by testing the model on every conceivable input and output. In unsupervised learning, a probabilistic perspective allows us to estimate generalization by how much probability mass the model assigns to held-out data. Since a distribution obeys conservation of probability mass, unsupervised models can overfit by assigning too much of it to the training data, getting good training loss at the cost of underestimating the probability of future outcomes.
+
+When engineers apply a formal method to real-world problems, the assumptions and idealizations that make the method work often conflict with the nebulous nature of the problem. So it is with the notion of "data distribution". Consider the problem of predicting future temperatures given past measurements. After training on an hours' worth of continuous data, learning that the temperature increases linearly, forever, generalizes very well for a few hours, until it doesn't. Training for 48 hours, learning the day-night cycle generalizes quite well for a few days, until it doesn't. Training for a month, learning the day-night cycle plus a trend generalizes fine for a few months, until it doesn't. Training for a millenium, induction on past experience doesn't prepare the model for anthropogenic climate change. The only constant is change.
+
+We call this phenomenon _non-stationarity_, or _distribution shift_, with special cases _covariate shift_ (when $$p(\mathbf{y} | \mathbf{x})$$ is stationary but $$p(\mathbf{x})$$ isn't), _label shift_ (vice versa). Distribution shift is usually much more subtle than the educational example above, and there is a rich folklore in machine learning with cautionary tales of neglecting to consider distribution shift (Tanks), but we keep doing it. Most recently, a large swathe of NN-driven medical diagnosis tools have been defeated by models picking up on idiosyncracies of cameras in different hospitals. 
+
+Distribution shift.
+Two models can generalize equally well on one test set, but differently on another (e.g. recognizing a cat by shape of vs texture)
+Shortcut learning.
+
+
 
 ![prob_gen]({{ site.url }}/images/probabilistic_generalization_wilson_izmailov.png "A probabilistic perspective of generalization.")
 <center> A probabilistic perspective of generalization.</center>
