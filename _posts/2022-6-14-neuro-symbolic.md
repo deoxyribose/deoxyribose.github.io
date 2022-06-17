@@ -4,19 +4,19 @@ title:
 katex: True
 ---
 
-Will scaling deep learning produce human-level generality, or do we need to add other approaches? Time will tell, but in the meantime, we can look at what AI needs to become AGI, what theory says about getting there, and what scaling has delivered thus far. 
+Will scaling deep learning produce human-level generality, or do we need a new approach? Can everything be learned from experience, or does learning require innate knowledge and reason? The question is as old as philosophy itself, but as we continue to develop learning systems that affect our lives, we need to start answering it. 
 
-Deep learning is lacking in many interrelated ways: data efficiency, generalization ability, extrapolation, robustness to adversarial attacks, compositionality, causality, symbolic reasoning, and several more. Most people agree that these shortcomings will have to be overcome to build AGI. Where they disagree is what it'll take to get there. There's a wide range of views:
+Current deep learning has limitations. It lacks data efficiency, generalization ability, extrapolation, robustness to adversarial attacks, compositionality, causality, symbolic reasoning, and several more. Most people agree that these are necessary for AGI. But they disagree about what it will take to get there. 
 
-Scaling maximalists argue that, just as the human brain is a giant neural network trained on years of experience, and just as we've seen ever more impressive and surprising abilities emerge with more data and compute, these shortcomings will be solved by scale as well.
+Proponents of the scaling hypothesis argue that, just as the human brain is a giant neural network trained on years of experience, and just as we've seen ever more impressive and surprising abilities emerge with more data and compute, these limitations will likewise be overcome by scaling.
 
-Perhaps a more common view, is that while deep learning and scale are foundational, we do need to add new concepts, but they will have to be compatible with gradient-based learning.
+Perhaps the most common view, is that while deep learning and scale are foundational, we do need to add new concepts, but they will have to be compatible with gradient-based learning.
 
-Proponents of neuro-symbolic AI argue that deep learning should be combined with a radically different approach, symbolic AI, in order to compensate for what's lacking. On its own, they say, deep learning is fundamentally limited in important ways, irrespective of scale.
+Proponents of neuro-symbolic AI argue that deep learning should be combined with a radically different approach, symbolic AI. The above limitations are fundamental to deep learning, irrespective of scale.
 
-On all sides, proponents cite well-known results to support their respective views; The universal approximation theorem means that neural networks can represent any function. Bayes' theorem implies that simple models generalize better. No amount of correlation can ever imply causation. 
+On all sides, proponents cite well-known results in support of their views; The universal approximation theorem means that neural networks can represent any function. Bayes' theorem implies that simple models generalize better. No amount of correlation can ever imply causation. 
 
-Empirically, deep learning continues to deliver amazing results. But it still struggles with full self-driving, medical diagnosis and other long-tailed, billion-dollar problems that we've been working on for a while now. 
+Each side interprets the abilities and shortcomings of current systems in accordance with their views. Empirically, deep learning continues to deliver amazing results. But it still struggles with full self-driving, medical diagnosis and other long-tailed, billion-dollar problems that we've been working on for a while now. 
 
 I'll present my take on DL's generalization ability. I'll argue that while DL can indeed learn anything given enough data and compute, many problems place harsh constraints on both. Loss functions are minimized by "shortcuts", i.e. solutions that don't generalize beyond the data distribution. But you and I generalize out-of-distribution all the time. In fact, let's try it now:
 
