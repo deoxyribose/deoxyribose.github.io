@@ -4,30 +4,19 @@ title:
 katex: True
 ---
 
+Will scaling deep learning produce human-level generality, or do we need to add other approaches? Time will tell, but in the meantime, we can look at what AI needs to become AGI, what theory says about getting there, and what scaling has delivered thus far. 
 
-Example: DL-based CV vs inverse graphics? DL-regression vs symbolic regression?
-Thesis: Scaling deep learning won't produce flexible generalization ability. Symbolic computation is needed.
-Supporting arguments:
-1. DL can't extrapolate, only interpolate.
-	1. Extrapolation matters for generalization.
-		1. Show example of NN vs symbolic regression.
-	2. Lack of OOD generalization makes a model brittle, and soon outdated.
-2. DL can't infer causes, only associations.
-	1. We need causality to explain things. Otherwise, we're just predicting.
-	2. We need causality to figure out what to do to achieve our goals.
-	3. We need causality for imagination and creativity.
-3. DL requires a dense sampling of the latent manifold, and a large compute budget.
+Deep learning is lacking in many interrelated ways: data efficiency, generalization ability, extrapolation, robustness to adversarial attacks, compositionality, causality, symbolic reasoning, and several more. Most people agree that these shortcomings will have to be overcome to build AGI. Where they disagree is what it'll take to get there. There's a wide range of views:
 
+Scaling maximalists argue that, just as the human brain is a giant neural network trained on years of experience, and just as we've seen ever more impressive and surprising abilities emerge with more data and compute, these shortcomings will be solved by scale as well.
+Perhaps a more common view, held by Yann LeCun, is that while deep learning and scale will remain the foundation of AI, we do need to add new concepts - which will have to be compatible with gradient-based learning.
+At the other extreme, proponents of neuro-symbolic AI argue that deep learning should be combined with a radically different approach, symbolic AI, in order to compensate for what's lacking. On its own, they say, deep learning is fundamentally limited in important ways, irrespective of scale.
 
-Will scaling deep learning deliver human-level generality, or do we need to add other approaches? Time will tell, but in the meantime, we can look at what theory implies, what AI will need to become AGI, and what scaling has delivered thus far. 
-In theory, well-known results seem to contradict each other: on one hand, the universal approximation theorem means that neural networks can represent any function. On the other, Bayes' theorem implies that simpler models generalize better - and deep learning models are complex. 
-Deep learning has many interrelated areas where they are lacking: data efficiency, generalization ability, extrapolation, robustness to adversarial attacks, compositionality, causality, symbolic reasoning, and several more. Most agree that these shortcomings will have to be overcome to build AGI. Where they disagree is what it'll take to get there. There's a wide range of views:
+Well-known results seem to contradict each other: on one hand, the universal approximation theorem means that neural networks can represent any function. On the other, Bayes' theorem implies that simple models generalize better - and deep learning models are complex. 
 
-Scaling maximalists argue that, just as the the human brain is a giant neural network trained on years of experience, and just as ever more impressive abilities have been emerging with scale, these desiderata will emerge as well. 
-Perhaps a more common view, held by Yann LeCun, is that while deep learning and scale will remain the foundation of AI, we do need to find and add some number of new concepts - which will have to be compatible with gradient-based learning.
-At the other extreme, proponents of neuro-symbolic AI argue that deep learning needs to be combined with a radically different approach - symbolic AI, in order to compensate for what's lacking. On its own, they say, deep learning is fundamentally limited irrespective of scale.
+Empirically, deep learning continues to deliver amazing results. But it still struggles with full self-driving, medical diagnosis and other long-tailed billion-dollar problems that we've been working on for a while now. 
 
-
+I'll present my take on DL's generalization ability. I'll argue that while DL can learn anything given enough data and compute, many problems we routinely solve as humans exhibit far harsher resource constraints. In fact, here's one:
 
 ### 
 
