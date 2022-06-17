@@ -9,7 +9,9 @@ Will scaling deep learning produce human-level generality, or do we need to add 
 Deep learning is lacking in many interrelated ways: data efficiency, generalization ability, extrapolation, robustness to adversarial attacks, compositionality, causality, symbolic reasoning, and several more. Most people agree that these shortcomings will have to be overcome to build AGI. Where they disagree is what it'll take to get there. There's a wide range of views:
 
 Scaling maximalists argue that, just as the human brain is a giant neural network trained on years of experience, and just as we've seen ever more impressive and surprising abilities emerge with more data and compute, these shortcomings will be solved by scale as well.
+
 Perhaps a more common view, held by Yann LeCun, is that while deep learning and scale will remain the foundation of AI, we do need to add new concepts - which will have to be compatible with gradient-based learning.
+
 At the other extreme, proponents of neuro-symbolic AI argue that deep learning should be combined with a radically different approach, symbolic AI, in order to compensate for what's lacking. On its own, they say, deep learning is fundamentally limited in important ways, irrespective of scale.
 
 On all sides, proponents cite well-known results to support their respective views; The universal approximation theorem means that neural networks can represent any function. Bayes' theorem implies that simple models generalize better. No amount of correlation can ever imply causation. 
