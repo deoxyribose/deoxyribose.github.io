@@ -16,7 +16,7 @@ Proponents of neuro-symbolic AI argue that the above limitations are fundamental
 
 On all sides, proponents cite well-known results in support of their views; The universal approximation theorem means that neural networks can represent any function. Bayes' theorem implies that simple models generalize better. No amount of correlation can ever imply causation. 
 
-Each side interprets the abilities and shortcomings of current systems in accordance with their views. Empirically, deep learning continues to deliver amazing results, largerly though . But it still struggles with full self-driving, medical diagnosis and other long-tailed, billion-dollar problems that we've been working on for a while now. 
+Each side interprets the abilities and shortcomings of current systems in accordance with their views. Deep learning continues to deliver amazing results, largerly thanks to scale. But it still struggles with full self-driving, medical diagnosis and other long-tailed, billion-dollar problems that we've been working on for a while now. 
 
 I'll present my take on DL's generalization ability. I'll argue that while DL can indeed learn anything given enough data and compute, many problems place harsh constraints on both. Loss functions are minimized by "shortcuts", i.e. solutions that don't generalize beyond the data distribution. But you and I generalize out-of-distribution all the time. In fact, let's try it now:
 
