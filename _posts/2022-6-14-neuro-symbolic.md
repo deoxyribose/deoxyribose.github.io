@@ -12,7 +12,7 @@ Scaling maximalists argue that, just as the human brain is a giant neural networ
 Perhaps a more common view, held by Yann LeCun, is that while deep learning and scale will remain the foundation of AI, we do need to add new concepts - which will have to be compatible with gradient-based learning.
 At the other extreme, proponents of neuro-symbolic AI argue that deep learning should be combined with a radically different approach, symbolic AI, in order to compensate for what's lacking. On its own, they say, deep learning is fundamentally limited in important ways, irrespective of scale.
 
-Well-known results seem to contradict each other: on one hand, the universal approximation theorem means that neural networks can represent any function. On the other, Bayes' theorem implies that simple models generalize better - and deep learning models are complex. 
+On all sides, proponents cite well-known results to support their respective views; The universal approximation theorem means that neural networks can represent any function. Bayes' theorem implies that simple models generalize better. No amount of correlation can ever imply causation. 
 
 Empirically, deep learning continues to deliver amazing results. But it still struggles with full self-driving, medical diagnosis and other long-tailed billion-dollar problems that we've been working on for a while now. 
 
