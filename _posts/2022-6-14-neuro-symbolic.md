@@ -4,19 +4,19 @@ title:
 katex: True
 ---
 
-Will scaling deep learning produce human-level generality, or do we need a new approach? Can everything be learned from experience, or does learning require innate knowledge and reason? The question is as old as philosophy itself, but as we continue to develop learning systems that affect our lives, we need to start answering it. 
+Will scaling deep learning produce human-level generality, or do we need a new approach? Can everything be learned from experience, or does learning require innate knowledge and reason? The question is as old as philosophy itself, but as we continue to develop learning systems that affect our lives in profound ways, we need to start answering it. 
 
-Current deep learning has limitations. It lacks data efficiency, generalization ability, extrapolation, robustness to adversarial attacks, compositionality, causality, symbolic reasoning, and several more. Most people agree that these are necessary for AGI. But they disagree about what it will take to get there. 
+Current deep learning has limitations. It lacks data efficiency, generalization ability, extrapolation, robustness to adversarial attacks, compositionality, causality, symbolic reasoning, and several more. Most people agree that these will have to improve if we're to develop AGI. But they disagree about how to do it. 
 
-Proponents of the scaling hypothesis argue that, just as the human brain is a giant neural network trained on years of experience, and just as we've seen ever more impressive and surprising abilities emerge with more data and compute, these limitations will likewise be overcome by scaling.
+Proponents of the scaling hypothesis argue that, just as the human brain is a giant neural network trained on years of experience, and just as we've seen ever more impressive and surprising abilities emerge with more data and compute, these limitations will likewise be overcome by adding data and compute.
 
 Perhaps the most common view, is that while deep learning and scale are foundational, we do need to add new concepts, but they will have to be compatible with gradient-based learning.
 
-Proponents of neuro-symbolic AI argue that deep learning should be combined with a radically different approach, symbolic AI. The above limitations are fundamental to deep learning, irrespective of scale.
+Proponents of neuro-symbolic AI argue that the above limitations are fundamental to deep learning, no matter how deep it gets. They want to combine deep learning with a radically different approach, symbolic AI. 
 
 On all sides, proponents cite well-known results in support of their views; The universal approximation theorem means that neural networks can represent any function. Bayes' theorem implies that simple models generalize better. No amount of correlation can ever imply causation. 
 
-Each side interprets the abilities and shortcomings of current systems in accordance with their views. Empirically, deep learning continues to deliver amazing results. But it still struggles with full self-driving, medical diagnosis and other long-tailed, billion-dollar problems that we've been working on for a while now. 
+Each side interprets the abilities and shortcomings of current systems in accordance with their views. Empirically, deep learning continues to deliver amazing results, largerly though . But it still struggles with full self-driving, medical diagnosis and other long-tailed, billion-dollar problems that we've been working on for a while now. 
 
 I'll present my take on DL's generalization ability. I'll argue that while DL can indeed learn anything given enough data and compute, many problems place harsh constraints on both. Loss functions are minimized by "shortcuts", i.e. solutions that don't generalize beyond the data distribution. But you and I generalize out-of-distribution all the time. In fact, let's try it now:
 
@@ -28,9 +28,9 @@ Take a look at the following objects:
 
 [Credit: Josh Tenenbaum](https://www.slideserve.com/victoria/ucsd07-powerpoint-ppt-presentation)
 
-The ones highlighted in red are _tufas_. Can you spot other tufas among the objects? What would a tufa look like viewed from above? What if the lighting was coming from below, and was blue in color? If you held a tufa by the "roots" (I'm sure you know what I mean) and spun it around in a circle, what would happen to the other end? What sound would a tufa make if you dropped it on the floor?
+The ones highlighted in red are _tufas_. Can you spot other tufas among the objects? Can you imagine what a tufa looks like viewed from above? Do you think a tufa is hard and unyielding, or soft and elastic? If you held a tufa by the "roots" and spun it around in a circle, what could happen to the other end? Would a tufa float in water, or sink?
 
-Most likely you can answer all these questions without too much trouble. Perhaps you're not exactly certain of the answers, but you have a rough idea. In general, you can probably make good guesses about various properties of tufas. 
+Most likely you can answer all these questions without too much trouble. Perhaps you're not exactly sure of the answers, but you have a rough idea. In general, you can probably make good guesses about various properties of tufas, and what would happen to one in different hypothetical scenarios. 
 
 In recent debates about how to develop artificial intelligence, two viewpoints dominate. Proponents of the scaling hypothesis argue that deep learning is on track to acquire all the cognitive abilities featured by human intelligence, all we need is to scale it up. Opponents argue that deep learning is lacking in some fundamental ways, which mere scale cannot overcome. According to them, adding symbolic reasoning, causality, and program induction are the next step. 
 
