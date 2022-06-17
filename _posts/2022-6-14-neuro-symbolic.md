@@ -8,7 +8,7 @@ Will scaling deep learning produce human-level generality, or do we need a new a
 
 Current deep learning has limitations. It lacks data efficiency, generalization ability, extrapolation, robustness to adversarial attacks, compositionality, causality, symbolic reasoning, and several more. Most people agree that these will have to improve if we're to develop AGI. But they disagree about how to do it. 
 
-Proponents of the scaling hypothesis argue that, just as the human brain is a giant neural network trained on years of experience, and just as we've seen ever more impressive and surprising abilities emerge with more data and compute, these limitations will likewise be overcome by adding data and compute.
+Proponents of the scaling hypothesis argue that, just as the human brain is a giant neural network trained through years of high bitrate experience, and just as we've seen ever more impressive and surprising abilities emerge with more data and compute, these limitations will likewise be overcome by adding data and compute.
 
 Perhaps the most common view, is that while deep learning and scale are foundational, we do need to add new concepts, but they will have to be compatible with gradient-based learning.
 
@@ -16,9 +16,12 @@ Proponents of neuro-symbolic AI argue that the above limitations are fundamental
 
 On all sides, proponents cite well-known results in support of their views; The universal approximation theorem means that neural networks can represent any function. Bayes' theorem implies that simple models generalize better. No amount of correlation can ever imply causation. 
 
-Each side interprets the abilities and shortcomings of current systems in accordance with their views. Deep learning continues to deliver amazing results, largerly thanks to scale. But it still struggles with full self-driving, medical diagnosis and other long-tailed, billion-dollar problems that we've been working on for a while now. 
+Each side interprets the abilities and shortcomings of current systems in accordance with their views. Deep learning continues to deliver amazing results, largely thanks to scale. But it still struggles with full self-driving, medical diagnosis and other long-tailed, billion-dollar problems that we've been working on for a while. 
 
-I'll present my take on DL's generalization ability. I'll argue that while DL can indeed learn anything given enough data and compute, many problems place harsh constraints on both. Loss functions are minimized by "shortcuts", i.e. solutions that don't generalize beyond the data distribution. But you and I generalize out-of-distribution all the time. In fact, let's try it now:
+I'll present my take on deep learning's generalization ability, heavily inspired by Francois Chollet's "On the Measure of Intelligence", work from Josh Tenenbaum and MIT's Probabilistic Computing Project and the paper "Shortcut Learning in Deep Neural Networks" by Geirhos et al. I'll argue that 
+1) While DL can indeed learn anything given enough data and compute, mundane, everyday problems like making breakfast, place harsh constraints on both. 
+2) The limitations of deep learning are inherent. Loss functions are minimized by "shortcuts", i.e. solutions that don't generalize beyond the data distribution. Large pre-trained models can effectively provide "generalization" and "few-shot learning" within a data-rich domain, but the real-time adaptability and flexibility of human intelligence comes from generalizing across domains. 
+3) Neuro-symbolic systems that overcome these limitations already exist.
 
 ### Tufa or not tufa.
 
