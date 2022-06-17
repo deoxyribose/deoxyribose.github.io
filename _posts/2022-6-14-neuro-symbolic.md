@@ -19,6 +19,18 @@ Supporting arguments:
 3. DL requires a dense sampling of the latent manifold, and a large compute budget.
 
 
+Will scaling deep learning deliver human-level generality, or do we need to add other approaches? Time will tell, but in the meantime, we can look at what theory implies, what AI will need to become AGI, and what scaling has delivered thus far. 
+In theory, well-known results seem to contradict each other: on one hand, the universal approximation theorem means that neural networks can represent any function. On the other, Bayes' theorem implies that simpler models generalize better - and deep learning models are complex. 
+Deep learning has many interrelated areas where they are lacking: data efficiency, generalization ability, extrapolation, robustness to adversarial attacks, compositionality, causality, symbolic reasoning, and several more. Most agree that these shortcomings will have to be overcome to build AGI. Where they disagree is what it'll take to get there. There's a wide range of views:
+
+Scaling maximalists argue that, just as the the human brain is a giant neural network trained on years of experience, and just as ever more impressive abilities have been emerging with scale, these desiderata will emerge as well. 
+Perhaps a more common view, held by Yann LeCun, is that while deep learning and scale will remain the foundation of AI, we do need to find and add some number of new concepts - which will have to be compatible with gradient-based learning.
+At the other extreme, proponents of neuro-symbolic AI argue that deep learning needs to be combined with a radically different approach - symbolic AI, in order to compensate for what's lacking. On its own, they say, deep learning is fundamentally limited irrespective of scale.
+
+
+
+### 
+
 
 Take a look at the following objects:
 ![tufa]({{ site.url }}/images/tufa.png "Various novel objects.")
@@ -129,26 +141,70 @@ We call this phenomenon _non-stationarity_, or _distribution shift_, with specia
 [Credit: Andrew Gordon Wilson and Pavel Izmailov](https://arxiv.org/pdf/2002.08791.pdf)
 
 It's important to understand that bad generalization ability doesn't imply low skill level, and high skill level doesn't imply good generalization ability. 
+
+	How do NNs learn? Geometric analogy - they unfold a crimpled ball of paper through a chain of geometric transformations.
+		Experiment: Initialize an autoencoder with a 2d latent space. 
+	Latent space interpolation.
+	MLPs and hierarchical features.
+		You may ask, if the crux of the issue is to have multiple successive layers of repre-
+		sentations, could shallow methods be applied repeatedly to emulate the effects of
+		deep learning? In practice, there are fast-diminishing returns to successive applica-
+		tions of shallow-learning methods, because the optimal first representation layer in a three-
+		layer model isn’t the optimal first layer in a one-layer or two-layer model. What is transforma-
+		tive about deep learning is that it allows a model to learn all layers of representation
+		jointly, at the same time, rather than in succession (greedily, as it’s called). With joint
+		feature learning, whenever the model adjusts one of its internal features, all other fea-
+		tures that depend on it automatically adapt to the change, without requiring human
+		intervention. Everything is supervised by a single feedback signal: every change in the
+		model serves the end goal. This is much more powerful than greedily stacking shallow
+		models, because it allows for complex, abstract representations to be learned by
+		breaking them down into long series of intermediate spaces (layers); each space is
+		only a simple transformation away from the previous one.
+	CNNs and translation invariance.
+	RNNs and local relationships in sequence.
+	Transformers and Hopfield networks.
+
 Distribution shift.
 Two models can generalize equally well on one test set, but differently on another (e.g. recognizing a cat by shape of vs texture)
 Shortcut learning.
 OOD generalization.
+https://twitter.com/sirbayes/status/1537177495866327040
+https://jacobbuckman.com/2022-06-14-an-actually-good-argument-against-naive-ai-scaling/?utm_source=pocket_mylist
 
-### Do we need anything beyond interpolation?
+### Do we need anything beyond local generalization?
 
-Some people understand all this and still believe the scaling hypothesis. 
-Either because they believe interpolation in high dimensions amounts to extrapolation: https://arxiv.org/abs/2110.09485
-Or because they believe interpolation is all that is needed:https://www.gwern.net/docs/ai/scaling/2020-hasson.pdf
+You can always buy any skill level by injecting priors or data. But that's not intelligence, because intelligence is generalization ability.
+However, that's only a good argument if generalization ability is a good definition of intelligence, otherwise it becomes circular.
+So the task remains to argue in what generalization gives us that we can't get without it. In short: adaptability.
+
+Some people understand all this and still believe the scaling hypothesis, or at least in the power of interpolative models trained on big data.
+
+#### Why try to extrapolate when you can just buy skills by interpolating more data?
+Either because because they believe interpolation is all that is needed:https://www.gwern.net/docs/ai/scaling/2020-hasson.pdf
 	"By widening the interpolation zone, the model’s inability to extrapolate becomes less and less of a liability (Feldman,2019; Radhakrishnan et al., 2019)."
 
 	What does "less and less" mean? What is the rate of widening the interpolation zone vs the rate of distribution shift?
+	We need more than just to widen the zone. We need a dense sampling of the space. Density is points over volume, and volume scales exponentially in the number of dimensions.
 
-	"The same direct-fit proced-ures can be expanded to fit arbitrarily complex data structures(Cybenko, 1989; Funahashi, 1989; Hornik et al., 1989; Raghu etal., 2017). The ability of over-parameterized models to robustlyfit complex data structures provides unparalleled predictive po-wer within the interpolation zone, making them uniquely suit-able for multidimensional, real-life situations for which no sim-ple, ideal model exists."
-	Unparalleled predictive power? Show "Composing graphical models..."
-	No simple model exists? The unreasonable effectiveness of mathematics mights as well have been called the unreasonable effectiveness of simple, symbolic representations.
+	"The same direct-fit procedures can be expanded to fit arbitrarily complex data structures(Cybenko, 1989; Funahashi, 1989; Hornik et al., 1989; Raghu etal., 2017). The ability of over-parameterized models to robustly fit complex data structures provides unparalleled predictive po-wer within the interpolation zone, making them uniquely suit-able for multidimensional, real-life situations for which no simple, ideal model exists."
+		Unparalleled predictive power? Show "Composing graphical models..."
+		No simple model exists? The unreasonable effectiveness of mathematics mights as well have been called the unreasonable effectiveness of simple, symbolic representations.
+		There is a simple model for computer vision: inverse graphics
+		In general, the causal direction is simple: Max Welling's response to the bitter lesson
+Or they believe interpolation in high dimensions amounts to extrapolation: https://arxiv.org/abs/2110.09485
+	Does a low-dimensional extrapolation problem become a interpolation problem in high dimensions? Sort of like how quantum mechanics is linear, but in space where every particle has a dimension.
 
-Or because they believe NNs are "lazy", and are forced to learn more and more generalizable patterns with larger scale: "So, the larger the model, the better, if there is enough data & compute to push it past the easy convenient sub-models and into the sub-models which express desirable traits like generalizing, factorizing perception into meaningful latent dimensions, meta-learning tasks based on descriptions, learning causal reasoning & logic, and so on. If the ingredients are there, it’s going to happen.": https://www.gwern.net/Scaling-hypothesis#blessings-of-scale
+Or because they believe NNs are "lazy", and are forced to learn more and more generalizable patterns with larger scale: 
+	"So, the larger the model, the better, if there is enough data & compute to push it past the easy convenient sub-models and into the sub-models which express desirable traits like generalizing, factorizing perception into meaningful latent dimensions, meta-learning tasks based on descriptions, learning causal reasoning & logic, and so on. If the ingredients are there, it’s going to happen.": https://www.gwern.net/Scaling-hypothesis#blessings-of-scale
+		NNs are still too flexible. 
+		The ingredients aren't there - you can represent any function with an NN to any degree of accuracy, but you can't learn any function.
+		A larger model trained on larger data learns a different latent manifold, so that interpolation leads to different predictions.
+			This is what makes pre-training work.
 
+Experiments:
+Test extrapolation as function of scale for MLP on x -> x^2
+Test extrapolation as function of scale for symbolic regression on x -> x^2
+Test extrapolation as function of scale for Transformer on binary x -> x^2
 
 
 If we sample a large enough and diverse enough dataset, do we even need OOD? Don't NNs learn more generalizable patterns with larger scale by compressing it? Haven't we seen few-shot learning and meta-learning emerge with scale?
@@ -157,6 +213,12 @@ Gwern says yes:
 "DL enjoys an unreasonably effective blessing of dimensionality—just simply training a big model on a lot of data induces better properties like meta-learning without even the slightest bit of that architecture being built in; and in general, training on more and harder tasks creates ever more human-like performance, generalization, and robustness."
 ...and proceeds to cite a bunch of papers where scale improves in-distribution generalization.
 
+
+*Will everything that's missing from DL in order to generalize more broadly, causality, reasoning, symbols, programs, emerge with scale?*
+NNs can represent it.
+But they cannot learn it from data.
+A "true" model converges at some point. Inverse graphics works on everything.
+
 ### Level 1.5: Out-of-distribution generalization
 
 Solving OOD generalization would be a huge boon, economically. Upkeep costs in AI companies are generally much higher than in tradiational software companies, because of this.
@@ -164,6 +226,8 @@ Solving OOD generalization would be a huge boon, economically. Upkeep costs in A
 
 
 ### Level 2: Causality and broad generalization
+
+Predictions vs Explanations
 
 
 ### Level 3: Imagination, creativity, analogy and extreme generalization
