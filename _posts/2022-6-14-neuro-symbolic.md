@@ -16,12 +16,11 @@ Proponents of neuro-symbolic AI argue that deep learning should be combined with
 
 On all sides, proponents cite well-known results to support their respective views; The universal approximation theorem means that neural networks can represent any function. Bayes' theorem implies that simple models generalize better. No amount of correlation can ever imply causation. 
 
-Empirically, deep learning continues to deliver amazing results. But it still struggles with full self-driving, medical diagnosis and other long-tailed billion-dollar problems that we've been working on for a while now. 
+Empirically, deep learning continues to deliver amazing results. But it still struggles with full self-driving, medical diagnosis and other long-tailed, billion-dollar problems that we've been working on for a while now. 
 
-I'll present my take on DL's generalization ability. I'll argue that while DL can learn anything given enough data and compute, many problems we routinely solve as humans exhibit far harsher resource constraints. In fact, here's one:
+I'll present my take on DL's generalization ability. I'll argue that while DL can indeed learn anything given enough data and compute, many problems place harsh constraints on both. Loss functions are minimized by "shortcuts", i.e. solutions that don't generalize beyond the data distribution. But you and I generalize out-of-distribution all the time. In fact, let's try it now:
 
-### 
-
+### Tufa or not tufa.
 
 Take a look at the following objects:
 ![tufa]({{ site.url }}/images/tufa.png "Various novel objects.")
