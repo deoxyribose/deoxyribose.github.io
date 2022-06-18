@@ -6,7 +6,7 @@ katex: True
 
 Will scaling deep learning produce human-level generality, or do we need a new approach? Can everything be learned from experience, or does learning require innate knowledge and reason? The question is as old as philosophy itself, but as we continue to develop learning systems that affect our lives in profound ways, we need to start answering it. 
 
-Current deep learning has limitations. It lacks data efficiency, generalization ability, extrapolation, robustness to adversarial attacks, compositionality, causality, symbolic reasoning, and several more. Most people agree that these will have to improve if we're to develop AGI. But they disagree about how to do it. 
+Current deep learning has limitations. It lacks data efficiency, generalization ability, extrapolation, robustness to adversarial attacks, compositionality, causality, symbolic reasoning, and several more. Most people agree that these will have to improve if we're to develop AGI. But they disagree about how best to do it. 
 
 Proponents of the scaling hypothesis argue that, just as the human brain is a giant neural network trained through years of high bitrate experience, and just as we've seen ever more impressive and surprising abilities emerge with more data and compute, these limitations will likewise be overcome by adding data and compute.
 
@@ -18,46 +18,55 @@ On all sides, proponents cite well-known results in support of their views; The 
 
 Each side interprets the abilities and shortcomings of current systems in accordance with their views. Deep learning continues to deliver amazing results, largely thanks to scale. But it still struggles with full self-driving, medical diagnosis and other long-tailed, billion-dollar problems that we've been working on for a while. 
 
-I'll present my take on deep learning's generalization ability, heavily inspired by Francois Chollet's "On the Measure of Intelligence", work from Josh Tenenbaum and MIT's Probabilistic Computing Project and the paper "Shortcut Learning in Deep Neural Networks" by Geirhos et al. I'll argue that 
-1) While DL can indeed learn anything given enough data and compute, mundane, everyday problems like making breakfast, place harsh constraints on both. 
-2) The limitations of deep learning are inherent. Loss functions are minimized by "shortcuts", i.e. solutions that don't generalize beyond the data distribution. Large pre-trained models can effectively provide "generalization" and "few-shot learning" within a data-rich domain, but the real-time adaptability and flexibility of human intelligence comes from generalizing across domains. 
-3) Neuro-symbolic systems that overcome these limitations already exist.
+My take on deep learning's generalization ability draws on Francois Chollet's "On the Measure of Intelligence", work from Josh Tenenbaum's lab and MIT's Probabilistic Computing Project and the paper "Shortcut Learning in Deep Neural Networks" by Geirhos et al. I argue that 
+
+1) Deep learning can indeed learn anything given enough data and compute. But mundane, everyday problems like making breakfast, place harsh constraints on both. 
+2) The limitations of deep learning are inherent. Loss functions are minimized by "shortcuts", i.e. solutions that don't generalize beyond the data distribution. 
+3) Large pre-trained models can effectively provide "generalization" and "few-shot learning" within a data-rich domain, but the real-time adaptability and flexibility of human intelligence comes from generalizing across domains. 
+4) Neuro-symbolic systems that overcome these limitations already exist.
+
+There have been a number of similar posts lately. This exchange between Gary Marcus and Scott Alexander. Two posts from Jacob Buckman saying there are bad arguments on both sides (but really siding more with the scaling hypothesis). A great post from Yann LeCun and Jacob Browning, which succeeds in cutting through tangential issues and semantics, identifies the central question in the debate, and whose main conclusion I disagree with. And a number of twitter threads:
+
+I want to try, as much as possible, to boil things down to fundamental principles. Any observation can be construed in a thousand ways. Convincing analogies can give the illusion of valid argument. But if there are fundamental principles that we all agree are correct, we should try to reason from them. But first, prove that you're human:
 
 ### Tufa or not tufa.
 
 Take a look at the following objects:
+
 ![tufa]({{ site.url }}/images/tufa.png "Various novel objects.")
 <center> Various novel objects.</center>
 
 [Credit: Josh Tenenbaum](https://www.slideserve.com/victoria/ucsd07-powerpoint-ppt-presentation)
 
-The ones highlighted in red are _tufas_. Can you spot other tufas among the objects? Can you imagine what a tufa looks like viewed from above? Do you think a tufa is hard and unyielding, or soft and elastic? If you held a tufa by the "roots" and spun it around in a circle, what could happen to the other end? Would a tufa float in water, or sink?
+The ones highlighted in red are _tufas_. Can you spot other tufas among the objects? Can you imagine what a tufa looks like viewed from above? Do you think tufas are hard and unyielding, or soft and elastic? If you held a tufa by the "roots" and spun it around in a circle, what might happen to the other end? Would a tufa float in water, or sink?
 
-Most likely you can answer all these questions without too much trouble. Perhaps you're not exactly sure of the answers, but you have a rough idea. In general, you can probably make good guesses about various properties of tufas, and what would happen to one in different hypothetical scenarios. 
+Most likely you can answer all these questions without too much trouble. Perhaps you're not sure of the precise answers, but you have a rough idea. In general, you can probably make good guesses about various properties of tufas, and what would happen to one in different hypothetical scenarios. 
 
-In recent debates about how to develop artificial intelligence, two viewpoints dominate. Proponents of the scaling hypothesis argue that deep learning is on track to acquire all the cognitive abilities featured by human intelligence, all we need is to scale it up. Opponents argue that deep learning is lacking in some fundamental ways, which mere scale cannot overcome. According to them, adding symbolic reasoning, causality, and program induction are the next step. 
-
-I think the latter viewpoint is correct. But the best arguments for it haven't been part of the debate. The tufa example above, borrowed from cognitive scientist Joshua Tenenbaum, is meant to showcase some of the abilities that we all possess, that form a good portion of our intelligence. These abilities are not within the scope of deep learning. Present-day deep learning certainly hasn't produced anything like it. However, the scaling hypothesis is not easily falsified. As large as modern neural networks are, they are still insect-sized. By analogy, wouldn't a much larger network naturally acquire all the abilities that _our_ giant neural network has? I will argue that while the analogy works in some ways, overall, reasoning from first principles supports the other view: extrapolation, generalizing out-of-distribution, few-shot-learning and causal reasoning cannot emerge from scaling DL. Indeed, many of the apparent empirical successes of DL are being misinterpreted. 
-
+This example is meant to showcase some of the abilities that we all possess, that form a good portion of our intelligence. 
 
 ### Deep learning: a bittersweet lesson
 
 Deep learning is amazing. Tasks that once required specialized methods, or were impossible to even approach, are now routinely solved with a single method:
 1. Gather a large training dataset of input -> output examples
-2. Initialize a large neural network (NN), a function composed of layers of differentiable transformations parameterized by weights
+2. Initialize a large neural network (NN), a function composed of layers of differentiable modules parameterized by weights
 3. Minimize a loss function wrt. all the weights using stochastic gradient descent (SGD)
 
 This method gives us superhuman performance at the game of Go, computer vision that 10 years ago would've been unimaginable, speech recognition, machine translation and now, apparently, mastery of natural language. The secret to powerful deep learning is simply scaling up the basic method, meaning
 
 1. Train on lots of data
-2. Have lots of parameters
+2. Have lots of layers with lots of parameters
 3. Perform lots of SGD iterations on lots of GPUs (compute)
 
-Scale is often the only difference between not being able to solve a task at all, to achieving superhuman performance. Some researchers, including heavyweights like Richard Sutton, Nando de Freitas and Ilya Sutskever, believe scale will take deep learning all the way to AGI: a system that can learn not just a single narrow task at a time, but any task a human can learn, from perception to board games to engineering to even AI research itself. The scaling hypothesis, as argued by Gwern [here](https://www.gwern.net/Scaling-hypothesis#scaling-hypothesis), "has only looked more and more plausible every year since 2010". The bitter part of the lesson is that most of the intellectual effort poured into AI has seemingly been for nought. Scale is boring, but practical.
+Scale is often the only difference between not being able to solve a task at all, to achieving superhuman performance. Some researchers, including Richard Sutton, Nando de Freitas and Ilya Sutskever, believe scale will take deep learning all the way to AGI: a system that can learn not just a single narrow task at a time, but any task a human can learn, from perception to board games to engineering to even AI research itself. The scaling hypothesis, as argued by Gwern [here](https://www.gwern.net/Scaling-hypothesis#scaling-hypothesis), "has only looked more and more plausible every year since 2010". The bitter part of the lesson is that most of the intellectual effort poured into AI has been for nought. Scale is boring, but practical.
+
+#Successes of scale: large pre-trained models
+	#Language features
+	#OOD vision
+#Failures of scale: Brittleness
 
 ### Machine learning: a probabilistic perspective in 5 minutes
 
-To examine deep learning from a broader perspective, we need a quick primer of machine learning. I'll assume some familiarity with probability theory, and present a probabilistic perspective on ML. This will later allow us to see what is missing in deep learning, and help us bridge the gap between the neural and the symbolic.
+To examine deep learning from a broader perspective, we need a quick primer of machine learning. I'll assume some familiarity with probability theory, and present a probabilistic perspective on ML. This will allow us to see why deep learning generalizes only locally, and later help us bridge the gap between the neural and the symbolic.
 
 Nature generates some data, $$\mathbf{X}$$, by sampling it from the data distribution $$p(\mathbf{X})$$. $$\mathbf{X}$$ can be a matrix of numbers representing, say, the height and weight of people, a collection of images, a text corpus, a time series, etc.
 In unsupervised learning, we seek to estimate $$p(\mathbf{X})$$, often by positing additional hidden variables $$\mathbf{Z}$$, which capture some underlying regularities in $$\mathbf{X}$$, such as clusters or latent factors. In supervised learning, we think of one of the variables as the output $$\mathbf{y}$$, and want to estimate $$p(\mathbf{y}|\mathbf{X})$$, i.e. the posterior probability of getting $$\mathbf{y}$$ given that we observed $$\mathbf{X}$$. To keep notation clean, let's stick with the unsupervised case for now.
@@ -127,7 +136,7 @@ Informally, generalization is the ability to use past experience to perform in n
 When engineers apply a formal method to real-world problems, the assumptions and idealizations that make the method work often conflict with the nebulous nature of the problem. So it is with the notion of "data distribution". Consider the problem of predicting future temperatures in your city given past measurements. After training on an hours' worth of continuous data, learning that the temperature changes linearly, generalizes very well for a few hours, until it doesn't. Training for 48 hours, learning the day-night cycle generalizes quite well for a few days, until it doesn't. Training for a month, learning the day-night cycle plus a trend generalizes fine for a few months, until it doesn't. Training for a millenium, induction on past experience doesn't prepare the model for anthropogenic climate change. The only constant is change.
 
 https://d2l.ai/chapter_multilayer-perceptrons/environment.html#a-taxonomy-of-learning-problems
-We call this phenomenon _non-stationarity_, or _distribution shift_, with special cases _covariate shift_ (when $$p(\mathbf{y} | \mathbf{x})$$ is stationary but $$p(\mathbf{x})$$ isn't), _label shift_ (vice versa). Distribution shift is usually much more subtle than the educational example above, and there is a rich folklore in machine learning with cautionary tales of neglecting to consider distribution shift (Tanks), but we keep doing it. Kaggle winners are usually useless in practice. Most recently, a large swathe of NN-driven medical diagnosis tools have been defeated by models picking up on idiosyncracies of cameras in different hospitals. 
+We call this phenomenon _non-stationarity_, or _distribution shift_, with special cases _covariate shift_ (when $$p(\mathbf{y} | \mathbf{x})$$ is stationary but $$p(\mathbf{x})$$ isn't), _label shift_ (vice versa). Distribution shift is usually much more subtle than the example above, and there is a rich folklore in machine learning with cautionary tales of neglecting to consider distribution shift (Tanks), but we keep doing it. Kaggle winners are usually useless in practice. Most recently, a large swathe of NN-driven medical diagnosis tools have been defeated by models picking up on idiosyncracies of cameras in different hospitals. 
 
 ![prob_gen]({{ site.url }}/images/probabilistic_generalization_wilson_izmailov.png "A probabilistic perspective of generalization.")
 <center> A probabilistic perspective of generalization.</center>
@@ -163,6 +172,8 @@ Shortcut learning.
 OOD generalization.
 https://twitter.com/sirbayes/status/1537177495866327040
 https://jacobbuckman.com/2022-06-14-an-actually-good-argument-against-naive-ai-scaling/?utm_source=pocket_mylist
+https://twitter.com/jacobmbuckman/status/1537506566831804418
+https://www.noemamag.com/what-ai-can-tell-us-about-intelligence/?utm_source=noematwitter&utm_medium=noemasocial
 
 ### Do we need anything beyond local generalization?
 
