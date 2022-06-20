@@ -16,18 +16,19 @@ Proponents of neuro-symbolic AI argue that the above limitations are fundamental
 
 On all sides, proponents cite well-known results in support of their views; The universal approximation theorem means that neural networks can represent any function. Bayes' theorem implies that simple models generalize better. No amount of correlation can ever imply causation. 
 
-Each side interprets the abilities and shortcomings of current systems in accordance with their views. Deep learning continues to deliver amazing results, largely thanks to scale. But it still struggles with full self-driving, medical diagnosis and other long-tailed, billion-dollar problems that we've been working on for a while. 
+Each side interprets the abilities and shortcomings of current systems in accordance with their views. Deep learning continues to deliver amazing results, largely thanks to scale. But it still struggles with full self-driving, medical diagnosis and other long-tailed, billion-dollar problems that we've been working on for a while. Is deep learning hitting a wall, or is it gaining momentum?
 
-My take on deep learning's generalization ability draws on Francois Chollet's "On the Measure of Intelligence", work from Josh Tenenbaum's lab and MIT's Probabilistic Computing Project and the paper "Shortcut Learning in Deep Neural Networks" by Geirhos et al. I argue that 
+My take draws on Francois Chollet's "On the Measure of Intelligence", work from Josh Tenenbaum's lab and MIT's Probabilistic Computing Project, Judea Pearl's work on causality and the paper "Shortcut Learning in Deep Neural Networks" by Geirhos et al. I argue that 
 
-1) Deep learning can indeed learn anything given enough data and compute. But mundane, everyday problems like making breakfast, place harsh constraints on both. 
-2) The limitations of deep learning are inherent. Loss functions are minimized by "shortcuts", i.e. solutions that don't generalize beyond the data distribution. 
-3) Large pre-trained models can effectively provide "generalization" and "few-shot learning" within a data-rich domain, but the real-time adaptability and flexibility of human intelligence comes from generalizing across domains. 
-4) Neuro-symbolic systems that overcome these limitations already exist.
+1. For practical purposes, deep learning can indeed learn anything given enough data and compute. But everyday problems like making breakfast, or navigating traffic, are highly resource constrained. 
+2. The limitations of deep learning are inherent. Loss functions are minimized by "shortcuts", i.e. solutions that don't generalize beyond the data distribution. 
+3. Large pre-trained models can effectively provide "generalization" and "few-shot learning" within data-rich domains. But as we abstract away from percepts towards concepts, data becomes scarce, and demands on generalization higher. The real-time adaptability and flexibility of human intelligence comes from generalizing across domains. 
+4. "Grokking", where a large NN suddenly figures out an algorithm that solves a problem like addition for all possible inputs, rather than memorizing examples or finding spurous patterns, is not a general phenomenon. NNs aren't able to learn such algorithms. 
+5. Neuro-symbolic systems that overcome these limitations already exist.
 
 There have been a number of similar posts lately. This exchange between Gary Marcus and Scott Alexander. Two posts from Jacob Buckman saying there are bad arguments on both sides (but really siding more with the scaling hypothesis). A great post from Yann LeCun and Jacob Browning, which succeeds in cutting through tangential issues and semantics, identifies the central question in the debate, and whose main conclusion I disagree with. And a number of twitter threads:
 
-I want to try, as much as possible, to boil things down to fundamental principles. Any observation can be construed in a thousand ways. Convincing analogies can give the illusion of valid argument. But if there are fundamental principles that we all agree are correct, we should try to reason from them. But first, prove that you're human:
+I want to try, as much as possible, to boil things down to fundamental principles. Any observation can be construed in a thousand ways. Convincing analogies can give the illusion of valid argument. But if there are fundamental principles that we all agree are correct, we should try to reason from them. I will thus explain some probability theory, at a level which to non-ML people may be a lot to take in, and to ML people may be trivial. Then I'll put deep learning, and neuro-symbolic systems within that framework. But first, prove that you're human:
 
 ### Tufa or not tufa.
 
@@ -81,7 +82,7 @@ p(\mathbf{w} | \mathbf{X}, \mathcal{M}) = \frac{p(\mathbf{X} | \mathbf{w}, \math
 \end{aligned}
 $$
 
-In a real sense, the posterior gives us not one model, but an entire set of models, with various posterior probabilities. There may not be a single most likely model - the posterior distribution could have many modes. Especially in deep learning, the likelihood, and consequently the posterior, may be high for a wide variety of different weights, corresponding to different functions - that will be important later.
+In a real sense, the posterior gives us not one model, but an ensemble of models, weighted by their posterior probabilities. There may not be a single most likely model - the posterior distribution could have many modes. Especially in deep learning, the likelihood, and consequently the posterior, may be high for a wide variety of different weights, corresponding to different functions - that will be important later.
 
 Thus, to make predictions about future data $$\mathbf{x}$$, we want to ensemble all of the models, weighted by their posterior probability. This is done in the posterior predictive, $$p(\mathbf{x} | \mathbf{X}, \mathcal{M})$$. We get it by marginalizing $$\mathbf{w}$$ out, over the posterior:
 
@@ -227,7 +228,9 @@ A "true" model converges at some point. Inverse graphics works on everything.
 
 Solving OOD generalization would be a huge boon, economically. Upkeep costs in AI companies are generally much higher than in tradiational software companies, because of this.
 
+#### What is a symbol?
 
+Not discrete latent variables. Models represented as programs.
 
 ### Level 2: Causality and broad generalization
 
