@@ -8,7 +8,7 @@ Will scaling deep learning produce human-level generality, or do we need a new a
 
 Current deep learning has limitations. It lacks data efficiency, generalization ability, extrapolation, robustness to adversarial attacks, compositionality, causality, symbolic reasoning, and several more. Most people agree that these will have to improve if we're to develop AGI. But they disagree about how best to do it. 
 
-Proponents of the scaling hypothesis argue that, just as the human brain is a giant neural network trained through years of high bitrate experience, and just as we've seen ever more impressive and surprising abilities emerge with more data and compute, these limitations will likewise be overcome by adding data and compute.
+Proponents of the scaling hypothesis argue that, just as the human brain is a giant neural network trained on years of high bitrate experience, and just as we've seen ever more impressive and surprising abilities emerge with more data and compute, these limitations will likewise be overcome by adding data and compute.
 
 Perhaps the most common view, is that while deep learning and scale are foundational, we do need to add new concepts, but they will have to be compatible with gradient-based learning.
 
