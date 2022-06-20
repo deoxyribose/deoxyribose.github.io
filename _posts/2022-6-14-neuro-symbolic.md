@@ -58,7 +58,7 @@ This method gives us superhuman performance at the game of Go, computer vision t
 2. Have lots of layers with lots of parameters
 3. Perform lots of SGD iterations on lots of GPUs (compute)
 
-Scale is often the only difference between not being able to solve a task at all, to achieving superhuman performance. Some researchers, including Richard Sutton, Nando de Freitas and Ilya Sutskever, believe scale will take deep learning all the way to AGI: a system that can learn not just a single narrow task at a time, but any task a human can learn, from perception to board games to engineering to even AI research itself. The scaling hypothesis, as argued by Gwern [here](https://www.gwern.net/Scaling-hypothesis#scaling-hypothesis), "has only looked more and more plausible every year since 2010". The bitter part of the lesson is that most of the intellectual effort poured into AI has been for nought. Scale is boring, but practical.
+Scale is often the only difference between not being able to solve a task at all, to achieving superhuman performance. Some researchers, including Richard Sutton, Nando de Freitas and Ilya Sutskever, believe scale will take deep learning all the way to AGI: a system that can learn not just a single narrow task at a time, but any task a human can learn, from perception to board games to engineering to even AI research itself. The scaling hypothesis, as argued by Gwern [here](https://www.gwern.net/Scaling-hypothesis#scaling-hypothesis), "has only looked more and more plausible every year since 2010". The bitter part of the lesson is that most of the intellectual effort poured into AI has been for naught. Scale is boring, but practical.
 
 #Successes of scale: large pre-trained models
 	#Language features
@@ -275,6 +275,12 @@ But if the goal is AGI, OOD generalization is too low a bar.
 - Aligning next generation AI
 	- Explainability and fairness need causality
 	- Reward maximization vs CIRL
+
+### Other arguments
+
+There are animals with larger brains and equally long lives (whales, elephants) that are clearly much less intelligent than humans. 
+
+
 
 [^1]: Most loss functions are log-likelihoods.
 [^2]: Briefly, a Gaussian prior on the weights, corresponds to weight decay/L2 regularization, when your point-estimate is the mode of the posterior (MAP), found by minimizing - log p(X | w, m)p(w | m)  = - log p(X | w, m) - log p(w | m) = MSE + L2norm(w)
