@@ -34,11 +34,8 @@ I want to try, as much as possible, to boil things down to fundamental principle
 
 Take a look at the following objects:
 
-![shortcuts]({{ site.url }}/images/shortcuts.png "Shortcut learning in NNs.")
-<center> Among the set of all possible rules, only some solve the
-training data. Among the solutions that solve the training data, only some generalise to an i.i.d. test
-set. Among those solutions, shortcuts fail to generalise to different data (o.o.d. test sets), but the
-intended solution does generalise.</center>
+![tufa]({{ site.url }}/images/tufa.png "Various novel objects.")
+<center> Various novel objects.</center>
 
 [Credit: Josh Tenenbaum](https://www.slideserve.com/victoria/ucsd07-powerpoint-ppt-presentation)
 

@@ -18,6 +18,14 @@ Eventually, after enough examples and enough updates, there may be a phase trans
 
 I agree with the premise. Neural nets are indeed "lazy", in that their loss functions are minimized by "shortcuts", solutions that don't generalize beyond the data distribution. A figure from the paper "Shortcut Learning in Deep Neural Networks" by Geirhos et al. illustrates this well:
 
+![shortcuts]({{ site.url }}/images/shortcuts.png "Shortcut learning in NNs.")
+<center> Among the set of all possible rules, only some solve the
+training data. Among the solutions that solve the training data, only some generalise to an i.i.d. test
+set. Among those solutions, shortcuts fail to generalise to different data (o.o.d. test sets), but the
+intended solution does generalise.</center>
+
+[Credit: Geirhos et al.](https://arxiv.org/abs/2004.07780)
+
 For the conclusion to follow from the premise, that is, for it to be true that, at large enough scale, the solution is the desired one, we need to assume that 
 1) NNs can represent the desired solution
 2) The desired solution has a lower loss than shortcut solutions
