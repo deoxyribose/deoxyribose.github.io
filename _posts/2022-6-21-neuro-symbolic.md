@@ -27,7 +27,8 @@ intended solution does generalise.</center>
 
 [Credit: Geirhos et al.](https://arxiv.org/abs/2004.07780)
 
-So, the scaling hypothesis says that at large enough scale, the lazy, shortcut solution is the desired one. This requires that 
+So, the scaling hypothesis says that at large enough scale, the lazy, shortcut solution is the desired one. Using the illustration above, we can imagine that the set of rules learnable by ML model #2 expands to include the orange dot, while the set of training and shortcut solutions contract around the orange dot. 
+This requires that 
 1. A practically sized NN can represent the desired solution
 2. The desired solution has a lower loss than shortcut solutions
 3. The optimizer converges to the desired solution
