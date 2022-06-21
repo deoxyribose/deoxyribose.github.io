@@ -27,11 +27,11 @@ intended solution does generalise.</center>
 [Credit: Geirhos et al.](https://arxiv.org/abs/2004.07780)
 
 For the conclusion to follow from the premise, that is, for it to be true that, at large enough scale, the solution is the desired one, we need to assume that 
-1) NNs can represent the desired solution
-2) The desired solution has a lower loss than shortcut solutions
-3) The optimizer converges to the desired solution
+1. NNs can represent the desired solution
+2. The desired solution has a lower loss than shortcut solutions
+3. The optimizer converges to the desired solution
 
 Furthermore, if all three assumptions hold, then for the stronger conculsion "Scaling NNs is sufficient for general intelligence" to hold in practice, we also need to assume
 
-1) There is enough data and compute to solve the problems that general intelligence can solve
-2) The data and compute is available within the relevant timeframes 
+1. There is enough data and compute to solve the problems that general intelligence can solve
+2. The data and compute is available within the relevant timeframes 
