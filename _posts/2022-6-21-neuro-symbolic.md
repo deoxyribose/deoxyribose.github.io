@@ -36,7 +36,7 @@ This requires that
 Furthermore, if all three assumptions hold, then the stronger hypothesis "Scaling NNs is sufficient for general intelligence" requires that
 
 1. There is enough data and compute to solve the problems that general intelligence can solve
-2. The data and compute is available within the relevant timeframes
+2. The data and compute is available within relevant timeframes
 
 Gwern does a good job of pointing out these assumptions himself:
 
