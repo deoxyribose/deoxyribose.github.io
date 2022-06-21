@@ -5,7 +5,7 @@ katex: True
 ---
 
 Will scaling deep learning produce human-level generality, or do we need a new approach? If you've read the exchange between Scott Alexander and Gary Marcus, and feel that there are some good arguments on both sides, some bad ones, but mostly a lack of arguments in general, I agree. If you haven't read the exchange, here it is: [SA](https://astralcodexten.substack.com/p/my-bet-ai-size-solves-flubs?s=w), [GM](https://garymarcus.substack.com/p/what-does-it-mean-when-an-ai-fails), [SA](https://astralcodexten.substack.com/p/somewhat-contra-marcus-on-ai-scaling?s=r), [GM](https://garymarcus.substack.com/p/does-ai-really-need-a-paradigm-shift?s=w#footnote-anchor-1). 
-I will argue for Marcus' position - I believe that symbolic representations, specifically _programs_, and learning as _program synthesis_, can provide data efficient and flexible generalization, in a way that deep learning can't, no matter how much we scale it. To strengthen the argument, I should first steelman the scaling hypothesis. Fortunately, Gwern has [already done that for me](https://www.gwern.net/Scaling-hypothesis), so I'll merely try to faithfully reproduce his argument. 
+I will argue for Marcus' position - I believe that symbolic representations, specifically _programs_, and learning as _program synthesis_, can provide data efficient and flexible generalization, in a way that deep learning can't, no matter how much we scale it. To strengthen the argument, I should first steelman the scaling hypothesis. Fortunately, Gwern has [already done that](https://www.gwern.net/Scaling-hypothesis), so I'll merely try to faithfully reproduce his argument. 
 The scaling hypothesis is that 
 
 > as we train ever larger NNs and ever more sophisticated behavior will emerge naturally as the easiest way to optimize for all the tasks & data
@@ -26,3 +26,4 @@ For the conclusion to follow from the premise, that is, for it to be true that, 
 Furthermore, if all three assumptions hold, then for the stronger conculsion "Scaling NNs is sufficient for general intelligence" to hold in practice, we also need to assume
 
 1) There is enough data and compute to solve the problems that general intelligence can solve
+2) The data and compute is available within the relevant timeframes 
