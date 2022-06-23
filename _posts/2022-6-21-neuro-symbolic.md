@@ -27,11 +27,12 @@ intended solution does generalise.</center>
 
 [Credit: Geirhos et al.](https://arxiv.org/abs/2004.07780)
 
-So, the scaling hypothesis says that at large enough scale, the lazy, shortcut solution is the desired one. Using the illustration above, we can imagine that the set of rules learnable by ML model #2 expands to include the orange dot, while the set of training and shortcut solutions contract around the orange dot. 
-This requires that 
-1. A practically sized NN can represent the desired solution
-2. The desired solution has a lower loss than shortcut solutions
-3. The optimizer converges to the desired solution
+So, the scaling hypothesis says that at large enough scale, the lazy, shortcut solution is the desired one. Using the illustration above, we can imagine scaling the model size as the set of rules learnable by ML model #2 expanding to include the orange dot. Scaling data and compute corresponds to the set of training and shortcut solutions contracting around the orange dot. 
+
+This requires that the desired solution
+1. Can be represented by a practically sized NN
+2. Has a lower loss than shortcut solutions
+3. Can be found by gradient descent
 
 Furthermore, if all three assumptions hold, then the stronger hypothesis "Scaling NNs is sufficient for general intelligence" requires that
 
@@ -42,6 +43,3 @@ Gwern does a good job of pointing out these assumptions himself:
 
 >Sure, if the model got a low enough loss, it’d have to be intelligent, but how could you prove that would happen in practice? (Training char-RNNs was fun, but they hadn’t exactly revolutionized deep learning.) It might require more text than exists, countless petabytes of data for all of those subtle factors like logical reasoning to represent enough training signal, amidst all the noise and distractors, to train a model. Or maybe your models are too small to do more than absorb the simple surface-level signals, and you would have to scale them 100 orders of magnitude for it to work, because the scaling curves didn’t cooperate. Or maybe your models are fundamentally broken, and stuff like abstraction require an entirely different architecture to work at all, and whatever you do, your current models will saturate at poor performance. Or it’ll train, but it’ll spend all its time trying to improve the surface-level modeling, absorbing more and more literal data and facts without ever ascending to the higher planes of cognition as planned.
 
-The scaling hypothesis also makes certain predictions which Gwern doesn't mention:
-
-1. Animals are not as intelligent as humans because their brains are not large enough and/or they aren't exposed to enough data
