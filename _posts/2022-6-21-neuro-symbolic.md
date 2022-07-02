@@ -50,15 +50,16 @@ Gwern points out some of these assumptions himself:
 
 >Sure, if the model got a low enough loss, it’d have to be intelligent, but how could you prove that would happen in practice? (Training char-RNNs was fun, but they hadn’t exactly revolutionized deep learning.) It might require more text than exists, countless petabytes of data for all of those subtle factors like logical reasoning to represent enough training signal, amidst all the noise and distractors, to train a model. Or maybe your models are too small to do more than absorb the simple surface-level signals, and you would have to scale them 100 orders of magnitude for it to work, because the scaling curves didn’t cooperate. Or maybe your models are fundamentally broken, and stuff like abstraction require an entirely different architecture to work at all, and whatever you do, your current models will saturate at poor performance. Or it’ll train, but it’ll spend all its time trying to improve the surface-level modeling, absorbing more and more literal data and facts without ever ascending to the higher planes of cognition as planned.
 
-but then seems to treat GPT-3 and more recent models as proof by construction that the assumptions hold. I don't.
+but then seems to regard GPT-3 and more recent models as proof by construction that the assumptions hold. I don't.
 
 Critiquing these models is a tricky business. It's very easy to get strawmanned, or bogged down in tangential philosophical debates, so I want be clear:
 
 1. Large language and image models are incredible, surprising and useful achievements
 2. Their performance is no indication that we're making progress on AGI
 
-It's difficult to convincingly argue for the latter point, because we all share an intuition that, if a technology works when we test it, then it is sound. Criticizing a large language model for making silly mistakes given obscure prompts, which they inevitably get right in the next version, brings to mind the "God of the gaps" rhetoric of creationists. 
-But I'm not arguing that large-scale deep learning won't ever be able to do task X, or that mistakes A, B and C prove that it's not "really understanding", or that "mere pattern matching" isn't intelligence[^1]. 
+It's difficult to convincingly argue for the latter point, because we all share an intuition that, if a technology works when we test it, then it is sound. Criticizing a large language model for making silly mistakes given obscure prompts, which they get right in the next version, brings to mind the "God of the gaps" rhetoric of creationists. 
+
+But I'm not arguing that large-scale deep learning won't ever be able to do task X, or that mistakes A, B and C prove that it's not "really understanding", or that "mere pattern matching" isn't intelligence[[^1]]. 
 If we want to know whether large-scale DL is progressing towards AGI, we should not be evaluating how well the models perform the tasks they are trained on, but their ability to generalize. Generalization is what general intelligence is for, and where deep learning is making no progress.
 
 What is happening instead, is that as we scale up deep learning models, they get better performance on a test set of statistically identical examples. Contrary to what Gwern wrote, there is no pressure on the models to start generalizing better as we scale up. On the contrary, the exact same, limited generalization ability is much more performant when you have a billion more examples to generalize from. It doesn't matter whether you use the data directly to train on, or indirectly by using a pre-trained model. 
@@ -68,4 +69,4 @@ What is happening instead, is that as we scale up deep learning models, they get
 If all you need for general intelligence is a large neural network and lots of data, why aren't animals with human-sized or larger brains, and human-length or longer lives, as general as humans?
 Most animals rely on innate knowledge and instincts. They don't seem able to infer causes - squirrels try to bury nuts in concrete, apes over-imitate copied behaviors. The most intelligent animals seem to be able to use and understand symbols, understand causes, and use them to improvise novel behaviors. 
 
-[^1] I don't believe that deep learning models are really understanding, nor that pattern matching is all there is to intelligence, but that's not the point I'm making here.
+[^1]: I don't believe that deep learning models are really understanding, nor that pattern matching is all there is to intelligence, but that's not the point I'm making here.
