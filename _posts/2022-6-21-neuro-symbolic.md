@@ -50,3 +50,8 @@ Critiquing these models is a tricky business. It's very easy to get strawmanned,
 2. Their amazing performance is not an indication that we're making progress on AGI, because AGI requires stronger generalization than DL provides
 
 It's difficult to convincingly argue for the latter point, because we all share an intuition that, if a technology works when we test it, then it is sound. Criticizing a large language model for making silly mistakes given obscure prompts, which they inevitably get right in the next version, brings to mind the "God of the gaps" rethoric of creationists. But I'm not arguing that large deep learning won't ever be able to do X, or that mistakes A, B and C prove that it's not "really understanding", or that "mere pattern matching" isn't intelligence. I'm arguing that we're not evaluating them correctly. We should be evaluating their ability to generalize, because that is what intelligence is, and that is where the models are making no progress.
+
+
+## Tmp
+If all you need for general intelligence is a large neural network and lots of data, why aren't animals with human-sized or larger brains, and human-length or longer lives, as general as humans?
+Most animals rely on innate knowledge and instincts. They don't seem able to infer causes - squirrels try to bury nuts in concrete, apes over-imitate copied behaviors. The most intelligent animals seem to be able to use and understand symbols, understand causes, and use them to improvise novel behaviors. 
