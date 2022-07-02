@@ -37,7 +37,7 @@ This requires that the desired solution
 Using the illustration above, we can imagine scaling the model size as the set of rules learnable by ML model #2 expanding. Scaling data and compute corresponds to the set of training and shortcut solutions contracting. Visually, the scaling hypothesis requires that (1) the rules learnable by the NN eventually include the orange dot, and that (2 and 3) the blue and beige sets contract around it. 
 
 I will argue that as long as we use NNs, which are large piecewise-linear functions, as representations, 1. won't happen. Roughly speaking, any function can be approximated arbitrarily well as a piecewise linear function - but given a finite amount of pieces, the "arbitrarily well" part goes out the window.
-More importantly, as long as the loss we're minimizing is empirical risk, meaning we optimize training set performance, 2. and 3. won't happen. In agentic terms, an empirical risk minimizer couldn't care less what the NN is doing outside the training sample, so it has zero incentive to find the desired solution. The minimizer will not allocate any pieces outside the training data where it gains nothing from it.
+More importantly, as long as the loss we're minimizing is empirical risk, meaning we optimize training set performance, 2. and 3. won't happen. An empirical risk minimizer doesn't care what the NN is doing outside the training sample, so it has zero incentive to find the desired solution. The minimizer will not allocate any pieces outside the training data where it gains nothing from it.
 
 Even if all three assumptions held, the stronger hypothesis "Scaling NNs is sufficient for general intelligence" further requires that
 
