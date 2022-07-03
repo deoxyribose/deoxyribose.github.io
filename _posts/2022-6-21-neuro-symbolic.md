@@ -5,13 +5,14 @@ katex: True
 ---
 
 Will scaling deep learning produce human-level generality, or do we need a new approach? If you've read the exchange between Scott Alexander and Gary Marcus, and feel that there are some good arguments on both sides, some bad ones, but mostly a lack of arguments in general, I agree. If you haven't read the exchange, here it is: [SA](https://astralcodexten.substack.com/p/my-bet-ai-size-solves-flubs?s=w), [GM](https://garymarcus.substack.com/p/what-does-it-mean-when-an-ai-fails), [SA](https://astralcodexten.substack.com/p/somewhat-contra-marcus-on-ai-scaling?s=r), [GM](https://garymarcus.substack.com/p/does-ai-really-need-a-paradigm-shift?s=w#footnote-anchor-1). 
-I will argue for Marcus' position, but dive a little deeper than he does. I believe that symbolic representations, specifically _programs_, and learning as _program synthesis_, can provide data efficient and flexible generalization, in a way that deep learning can't, no matter how much we scale it. I'll show how _probabilistic programs_ can represent causal models of the world, which deep learning can't do, and why causal models are essential to everyday life. For the opposing view, that scaling deep learning is sufficient for general intelligence, I'll quote from [Gwern's essay on the scaling hypothesis](https://www.gwern.net/Scaling-hypothesis), which is so thorough that I'm saved the task of steelmanning the position on my own.
+
+I will argue for Marcus' position, but dive a little deeper than he does. I believe that symbolic representations, specifically _programs_, and learning as _program synthesis_, can provide data efficient and flexible generalization, in a way that deep learning can't, no matter how much we scale it. I'll show how _probabilistic programs_ can represent causal models of the world, which deep learning can't do, and why causal models are essential to intelligence. For the opposing view, that scaling deep learning is sufficient for general intelligence, I'll quote from [Gwern's essay on the scaling hypothesis](https://www.gwern.net/Scaling-hypothesis), which is so thorough that I'm saved the task of steelmanning the position on my own.
 
 
 <div id="toc"></div>
 
 
-### The scaling hypothesis
+### The scaling hypothesis and the laziness of deep learning
 
 The scaling hypothesis is that
 
@@ -43,10 +44,10 @@ This requires that the desired solution
 2. Has a lower loss than shortcut solutions
 3. Can be found by gradient descent
 
-Using the illustration above, we can imagine scaling the model size as the set of rules learnable by ML model #2 expanding. Scaling data and compute corresponds to the set of training and shortcut solutions contracting. Visually, the scaling hypothesis requires that (1) the rules learnable by the NN eventually include the orange dot, and that (2 and 3) the blue and beige sets contract around it. 
+Using the illustration above, we can imagine scaling the model size as the set of rules learnable by ML model #2 expanding, since more parameters means more representable functions. Scaling data and compute corresponds to the set of training and shortcut solutions contracting, since a larger dataset is fit by fewer rules than a small dataset. Visually, the scaling hypothesis requires that (1) the rules learnable by the NN eventually include the orange dot, and that (2 and 3) the blue and beige sets contract around it. 
 
-I will argue that as long as we use NNs, which are large piecewise-linear functions, as representations, 1. doesn't hold in general. Roughly speaking, any function can be approximated arbitrarily well as a piecewise linear function - but given a finite amount of pieces, the "arbitrarily well" part goes out the window.
-More importantly, as long as the loss we're minimizing is empirical risk, meaning we optimize training set performance, 2. and 3. doesn't hold. An empirical risk minimizer doesn't care what the NN is doing outside the training sample, so it has zero incentive to find the desired solution. The minimizer will not allocate any pieces outside the training data where it gains nothing from it.
+I will argue that this never actually happens. As long as we use NNs, which are large piecewise-linear functions, as representations, 1. won't hold in general. Roughly speaking, any function can be approximated arbitrarily well as a piecewise linear function - but given a finite amount of pieces, the "arbitrarily well" part goes out the window.
+More importantly, as long as the loss we're minimizing is empirical risk, meaning we optimize training set performance, 2. and 3. won't hold. An empirical risk minimizer doesn't care what the NN is doing outside the training sample, so it has zero incentive to find the desired solution. The minimizer will not allocate any pieces outside the training data where it gains nothing from it.
 
 Even if all three assumptions held, the stronger hypothesis "Scaling NNs is sufficient for general intelligence" further requires that
 
@@ -83,7 +84,17 @@ Before the deep learning revolution really took off, much of the early excitemen
 If all you need for general intelligence is a large neural network and lots of data, why aren't animals with human-sized or larger brains, and human-length or longer lives, as general as humans?
 Most animals rely on innate knowledge and instincts. They don't seem able to infer causes - squirrels try to bury nuts in concrete, apes over-imitate copied behaviors. The most intelligent animals seem to be able to use and understand symbols, understand causes, and use them to improvise novel behaviors. 
 
-### 
+### Intelligence is more than pattern matching: Why children are not deep learners
+
+The child as scientist
+
+The child as hacker
+
+#### Representing knowledge as probabilistic programs
+
+#### Learning as probabilistic program synthesis
+
+#### Causality as program editing
 
 
 [^1]: I don't believe that deep learning models are really understanding, nor that pattern matching is all there is to intelligence, but that's not the point I'm making here.
