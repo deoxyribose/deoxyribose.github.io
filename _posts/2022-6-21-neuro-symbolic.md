@@ -5,8 +5,15 @@ katex: True
 ---
 
 Will scaling deep learning produce human-level generality, or do we need a new approach? If you've read the exchange between Scott Alexander and Gary Marcus, and feel that there are some good arguments on both sides, some bad ones, but mostly a lack of arguments in general, I agree. If you haven't read the exchange, here it is: [SA](https://astralcodexten.substack.com/p/my-bet-ai-size-solves-flubs?s=w), [GM](https://garymarcus.substack.com/p/what-does-it-mean-when-an-ai-fails), [SA](https://astralcodexten.substack.com/p/somewhat-contra-marcus-on-ai-scaling?s=r), [GM](https://garymarcus.substack.com/p/does-ai-really-need-a-paradigm-shift?s=w#footnote-anchor-1). 
-I will argue for Marcus' position, but I'll try to present a bit more detail than he does. I believe that symbolic representations, specifically _programs_, and learning as _program synthesis_, can provide data efficient and flexible generalization, in a way that deep learning can't, no matter how much we scale it. I'll show how _probabilistic programs_ can represent causal models of the world, while deep learning can't, and why causal models are essential to everyday life. For the opposing view, that scaling deep learning is sufficient for general intelligence, I'll quote from [Gwern's essay on the scaling hypothesis](https://www.gwern.net/Scaling-hypothesis), which is so thorough that I'm saved the task of steelmanning the position on my own.
-The scaling hypothesis is that 
+I will argue for Marcus' position, but dive a little deeper than he does. I believe that symbolic representations, specifically _programs_, and learning as _program synthesis_, can provide data efficient and flexible generalization, in a way that deep learning can't, no matter how much we scale it. I'll show how _probabilistic programs_ can represent causal models of the world, which deep learning can't do, and why causal models are essential to everyday life. For the opposing view, that scaling deep learning is sufficient for general intelligence, I'll quote from [Gwern's essay on the scaling hypothesis](https://www.gwern.net/Scaling-hypothesis), which is so thorough that I'm saved the task of steelmanning the position on my own.
+
+
+<div id="toc"></div>
+
+
+### The scaling hypothesis
+
+The scaling hypothesis is that
 
 > we can simply train ever larger NNs and ever more sophisticated behavior will emerge naturally as the easiest way to optimize for all the tasks & data
 
@@ -29,6 +36,8 @@ intended solution does generalize.</center>
 
 So, the scaling hypothesis says that at large enough scale, the lazy, shortcut solution is the desired one. 
 
+#### Assumptions underlying the scaling hypothesis
+
 This requires that the desired solution
 1. Can be represented by a practically sized NN
 2. Has a lower loss than shortcut solutions
@@ -36,8 +45,8 @@ This requires that the desired solution
 
 Using the illustration above, we can imagine scaling the model size as the set of rules learnable by ML model #2 expanding. Scaling data and compute corresponds to the set of training and shortcut solutions contracting. Visually, the scaling hypothesis requires that (1) the rules learnable by the NN eventually include the orange dot, and that (2 and 3) the blue and beige sets contract around it. 
 
-I will argue that as long as we use NNs, which are large piecewise-linear functions, as representations, 1. won't happen. Roughly speaking, any function can be approximated arbitrarily well as a piecewise linear function - but given a finite amount of pieces, the "arbitrarily well" part goes out the window.
-More importantly, as long as the loss we're minimizing is empirical risk, meaning we optimize training set performance, 2. and 3. won't happen. An empirical risk minimizer doesn't care what the NN is doing outside the training sample, so it has zero incentive to find the desired solution. The minimizer will not allocate any pieces outside the training data where it gains nothing from it.
+I will argue that as long as we use NNs, which are large piecewise-linear functions, as representations, 1. doesn't hold in general. Roughly speaking, any function can be approximated arbitrarily well as a piecewise linear function - but given a finite amount of pieces, the "arbitrarily well" part goes out the window.
+More importantly, as long as the loss we're minimizing is empirical risk, meaning we optimize training set performance, 2. and 3. doesn't hold. An empirical risk minimizer doesn't care what the NN is doing outside the training sample, so it has zero incentive to find the desired solution. The minimizer will not allocate any pieces outside the training data where it gains nothing from it.
 
 Even if all three assumptions held, the stronger hypothesis "Scaling NNs is sufficient for general intelligence" further requires that
 
@@ -62,11 +71,19 @@ It's difficult to convincingly argue for the latter point, because we all share 
 But I'm not arguing that large-scale deep learning won't ever be able to do task X, or that mistakes A, B and C prove that it's not "really understanding", or that "mere pattern matching" isn't intelligence[[^1]]. 
 If we want to know whether large-scale DL is progressing towards AGI, we should not be evaluating how well the models perform the tasks they are trained on, but their ability to generalize. Generalization is what general intelligence is for, and where deep learning is making no progress.
 
-What is happening instead, is that as we scale up deep learning models, they get better performance on a test set of statistically identical examples. Contrary to what Gwern wrote, there is no pressure on the models to start generalizing better as we scale up. On the contrary, the exact same, limited generalization ability is much more performant when you have a billion more examples to generalize from. It doesn't matter whether you use the data directly to train on, or indirectly by using a pre-trained model. 
+What is happening instead, is that as we scale up deep learning models, they get better performance on a test set of statistically identical examples. Contrary to what Gwern wrote, there is no pressure on the models to start generalizing better as we scale up, especially since we're increasing the model size, rather than decreasing it. On the contrary, the exact same, limited generalization ability is much more performant when you have a billion more examples to generalize from. It doesn't matter whether you use the data directly to train on, or indirectly by using a pre-trained model. 
+
+#### What do neural networks learn?
+
+Before the deep learning revolution really took off, much of the early excitement was due to the fact that deep learning _learns_ features, as opposed to most approaches which require features to be _engineered_ for a given task and domain. Experts would invent, stack and ensemble transformations, building pipelines that processed the data in successive steps, training each part of the pipeline separately. In contrast, a neural network learns all of its layers end-to-end, so that a change in any layer backpropagates to all the layers that it depends on. The power of this approach was most easily appreciated in computer vision, where [feature maps](https://distill.pub/2017/feature-visualization/) in the early layers of convolutional neural nets learned to detect edges, and later layers detect textures, patterns, parts of objects and objects. 
 
 
-## Tmp
+#### Implications of the scaling hypothesis
+
 If all you need for general intelligence is a large neural network and lots of data, why aren't animals with human-sized or larger brains, and human-length or longer lives, as general as humans?
 Most animals rely on innate knowledge and instincts. They don't seem able to infer causes - squirrels try to bury nuts in concrete, apes over-imitate copied behaviors. The most intelligent animals seem to be able to use and understand symbols, understand causes, and use them to improvise novel behaviors. 
+
+### 
+
 
 [^1]: I don't believe that deep learning models are really understanding, nor that pattern matching is all there is to intelligence, but that's not the point I'm making here.
