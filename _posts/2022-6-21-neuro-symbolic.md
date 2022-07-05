@@ -28,12 +28,12 @@ Gwern cites a swathe of papers in support, interpreting them in such a way that 
 I agree with the premise. Neural nets are indeed "lazy", in that their loss functions are minimized by "shortcuts", solutions that don't generalize beyond the data distribution. A figure from the paper "Shortcut Learning in Deep Neural Networks" by Geirhos et al. illustrates this well:
 
 ![shortcuts]({{ site.url }}/images/shortcuts.png "Shortcut learning in NNs.")
+[Credit: Geirhos et al.](https://arxiv.org/abs/2004.07780)
 <center> Among the set of all possible rules, only some solve the
 training data. Among the solutions that solve the training data, only some generalise to an i.i.d. test
 set. Among those solutions, shortcuts fail to generalise to different data (o.o.d. test sets), but the
 intended solution does generalize.</center>
 
-[Credit: Geirhos et al.](https://arxiv.org/abs/2004.07780)
 
 So, the scaling hypothesis says that at large enough scale, the lazy, shortcut solution is the desired one. 
 
@@ -77,14 +77,16 @@ What is happening instead, is that as we scale up deep learning models, they get
 #### What do neural networks learn?
 
 Neural networks are non-linear transformations from one vector space to another. The transformation is performed in steps, layer by layer, from vector space to [vector space](http://colah.github.io/posts/2015-01-Visualizing-Representations/#neural-networks-transform-space). 
-Francois Chollet compares the transformation an NN performs to uncrumpling a paper ball. The output vector space, or latent space manifold, is like an uncrumpled, flat piece of paper. On the latent manifold, we can draw a straight line between any two points on the manifold, and every point on the line will also lie on the manifold. If the NN is a classifier, the right latent space manifold allows it use such a line to discriminate between classes. In the case of regression, given any input in the convex hull ("somewhere in the middle") of known points, we can predict the output by interpolation on the latent manifold. Generative models can sample from the latent manifold to produce new samples from the (empirical) data distribution. The defining characteristic of the latent manifold is a meaningful notion of distance (or similarity). 
+Francois Chollet compares the transformation an NN performs to uncrumpling a paper ball. The output vector space, or latent space manifold, is like an uncrumpled, flat piece of paper. On the latent manifold, we can draw a straight line between any two points on the manifold, and every point on the line will also lie on the manifold. If the NN is a classifier, the right latent space manifold allows it use such a line to discriminate between classes. In the case of regression, given any input in the convex hull ("somewhere in the middle") of known points, we can predict the output by interpolation on the latent manifold. Generative models can sample from the latent manifold to produce new samples from the (empirical) data distribution. The defining characteristic of the latent manifold is a meaningful notion of distance. 
 
-Distances between observations change in subsequent vector spaces. In the raw pixel space of images, the distance is short if the same pixels have the same colors. But in the subsequent vector spaces learned by a deep NN, the distances will depend on increasingly abstract features. In a convolutional layer, the representation of an image from the previous layer is compared to a number of "prototypes". If two images match the same prototypes to the same degree, they are similar in that space. Early layers of convolutional nets learn to [detect edges](https://distill.pub/2017/feature-visualization/), and later layers detect textures, patterns, parts of objects and objects. It may be that if a test image is similar to a training image in "texture space", that's enough to correctly classify it. In fact, it has been observed a number of times that NNs rely strongly on textures to classify objects, largely ignoring their shape. That's not a problem, as long as the distribution of test images is the same as the distribution of training images - the textures will always predict the same object that shapes predict. 
+Distances between observations change in subsequent vector spaces. In the raw pixel space of images, the distance is short if the same pixels have similar colors. But in the subsequent vector spaces learned by a deep NN, the distances will depend on increasingly abstract features. In a convolutional layer, the representation of an image from the previous layer is compared to a number of "prototypes". If two images match the same prototypes to the same degree, they are similar in that space. Early layers of convolutional nets learn to [detect edges](https://distill.pub/2017/feature-visualization/), and later layers detect textures, patterns, parts of objects and objects. It may be that if a test image is similar to a training image in "texture space", that's enough to correctly classify it. In fact, it has been observed that NNs rely strongly on textures to classify objects, largely ignoring their shape. That's not a problem, as long as the distribution of test images is the same as the distribution of training images - the textures will always predict the same object that shapes predict. Using textures for classifying objects is not "wrong". It's a clever shortcut, albeit with limited applicability.
+
+Here's a toy example of an even simpler shortcut:
 
 ![shortcuts]({{ site.url }}/images/starmoon.png "Example of shortcut learning.")
+[Credit: Geirhos et al.](https://arxiv.org/abs/2004.07780)
 <center> Trained on images of stars and moons (top row), a three-layer MLP correctly classifies new examples from an i.i.d. test set. However, testing it on an o.o.d test set (bottom row) reveals the shortcut: The network has learned to associate object location with a category. </center>
 
-[Credit: Geirhos et al.](https://arxiv.org/abs/2004.07780)
 
 Note that a convolutional net wouldn't take this shortcut. We explicitly prevent this, by building in translation invariance into CNNs; by iterating over patches of the image, we compute the similarity to the same, reusable "prototype" feature. Thus the NN doesn't learn a "vertical edge in the upper right corner" feature, and a "vertical edge in the upper middle" and so on. It learns a single "vertical edge" feature, and the for-loops hardcoded into the convolution operation scan the entire image for it.
 
