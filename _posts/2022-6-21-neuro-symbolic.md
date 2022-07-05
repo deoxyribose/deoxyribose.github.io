@@ -47,7 +47,7 @@ This requires that the desired solution
 Using the illustration above, we can imagine scaling the model size as the set of rules learnable by ML model #2 expanding, since more parameters means more representable functions. Scaling data and compute corresponds to the set of training and shortcut solutions contracting, since a larger dataset is fit by fewer rules than a small dataset. Visually, the scaling hypothesis requires that (1) the rules learnable by the NN eventually include the orange dot, and that (2 and 3) the blue and beige sets contract around it. 
 
 I will argue that this never actually happens. As long as we use NNs, which are large piecewise-linear functions, as representations, 1. won't hold in general. Roughly speaking, any function can be approximated arbitrarily well as a piecewise linear function - but given a finite amount of pieces, the "arbitrarily well" part goes out the window.
-More importantly, as long as the loss we're minimizing is empirical risk, meaning we optimize training set performance, 2. and 3. won't hold. An empirical risk minimizer doesn't care what the NN is doing outside the training sample, so it has zero incentive to find the desired solution. The minimizer will not allocate any pieces outside the training data where it gains nothing from it.
+More importantly, as long as the loss we're minimizing is empirical risk, meaning we optimize training set performance, 2. and 3. won't hold. An empirical risk minimizer doesn't care what the NN is doing outside the training sample, so it has zero incentive to find a solution that generalizes everywhere. The minimizer will not allocate any pieces outside the training data where it gains nothing from it.
 
 Even if all three assumptions held, the stronger hypothesis "Scaling NNs is sufficient for general intelligence" further requires that
 
@@ -69,19 +69,33 @@ Critiquing these models is a tricky business. It's very easy to get strawmanned,
 
 It's difficult to convincingly argue for the latter point, because we all share an intuition that, if a technology works when we test it, then it is sound. Criticizing a large language model for making silly mistakes given obscure prompts, which they get right in the next version, brings to mind the "God of the gaps" rhetoric of creationists. 
 
-But I'm not arguing that large-scale deep learning won't ever be able to do task X, or that mistakes A, B and C prove that it's not "really understanding", or that "mere pattern matching" isn't intelligence[[^1]]. 
+But I'm not arguing that large-scale deep learning won't ever be able to do task X, or that mistakes A, B and C prove that it's not "really understanding", or that "mere pattern matching" isn't intelligence [^1]. 
 If we want to know whether large-scale DL is progressing towards AGI, we should not be evaluating how well the models perform the tasks they are trained on, but their ability to generalize. Generalization is what general intelligence is for, and where deep learning is making no progress.
 
 What is happening instead, is that as we scale up deep learning models, they get better performance on a test set of statistically identical examples. Contrary to what Gwern wrote, there is no pressure on the models to start generalizing better as we scale up, especially since we're increasing the model size, rather than decreasing it. On the contrary, the exact same, limited generalization ability is much more performant when you have a billion more examples to generalize from. It doesn't matter whether you use the data directly to train on, or indirectly by using a pre-trained model. 
 
 #### What do neural networks learn?
 
-Before the deep learning revolution really took off, much of the early excitement was due to the fact that deep learning _learns_ features, as opposed to most approaches which require features to be _engineered_ for a given task and domain. Experts would invent, stack and ensemble transformations, building pipelines that processed the data in successive steps, training each part of the pipeline separately. In contrast, a neural network learns all of its layers end-to-end, so that a change in any layer backpropagates to all the layers that it depends on. The power of this approach was most easily appreciated in computer vision, where [feature maps](https://distill.pub/2017/feature-visualization/) in the early layers of convolutional neural nets learned to detect edges, and later layers detect textures, patterns, parts of objects and objects. 
+Neural networks are non-linear transformations from one vector space to another. The transformation is performed in steps, layer by layer, from vector space to [vector space](http://colah.github.io/posts/2015-01-Visualizing-Representations/#neural-networks-transform-space). 
+Francois Chollet compares the transformation an NN performs to uncrumpling a paper ball. The output vector space, or latent space manifold, is like an uncrumpled, flat piece of paper. On the latent manifold, we can draw a straight line between any two points on the manifold, and every point on the line will also lie on the manifold. 
 
+Distances between observations change in subsequent vector spaces. In the space of images, the distance is short if the same pixels have the same colors. But in the subsequent vector spaces learned by a deep NN, the distances will depend on increasingly abstract features. In a convolutional layer, the representation of an image from the previous layer is compared to a number of "prototypes". If two images match the same prototypes to the same degree, they are similar in that space. Early layers of convolutional nets learn to [detect edges](https://distill.pub/2017/feature-visualization/), and later layers detect textures, patterns, parts of objects and objects. It may be that if a test image is similar to a training image in "texture space", that's enough to correctly classify it. In fact, it has been observed a number of times that NNs rely strongly on textures to classify objects, largely ignoring their shape. That doesn't matter, as long as the distribution of test images is the same as the distribution of training images - the textures will always predict the same object that shapes predict. 
+
+![shortcuts]({{ site.url }}/images/starmoon.png "Example of shortcut learning.")
+<center> Trained on images of stars and moons (top row), a three-layer MLP correctly classifies new examples from an i.i.d. test set. However, testing it on an o.o.d test set (bottom row) reveals the shortcut: The network has learned to associate object location with a category. </center>
+
+[Credit: Geirhos et al.](https://arxiv.org/abs/2004.07780)
+
+The end result is a piecewise function - in the case where the activation function is the ReLU, it's a piecewise linear function.
+
+Conclusion: NNs generalize by [similarity-based abstraction](https://www.youtube.com/watch?v=3Nxe7J07TQY).
 
 #### Implications of the scaling hypothesis
 
-If all you need for general intelligence is a large neural network and lots of data, why aren't animals with human-sized or larger brains, and human-length or longer lives, as general as humans?
+##### Bigger brains should be smarter
+If all you need for general intelligence is a large neural network and lots of data, why aren't animals with human-sized or larger brains, and human-length or longer lives, as general as humans? Why aren't blue whales generally smarter than humans? Why don't non-human animals ever pick up human language[^2], when GPT-3 allegedly can?
+This observation doesn't falsify the scaling hypothesis - there could be any number of extra reasons why the straightforward extrapolation doesn't hold. In general, it seems clear that natural intelligence is highly reliant on innate knowledge. It's possible that intelligence that relies on innate knowledge was more likely to evolve, given how evolution tends to exapt existing structures, but that scaling is an equally good, or better approach, if you're starting from scratch. But given that some animals already have large brains, and long lives, and there's at least some selection pressure for higher intelligence, then it would take a very good excuse to explain their lack of general intelligence away under the scaling hypothesis.
+
 Most animals rely on innate knowledge and instincts. They don't seem able to infer causes - squirrels try to bury nuts in concrete, apes over-imitate copied behaviors. The most intelligent animals seem to be able to use and understand symbols, understand causes, and use them to improvise novel behaviors. 
 
 ### Intelligence is more than pattern matching: Why children are not deep learners
@@ -90,7 +104,11 @@ The child as scientist
 
 The child as hacker
 
+Social learning
+
 #### Representing knowledge as probabilistic programs
+
+Compositionality
 
 #### Learning as probabilistic program synthesis
 
@@ -98,3 +116,4 @@ The child as hacker
 
 
 [^1]: I don't believe that deep learning models are really understanding, nor that pattern matching is all there is to intelligence, but that's not the point I'm making here.
+[^2]: If you think parrots, or dogs/chimps that learn a small vocabulary of sign language should count as counter-examples, why specifically those animals, and not any large-brained animal?
