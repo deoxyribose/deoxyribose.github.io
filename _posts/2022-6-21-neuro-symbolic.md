@@ -4,7 +4,7 @@ title:
 katex: True
 ---
 
-Will scaling deep learning produce human-level generality, or do we need a new approach? You may have read the exchange between Scott Alexander and Gary Marcus, and felt that there are some good arguments on both sides, some bad ones, but few arguments that go beyond analogy and handwaving. If you haven't read the exchange, here it is: [SA](https://astralcodexten.substack.com/p/my-bet-ai-size-solves-flubs?s=w), [GM](https://garymarcus.substack.com/p/what-does-it-mean-when-an-ai-fails), [SA](https://astralcodexten.substack.com/p/somewhat-contra-marcus-on-ai-scaling?s=r), [GM](https://garymarcus.substack.com/p/does-ai-really-need-a-paradigm-shift?s=w#footnote-anchor-1). 
+Will scaling deep learning produce human-level generality, or do we need a new approach? You may have read the exchange between Scott Alexander and Gary Marcus, and felt that there are some good arguments on both sides, some bad ones, but few arguments that go beyond analogy and handwaving - arguments that take what we know about deep learning and intelligence, and look at what that knowledge implies. If you haven't read the exchange, here it is: [SA](https://astralcodexten.substack.com/p/my-bet-ai-size-solves-flubs?s=w), [GM](https://garymarcus.substack.com/p/what-does-it-mean-when-an-ai-fails), [SA](https://astralcodexten.substack.com/p/somewhat-contra-marcus-on-ai-scaling?s=r), [GM](https://garymarcus.substack.com/p/does-ai-really-need-a-paradigm-shift?s=w#footnote-anchor-1). 
 
 I will argue for Marcus' position, but dive a little deeper than he does. I believe that symbolic representations, specifically _programs_, and learning as _program synthesis_, can provide data efficient and flexible generalization, in a way that deep learning can't, no matter how much we scale it. I'll show how _probabilistic programs_ can represent causal models of the world, which deep learning can't do, and why causal models are essential to intelligence. But I'll start by examining the opposing view, that scaling deep learning is sufficient for general intelligence. To that end, I'll quote from [Gwern's thorough essay on the scaling hypothesis](https://www.gwern.net/Scaling-hypothesis).
 
@@ -49,12 +49,17 @@ Using the illustration above, we can imagine scaling the model size as the set o
 I will argue that this never actually happens. As long as we use NNs, which are large piecewise-linear functions, as representations, 1. won't hold in general. Roughly speaking, any function can be approximated arbitrarily well as a piecewise linear function - but given a finite amount of pieces, the "arbitrarily well" part goes out the window.
 More importantly, as long as the loss we're minimizing is empirical risk, meaning we optimize training set performance, 2. and 3. won't hold. An empirical risk minimizer doesn't care what the NN is doing outside the training sample, so it has zero incentive to find a solution that generalizes everywhere. The minimizer will not allocate any pieces outside the training data where it gains nothing from it.
 
-Even if all three assumptions held, the stronger hypothesis "Scaling NNs is sufficient for general intelligence" further requires that
+But there is a potential way around these limitations, which corresponds to a [weaker version of the scaling hypothesis](https://www.gwern.net/docs/ai/scaling/2020-hasson.pdf).
+Proponents of this version acknowledge that NNs don't extrapolate, and their generalization ability is confined to an "interpolation zone". But given enough data to cover the relevant parts of the domain, the fact that we're not generalizing out of distribution won't be a problem - the shortcut solution will in practice be indistinguishable from the desired solution. 
+
+The only relevant assumptions then are 
 
 1. There is enough data and compute to solve the problems that general intelligence can solve
 2. The data and compute is available within relevant time frames
 
-I will argue that mundane problems that we solve everyday put far harsher constraints on data, time and compute, than NNs can accommodate.
+This weaker version of the scaling hypothesis seems more reasonable, since it doesn't posit that deep learning starts generalizing better at scale, or finds solutions that it can neither represent nor reach through optimization. But viewed from a different perspective, it is far more radical, because it implies all of intelligence, including improvisation, imagination, creativity etc., is simply the ability to recall a similar circumstance from memory. No o.o.d. generalization needed.
+
+I will argue that mundane problems that we solve everyday put far harsher constraints on data, time and compute, than NNs can accommodate. Such problems can only be solved by strong generalization.
 
 Gwern points out some of these assumptions himself:
 
@@ -62,22 +67,14 @@ Gwern points out some of these assumptions himself:
 
 but then seems to regard GPT-3 and more recent models as proof by construction that the assumptions hold. I don't.
 
-Critiquing these models is a tricky business. It's very easy to get strawmanned, or bogged down in tangential philosophical debates, so I want be clear:
-
-1. Large language and image models are incredible, surprising and useful achievements
-2. Their performance is no indication that we're making progress on AGI
-
-It's difficult to convincingly argue for the latter point, because we all share an intuition that, if a technology works when we test it, then it is sound. Criticizing a large language model for making silly mistakes given obscure prompts, which they get right in the next version, brings to mind the "God of the gaps" rhetoric of creationists. 
-
-But I'm not arguing that large-scale deep learning won't ever be able to do task X, or that mistakes A, B and C prove that it's not "really understanding", or that "mere pattern matching" isn't intelligence [^1]. 
-If we want to know whether large-scale DL is progressing towards AGI, we should not be evaluating how well the models perform the tasks they are trained on, but their ability to generalize. Generalization is what general intelligence is for, and where deep learning is making no progress.
+The problem is not that GPT-3 or other large models don't perform well at task X, or that mistakes A, B and C prove that it's not "really understanding", or that "mere pattern matching" isn't intelligence. These objections are valid, but they're not relevant if merely scaled up versions of essentially the same models start generalizing. For the same reason, we should not be evaluating how well the models perform the tasks they are trained on, but their ability to generalize. Generalization is what general intelligence is for, and where deep learning is making no progress.
 
 What is happening instead, is that as we scale up deep learning models, they get better performance on a test set of statistically identical examples. Contrary to what Gwern wrote, there is no pressure on the models to start generalizing better as we scale up, especially since we're increasing the model size, rather than decreasing it. On the contrary, the exact same, limited generalization ability is much more performant when you have a billion more examples to generalize from. It doesn't matter whether you use the data directly to train on, or indirectly by using a pre-trained model. 
 
 #### What do neural networks learn?
 
 Neural networks are non-linear transformations from one vector space to another. The transformation is performed in steps, layer by layer, from vector space to [vector space](http://colah.github.io/posts/2015-01-Visualizing-Representations/#neural-networks-transform-space). 
-Francois Chollet compares the transformation an NN performs to uncrumpling a paper ball. The output vector space, or latent space manifold, is like an uncrumpled, flat piece of paper. On the latent manifold, we can draw a straight line between any two points on the manifold, and every point on the line will also lie on the manifold. If the NN is a classifier, the right latent space manifold makes classes linearly separable. In the case of regression, given any input in the convex hull ("somewhere in the middle") of known points, we can predict the output by interpolation on the latent manifold. Generative models can sample from the latent manifold to produce new samples from the (empirical) data distribution. The defining characteristic of the latent manifold is that distances between observations along the manifold make the given task easy to solve. 
+Francois Chollet compares the transformation an NN performs to uncrumpling a paper ball. The output vector space, or latent space manifold, is like an uncrumpled, flat piece of paper. On the latent manifold, we can draw a straight line between any two points, and every intermediate point will also lie on the manifold. This property underlies the magic of deep learning. If the NN is a classifier, the right latent space manifold makes classes linearly separable. In the case of regression, given any input in the convex hull ("somewhere in the middle") of known points, we can predict the output by interpolation on the latent manifold. Generative models can sample from the latent manifold to produce new samples from the (empirical) data distribution. The defining characteristic of the latent manifold is that distances between observations along the manifold make the given task easy to solve. 
 
 In the raw pixel space of images, the distance is short if the same pixels have similar colors. But in the subsequent vector spaces learned by a deep NN, the distances will depend on increasingly abstract features. In a layer, the representation from the previous layer is compared to a number of "prototype" features (The comparison is simply a dot product between the representation vector and the prototype - if the vectors align, the dot product is large. Doing that for all the prototypes in the layer is what all those matrix multiplications are for). The next representation is the combined output of these similarity comparisons - the patterns encoded by the previous prototypes have been abstracted away. If two data-points matched the same prototypes to a similar degree, they are similar in that space, and the distance between them is short.
 
@@ -101,7 +98,6 @@ Conclusion: NNs generalize by [similarity-based abstraction](https://www.youtube
 #### NNs find shortcuts because they are "easy to vary"
 
 
-
 #### Implications of the scaling hypothesis
 
 Here I move away from the specifics of deep learning, and compare it to how learning works in brains. The general argument is that the scaling hypothesis implies brains are X, brains aren't X, therefore the scaling hypothesis is false. The weak point of the argument is that the scaling hypothesis doesn't necessarily imply anything about biological learning. Human intelligence and AI could work entirely differently and yet be equally powerful. But given that deep learning is very simple, the brain is computationally powerful, vast amounts of data is provided through sensory experience, and at least a subset of the brain's representations and learning mechanisms is similar to deep learning, the argument provides evidence against the scaling hypothesis - if the brain doesn't do what deep learning does, and deep learning is simple and works, why doesn't the brain just do deep learning? These arguments also motivate the neuro-symbolic paradigm, which the rest of the blog post delves into.
@@ -116,6 +112,7 @@ Most animals rely on innate knowledge and instincts. They don't seem able to inf
 
 >People learn entirely new systems of interdefined concepts(Carey, 1985; Block, 1987) and do so in a way that is driven by hypotheses and goals rather than blind search (Carey, 2009; Chu et al., 2019), with a sensitivity to what is good in ahypothesis and what is suboptimal or even wrong (Schulz, 2012a; Chu & Schulz, 2020). Suchrichness is interesting because there are extremely simple algorithms guaranteed to discoveroptimal hypotheses, e.g. enumerating every possible hypothesis (Gold, 1967; Solomonoff,1964a).  That such a proposal sounds alien as a model of cognition, despite the extremecomputational power of the human brain (Gallistel, 2017; Baum, 2004), reflects somethingnot only about the complexity of the world that learners are trying to explain but also theirreasons for learning and the sophistication of the machinery they bring to bear in doing so.
 
+
 ### Intelligence is more than pattern matching: Why children are not deep learners
 
 The child as scientist
@@ -125,6 +122,10 @@ The child as hacker
 Social learning
 
 #### Representing knowledge as probabilistic programs
+
+By writing computations as code, they become data that can be formally manipulated and analyzed (Abelson et al.,
+241996). Programming languages thus become programs which take code as input and return
+code as output.
 
 Compositionality
 
