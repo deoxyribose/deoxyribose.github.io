@@ -97,6 +97,12 @@ Conclusion: NNs generalize by [similarity-based abstraction](https://www.youtube
 
 #### NNs find shortcuts because they are "easy to vary"
 
+The reason why NNs find shortcuts has to do with the bias-variance decomposition. The bias-variance decomposition roughly says that models that express a large hypothesis space, end up learning widely varying hypotheses, when compared across different training sets. Models that are constrained to a small hypothesis space, will learn the same hypotheses, no matter the training set. A better formalization of this is [Bayesian Occam's razor](http://mlg.eng.cam.ac.uk/zoubin/papers/05occam/occam.pdf), where this property follows from Bayesian model comparison. The bottom line is that the most likely model given data is the one that is biased towards producing the data. In the extreme, a perfect model contains exactly one hypothesis, the one that produces the exact data we observed.
+
+Neural networks sit closer to the other extreme. You can get a neural network to produce pretty much any data, which is why they are so widely applicable. Of course, there has to be more to deep learning than just flexibility, otherwise any sufficiently flexible learning algorithm would perform as well as deep learning does. The answer is that despite being very flexible, neural networks are still [biased](https://arxiv.org/pdf/2002.08791.pdf) towards learning certain structures over others. The most important of these inductive biases is towards hierarchical structure, as explained in the previous section - different complex objects are made of similar simple objects. Another is the smoothness bias - if you change the input just a little, the output also doesn't change much. As mentioned, CNNs are endowed with a powerful bias towards natural images, in which the hierarchical structure bias further disregards the position in the image (and importantly, the image is processed as a 2D matrix rather than a vector). This bias is [so apt that even without training CNNs](https://arxiv.org/abs/1711.10925) on any data, they perform very well on several computer vision tasks.
+Transformers are equipped with an ingenious bias towards simple sequence to sequence functions - at each level of the hierarchy, the input is treated as a query sequence, to be compared against stored key sequences, returning a corresponding value sequence. This results in a kind of associative memory, as known from the ancient and hallowed [Hopfield networks](https://arxiv.org/abs/2008.02217).
+
+Inductive biases not only make learning more efficient, they are what allows the model to generalize. This is merely a reformulation of the bias-variance decomposition. Some believe that deep learning is somehow exempt from this, in that highly over-parametrized networks tend to work better, not worse, most clearly shown in the double descent phenomenon. But double descent is not at all unique to deep learning, and it doesn't contradict the bias-variance decomposition or Bayesian model comparison framework in any way. 
 
 #### Implications of the scaling hypothesis
 
@@ -110,10 +116,11 @@ Most animals rely on innate knowledge and instincts. They don't seem able to inf
 
 ##### Children shouldn't bother with sophisticated learning strategies - just imbibe data and wait for the brain to update
 
->People learn entirely new systems of interdefined concepts(Carey, 1985; Block, 1987) and do so in a way that is driven by hypotheses and goals rather than blind search (Carey, 2009; Chu et al., 2019), with a sensitivity to what is good in ahypothesis and what is suboptimal or even wrong (Schulz, 2012a; Chu & Schulz, 2020). Suchrichness is interesting because there are extremely simple algorithms guaranteed to discoveroptimal hypotheses, e.g. enumerating every possible hypothesis (Gold, 1967; Solomonoff,1964a).  That such a proposal sounds alien as a model of cognition, despite the extremecomputational power of the human brain (Gallistel, 2017; Baum, 2004), reflects somethingnot only about the complexity of the world that learners are trying to explain but also theirreasons for learning and the sophistication of the machinery they bring to bear in doing so.
+>People learn entirely new systems of interdefined concepts(Carey, 1985; Block, 1987) and do so in a way that is driven by hypotheses and goals rather than blind search (Carey, 2009; Chu et al., 2019), with a sensitivity to what is good in a hypothesis and what is suboptimal or even wrong (Schulz, 2012a; Chu & Schulz, 2020). Such richness is interesting because there are extremely simple algorithms guaranteed to discover optimal hypotheses, e.g. enumerating every possible hypothesis (Gold, 1967; Solomonoff,1964a).  That such a proposal sounds alien as a model of cognition, despite the extreme computational power of the human brain (Gallistel, 2017; Baum, 2004), reflects something not only about the complexity of the world that learners are trying to explain but also their reasons for learning and the sophistication of the machinery they bring to bear in doing so.
 
 
 ### Intelligence is more than pattern matching: Why children are not deep learners
+
 
 The child as scientist
 
@@ -126,6 +133,8 @@ Social learning
 By writing computations as code, they become data that can be formally manipulated and analyzed (Abelson et al.,
 241996). Programming languages thus become programs which take code as input and return
 code as output.
+
+It seems that our cognition exhibits the same property. Our thoughts can manipulate and analyze other thoughts. Systems of thought can scrutinize other systems of thought.
 
 Compositionality
 
