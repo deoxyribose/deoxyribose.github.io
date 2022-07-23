@@ -78,7 +78,7 @@ Francois Chollet compares the transformation an NN performs to uncrumpling a pap
 
 In the raw pixel space of images, the distance between images is short if the same pixels have similar colors. But in the subsequent vector spaces learned by a deep NN, the distances will depend on increasingly abstract features. In a layer, the representation from the previous layer is compared to a number of "prototype" features (The comparison is simply a dot product between the representation vector and the prototype - if the vectors align, the dot product is large. Doing that for all the prototypes in the layer is what all those matrix multiplications are for). The next representation is the combined output of these similarity comparisons - the patterns encoded by the previous prototypes have been abstracted away. If two data-points matched the same prototypes to a similar degree, they are similar in that space, and the distance between them is short.
 
-Early layers of convolutional nets learn to [detect edges](https://distill.pub/2017/feature-visualization/), and later layers detect textures, patterns, parts of objects and objects. It may be that if a test image is similar to a training image in "texture space", that's enough to correctly classify it in all training examples. In fact, it has been observed that NNs rely strongly on textures to classify objects, largely ignoring their shape. That's not a problem, as long as the distribution of test images is the same as the distribution of training images - the textures will always predict the same object that shapes predict. Using textures for classifying objects is not "wrong", in any way that affects the loss function. It's a clever shortcut, albeit with limited applicability.
+Early layers of convolutional nets learn to [detect edges](https://distill.pub/2017/feature-visualization/), and later layers detect textures, patterns, parts of objects and objects. It may be that if a test image is similar to a training image in "texture space", that's enough to correctly classify it in all training examples. In fact, it has been observed that NNs rely strongly on textures to classify objects, largely ignoring their shape. That's not a problem, as long as the distribution of test images is the same as the distribution of training images - the textures will always predict the same object that shapes predict. Using textures for classifying objects is not "wrong", in any way that affects the loss function. It's a clever shortcut, albeit with limited applicability. 
 
 Here's a toy example of an even simpler shortcut:
 
@@ -87,12 +87,6 @@ Here's a toy example of an even simpler shortcut:
 <center> Trained on images of stars and moons (top row), a three-layer MLP correctly classifies new examples from an i.i.d. test set. However, testing it on an o.o.d test set (bottom row) reveals the shortcut: The network has learned to associate object location with a category. </center>
 
 Note that a convolutional net wouldn't take this shortcut. We explicitly prevent this, by building in translation invariance into CNNs; by iterating over patches of the image, we compute the similarity to the same, reusable "prototype" feature. Thus the NN doesn't learn a "vertical edge in the upper right corner" feature, and a "vertical edge in the upper middle" and so on. It learns a single "vertical edge" feature, and the for-loops hardcoded into the convolution operation scan the entire image for it. Consider this foreshadowing. 
-
-The end result is a piecewise function - in the case where the activation function is the ReLU, it's a piecewise linear function.
-
-Conclusion: NNs generalize by [similarity-based abstraction](https://www.youtube.com/watch?v=3Nxe7J07TQY).
-
-> Never attribute to high-level abilities that which can be adequately explained by shortcut learning.
 
 #### NNs learn shortcuts because they are "easy to vary"
 
