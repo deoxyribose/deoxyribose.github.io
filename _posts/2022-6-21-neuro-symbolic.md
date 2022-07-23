@@ -108,9 +108,13 @@ The fact that the point estimate has high variance is especially true in deep le
 
 Having said all this, couldn't it still be the case that, with enough training examples, a shortcut solution just _is_ the desired solution, with out-of-distribution generalization, extrapolation through causality, even symbol manipulation? After all, with every additional training example, we are eliminating possible bad shortcuts. 
 
-The answer is no. As John von Neumann allegedly said, “With four parameters I can fit an elephant, and with five I can make him wiggle his trunk”. Each extra parameter adds far more possible shortcuts than an extra training example eliminates. Could we do the opposite then? Add more training data, but keep the network as small as possible? Also no. The network simply becomes too limited in representational capacity to learn much signal. The parameters quickly converge, and the remaining data is virtually useless. The bias-variance tradeoff lives up to its name - we can either have a small network that underfits, or a large network that learns a shortcut. One can keep playing the scaling game, fitting more and more examples with more and more parameters, but the real world is not so obliging as to present i.i.d. examples. It is exactly the fact that real world presents us with constant novelty that makes intelligence useful. 
+The answer is no. As John von Neumann allegedly said, “With four parameters I can fit an elephant, and with five I can make him wiggle his trunk”. Each extra parameter adds far more possible shortcuts than an extra training example eliminates. Could we do the opposite then? Add more training data, but keep the network as small as possible? Also no. The network simply becomes too limited in representational capacity to learn much signal. The parameters quickly converge, and the remaining data is virtually useless. The bias-variance tradeoff lives up to its name - we can either have a small network that underfits, or a large network that learns a shortcut. One can keep playing the scaling game, fitting more and more examples with more and more parameters, but the real world is not so obliging as to present i.i.d. examples, with the occasional o.o.d. outlier to keep things spicy. It is exactly the fact that real world presents us with constant novelty that makes intelligence useful. 
 
 ![alwayshasbeen]({{ site.url }}/images/alwayshasbeen.jpg "The world is always out of distribution.")
+
+Stuart Russell said it well:
+
+>Imagine your entire video record of your life, and that feeds into the decision about what to do next, and you have to learn that mapping as a supervised learning problem. It’s not even funny how unfeasible that is. The longer the deep learning community persists in this, the worse the pain is going to be when their heads bang into the wall.
 
 #### Representing knowledge as probabilistic programs
 
