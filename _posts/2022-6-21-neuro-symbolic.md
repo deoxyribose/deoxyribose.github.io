@@ -71,6 +71,14 @@ The problem is not that GPT-3 or other large models don't perform well at task X
 
 What is happening instead, is that as we scale up deep learning models, they get better performance on a test set of statistically identical examples. Contrary to what Gwern wrote, there is no pressure on the models to start generalizing better as we scale up, especially since we're increasing the model size, rather than decreasing it. On the contrary, the exact same, limited generalization ability is much more performant when you have a billion more examples to generalize from. It doesn't matter whether you use the data directly to train on, or indirectly by using a pre-trained model. 
 
+To keep things straight, let's distinguish between three versions of the scaling hypothesis:
+
+1. Deep learning will never learn to extrapolate, but with enough data, parameters and compute, interpolation is enough.
+2. Deep learning will learn to extrapolate, as long as there always are large amounts of data and compute available, which there is.
+3. Deep learning will learn to extrapolate, and the more data and compute has been used, the less additional data and compute is needed, i.e. generalization ability increases with scale.
+
+The first versions require less of neural networks themselves, but require the world to be more easily learnable. The latter versions don't require the world to be easily learnable, but they require neural networks to become better at scale. Without any math, let's look at what NNs do, and see if we can shed some light on these ideas.
+
 #### What do neural networks learn?
 
 Neural networks are non-linear transformations from one vector space to another. The transformation is performed in steps, layer by layer, from vector space to [vector space](http://colah.github.io/posts/2015-01-Visualizing-Representations/#neural-networks-transform-space). 
