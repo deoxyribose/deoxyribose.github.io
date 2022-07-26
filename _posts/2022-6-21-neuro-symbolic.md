@@ -34,7 +34,6 @@ training data. Among the solutions that solve the training data, only some gener
 set. Among those solutions, shortcuts fail to generalise to different data (o.o.d. test sets), but the
 intended solution does generalize.</center>
 
-
 So, the scaling hypothesis says that at large enough scale, the lazy, shortcut solution is the desired one. 
 
 #### Assumptions underlying the scaling hypothesis
@@ -49,7 +48,7 @@ Using the illustration above, we can imagine scaling the model size as the set o
 I will argue that this never actually happens. As long as we use NNs, which are large piecewise-linear functions, as representations, 1. won't hold in general. Roughly speaking, any function can be approximated arbitrarily well as a piecewise linear function - but given a finite amount of pieces, the "arbitrarily well" part goes out the window.
 More importantly, as long as the loss we're minimizing is empirical risk, meaning we optimize training set performance, 2. and 3. won't hold. An empirical risk minimizer doesn't care what the NN is doing outside the training sample, so it has zero incentive to find a solution that generalizes everywhere. The minimizer will not allocate any pieces outside the training data where it gains nothing from it.
 
-But there is a potential way around these limitations, which corresponds to a [weaker version of the scaling hypothesis](https://www.gwern.net/docs/ai/scaling/2020-hasson.pdf).
+There is a potential way around these limitations, which corresponds to a [weaker version of the scaling hypothesis](https://www.gwern.net/docs/ai/scaling/2020-hasson.pdf).
 Proponents of this version acknowledge that NNs don't extrapolate, and their generalization ability is confined to an "interpolation zone". But given enough data to cover the relevant parts of the domain, the fact that we're not generalizing out of distribution won't be a problem - the shortcut solution will in practice be indistinguishable from the desired solution. 
 
 The only relevant assumptions then are 
@@ -135,16 +134,18 @@ A 2012 paper called "Human-level concept learning through probabilistic program 
 
 Constructing the model thus required an expert to first understand how the writing process works, figure out what the basic moves are, how they can vary, how they combine, and how to render the character as an image. The expert then needs to be knowledge in both programming and statistics to formulate both the probabilistic program, which represents the writing process in code and the various sources of variation and noise as random variables, and then the inference algorithm, the program which inverts the writing process, from a given image to the strokes and randomness that produced it - which usually is the hardest part. 
 
-Following Chollet's definition of intelligence, this program is just as unintelligent as an equivalent deep learning model. While we bought sample efficiency, robustness to distribution shift, and extrapolation ability, we payed for it with an almost complete lack of generality, a large amount of required domain expertise, and an even larger cost in technical expertise. While the model can well be said to "understand" handwriting, as opposed to a deep learning model, it's clear that all the understanding comes directly from the developer. It is the developer's brain that created the causal knowledge of handwriting and represented it as a probabilistic program. Worse still, it is also the developer that figured out how to solve the complex problem of searching the large combinatorial space of different numbers and types of parts, sub-parts, and relations, to efficiently find the particular combinations that are likely to have produced a given image, and represented this solution as a highly specialized inference algorithm. This is narrow AI at its narrowest. 
+Following Chollet's definition of intelligence, this program is just as unintelligent as an equivalent deep learning model. While we bought sample efficiency, robustness to distribution shift, and extrapolation ability, we payed for it with an almost complete lack of generality, a large amount of required domain expertise, and an even larger cost in technical expertise. The model can well be said to "understand" handwriting, as opposed to a deep learning model, but it's clear that all the understanding comes directly from the developer. It is the developer's brain that created the causal knowledge of handwriting and represented it as a probabilistic program. Worse still, it is also the developer that figured out how to solve the complex problem of searching the large combinatorial space of different numbers and types of parts, sub-parts, and relations, to efficiently find the particular combinations that are likely to have produced a given image, and represented this solution as a highly specialized inference algorithm. This is narrow AI at its narrowest. 
 
-By writing computations as code, they become data that can be formally manipulated and analyzed (Abelson et al.,
-241996). Programming languages thus become programs which take code as input and return
-code as output.
+But notice how easy it would be to extend and combine the knowledge represented in this program, with other knowledge and skills. Generating a sequence of handwritten characters would just be calling the procedure several times, and concatenating the images. Inferring the motions that generated a sequence could also straightforwardly reuse the single character inference algorithm as a subroutine. Compositionality and modularity are also big selling points for explainability. To understand the whole program, just understand the parts and how they combine. 
 
-It seems that our cognition exhibits the same property. Our thoughts can manipulate and analyze other thoughts. Systems of thought can scrutinize other systems of thought.
+The narrowness of the program is also what makes it phenomenally robust to noise and distribution shifts. Changes to the font color, or line thickness, or background, which would undoubtedly break a deep learning model, would have no effect here. Invariance to rotation, scale, skewness, are all built-in to the model, no data augmentation needed. Adversarial attacks are not a thing. The knowledge contained in a program also generalizes far beyond the data distribution - a [similar, neuro-symbolic model](https://arxiv.org/pdf/2206.01829.pdf) trained on MNIST exhibits zero-shot transfer to other tasks - including the one this model is trained on. Without being retrained on any of the other tasks, it's able to generate new samples from all these other data distributions, out of the box. While the model and the inference algorithm are highly specialized, very narrow AI, the explanation they embody is so good that it generalizes far outside the original task - and as mentioned above, easily extendable much farther.
 
-Compositionality
+That's the power of symbolic representations. By writing computations as code, they become data that can be manipulated and analyzed by other code. Programming languages become programs which take code as input and return code as output. It seems that [our cognition exhibits the same property](https://joshrule.com/files/rule2020child.pdf), mostly obviously language, but clearly perception, motor skills and planning as well. Cognitive skills are programs - programs that generate mental imagery, verbal thought, behaviors and plans, as well as programs that infer the world from visual, auditory and other sensory input, infer mental states and goals in other agents. 
+
+The handwritten character generative and inference programs were written by humans. Where do cognitive skill programs come from? How do you learn programs?
 
 #### Learning as probabilistic program synthesis
+
+
 
 #### Causality as program editing
