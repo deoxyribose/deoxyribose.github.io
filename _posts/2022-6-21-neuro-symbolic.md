@@ -146,8 +146,17 @@ The generative and inference programs from the above example were written by ski
 
 #### Learning as probabilistic program synthesis
 
-If skills are programs, and intelligence is the ability to efficiently learn skills, then intelligence is, essentially, programming ability. 
+If skills are programs, and intelligence is the ability to efficiently learn skills, then intelligence is, essentially, programming ability. This description is very general and vague. It includes deep learning as a special case, in which the programs are restricted to just differentiable functions, and the space of programs is searched by SGD, an optimization algorithm that exploits the differentiability of the loss function wrt. parameters. Learning the parameters without the use of gradients, say by random search, or worse, grid search, would be completely infeasible. 
+
+In probabilistic programming, where the probabilistic program, priors and observed data are provided, learning is usually some approximation to full Bayesian inference. Learning the full posterior by conditioning on observed data involves integrating over a potentially high-dimensional continuous space, and/or summing over a high-dimensional discrete space, which usually isn't feasible. Popular ways to approximate the Bayesian posterior are MCMC, in which a stochastic process generates samples from the posterior distribution, and variational inference, in which we optimize an approximating distribution to diverge as little from the posterior as possible. Approximate Bayesian inference is a lot more involved than SGD. Most probabilistic programming languages come with just one or a couple of efficiently implemented inference algorithms, which severely limits their applicability, but some [experimental ones](https://www.gen.dev/) allow you to program your own custom inference algorithms, even ones that involve neural networks to great effect. Skilled probrammers can decompose inference into subproblems, tackle each one with different algorithms or alternate between updating on old data and incorporating new data in [smart ways, collectively called inference programming](https://www.cantab.net/users/yutian.chen/Publications/MansinghkaEtAl_pldi18.pdf). Such techniques can start to blur the line between learning as parameter estimation and learning as programming, when applied to models with stochastic structure - models in which random choices determine the make-up of the rest of the model, such as in the handwritten character program above, in which the number of parts is itself a parameter (rather than having separate models for "two-stroke-characters", "three-stroke-characters" and so on).
+
+When it crosses over to learning as programming proper, it's called program synthesis. We can distinguish between deterministic synthesis of deterministic programs, deterministic synthesis of probabilistic programs, probabilistic synthesis of deterministic programs, and probabilistic synthesis of probabilistic programs. All of these have been successfully applied, but to the best of my knowledge, no great successes have yet been made in inference program synthesis.
+
+
+
 
 The simplest way to program is by enumeration. 
+Probabilistic synthesis.
+Neural guided synthesis.
 
 #### Causality as program editing
