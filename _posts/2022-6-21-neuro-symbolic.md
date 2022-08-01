@@ -172,13 +172,19 @@ Most successful applications of program synthesis, like the FlashFill feature in
 
 With this design, DreamCoder can learn to acquire skills in a wide variety of domains, with or without supervision. It can learn to process lists, edit text, find regexes, draw simple graphics, build structures out of blocks, do symbolic regression, discover physical laws and much more. 
 
-![dreamcoderdomains]({{ site.url }}/images/dreamcoderdomains.png "The three phases of DreamCoder.")
+![dreamcoderdomains]({{ site.url }}/images/dreamcoderdomains.png "DreamCoder domains.")
 [Credit: Ellis et al.](https://arxiv.org/abs/2006.08381)
 
 The programs it discovers generalize. For example, the sorting algorithm it discovers can sort any list, not just ones that are statistically identical to the few examples it sees. The three phases bootstrap each other - with each iteration, previously unsolvable tasks get solved thanks to better inductive biases in the DSL and better guidance from the neural network; the DSL becomes more finely tuned to the domain, thanks to new programs being discovered during waking which get refactored into transferable concepts; and the neural network gets better programs to train on thanks to both a wider range of solved tasks and more realistic "dream"-tasks sampled from the DSL. 
 
+Using DreamCoder for new domains still requires a little human expertise. One needs to provide the initial concepts that form the primitives of the DSL, which can be very general - to discover physical laws, it was sufficient to provide it with a few higher-order functions like map and fold, and basic arithmetic, and DreamCoder itself learned concepts from vector algebra, like inner products and norms, and physics, like inverse-square laws. The neural network relies on some deep learning expertise, knowing how to embed tasks and use an appropriate architecture for the domain. More subtly, it's also up to the expert to delineate what tasks belong to which domains. The authors speculate how this limitation could be overcome in future work:
 
-
-
+> the approach will need to be extended to learn not just one domain at a
+time, but to simultaneously develop expertise across many different classes of problems, autonomously
+carving out its own domains alongside its own domain-specific representations. We anticipate this
+will be enabled by metalearning a cross-domain library or “language-of-thought” (...): growing a
+single generic programmatic substrate for learning and reasoning, as humans have built collectively
+through biological and cultural evolution, which can then differentiate itself into representations for
+unboundedly many different classes of problems.
 
 #### Causality as program editing
