@@ -161,7 +161,7 @@ That's bad news for the learning efficiency of the program synthesis approach. I
 We've identified two tradeoffs that exist in traditional machine learning, but go up a meta-level in program synthesis. Much like the bias-variance tradeoff for models, in program synthesis we can choose between specialized, domain specific languages (DSLs), in which programs that solve tasks in a narrow domain are simple and concise; or universal, Turing-complete languages, in which we can write programs that solve any task humans can solve, if only their length wouldn't make discovering them intractable. 
 And much like the tradeoff between compute-hungry but broadly-applicable learning algorithms like SGD versus efficient but bespoke inference programs that exploit the structure of a given learning problem, in program synthesis there's a generality-efficiency tradeoff in the choice of search algorithm. We can choose between general-purpose methods like brute-force enumeration that construct and evaluate entire programs, one by one, or more specialized methods which efficiently represent and evaluate entire subspaces of program space at a time.
 
-Most successful applications of program synthesis, like FlashFill in Excel, rely on the human experts to design a custom DSL, as well as a custom search algorithm. A [paper from Ellis et al.](https://arxiv.org/abs/2006.08381) proposes an alternative - learn a DSL, and learn how to write programs in it. Called DreamCoder, the algorithm alternates between three phases: 
+Most successful applications of program synthesis, like the FlashFill feature in Excel, rely on human experts to design a custom DSL, as well as a custom search algorithm. A [paper from Ellis et al.](https://arxiv.org/abs/2006.08381) proposes an alternative - learn a DSL, and learn how to write programs in it. Called DreamCoder, the algorithm alternates between three phases: 
 	
 + Wake, in which new tasks are solved by searching for programs expressed in the current version of the learned DSL, helped by the current version of a neural network which guides the search
 + Abstraction sleep, in which the learned DSL is expanded by looking at code snippets that were useful in solving the tasks during waking, and abstracting them into new functions in the DSL, and
@@ -170,13 +170,15 @@ Most successful applications of program synthesis, like FlashFill in Excel, rely
 ![dreamcoder]({{ site.url }}/images/dreamcoder.png "The three phases of DreamCoder.")
 [Credit: Ellis et al.](https://arxiv.org/abs/2006.08381)
 
+With this design, DreamCoder can learn to acquire skills in a wide variety of domains, with or without supervision. It can learn to process lists, edit text, find regexes, draw simple graphics, build structures out of blocks, do symbolic regression, discover physical laws and much more. 
 
-Programs as ASTs. Bottom-up search. Top down search and types.
-Learning a library of concepts.
+![dreamcoderdomains]({{ site.url }}/images/dreamcoderdomains.png "The three phases of DreamCoder.")
+[Credit: Ellis et al.](https://arxiv.org/abs/2006.08381)
+
+The programs it discovers generalize. For example, the sorting algorithm it discovers can sort any list, not just ones that are statistically identical to the few examples it sees. The three phases bootstrap each other - with each iteration, previously unsolvable tasks get solved thanks to better inductive biases in the DSL and better guidance from the neural network; the DSL becomes more finely tuned to the domain, thanks to new programs being discovered during waking which get refactored into transferable concepts; and the neural network gets better programs to train on thanks to both a wider range of solved tasks and more realistic "dream"-tasks sampled from the DSL. 
 
 
-The simplest way to program is by enumeration. 
-Probabilistic synthesis.
-Neural guided synthesis.
+
+
 
 #### Causality as program editing
