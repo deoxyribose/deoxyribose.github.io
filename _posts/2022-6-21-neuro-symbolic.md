@@ -161,11 +161,12 @@ That's bad news for the learning efficiency of the program synthesis approach. I
 We've identified two tradeoffs that exist in traditional machine learning, but go up a meta-level in program synthesis. Much like the bias-variance tradeoff for models, in program synthesis we can choose between specialized, domain specific languages (DSLs), in which programs that solve tasks in a narrow domain are simple and concise; or universal, Turing-complete languages, in which we can write programs that solve any task humans can solve, if only their length wouldn't make discovering them intractable. 
 And much like the tradeoff between compute-hungry but broadly-applicable learning algorithms like SGD versus efficient but bespoke inference programs that exploit the structure of a given learning problem, in program synthesis there's a generality-efficiency tradeoff in the choice of search algorithm. We can choose between general-purpose methods like brute-force enumeration that construct and evaluate entire programs, one by one, or more specialized methods which efficiently represent and evaluate entire subspaces of program space at a time.
 
-Most successful applications of program synthesis, like FlashFill in Excel, rely on the human experts to design a custom DSL, as well as a custom search algorithm. A paper from Ellis et al. proposes an alternative - learn a DSL, and learn how to write programs in it. Called DreamCoder, the algorithm alternates between three phases: 
+Most successful applications of program synthesis, like FlashFill in Excel, rely on the human experts to design a custom DSL, as well as a custom search algorithm. A [paper from Ellis et al.](https://arxiv.org/abs/2006.08381) proposes an alternative - learn a DSL, and learn how to write programs in it. Called DreamCoder, the algorithm alternates between three phases: 
 	
-	Wake, in which new tasks are solved by searching for programs expressed in the current version of the learned DSL, guided by the current version of a neural network which guides the search
-	Abstraction sleep, in which the learned DSL is expanded by looking at code snippets that were useful in solving the tasks during waking, and abstracting them into new functions in the DSL, and
-	Dream sleep, in which we generate programs and data using those programs, and train the neural network to help find the programs given the data.
++ Wake, in which new tasks are solved by searching for programs expressed in the current version of the learned DSL, guided by the current version of a neural network which guides the search
++ Abstraction sleep, in which the learned DSL is expanded by looking at code snippets that were useful in solving the tasks during waking, and abstracting them into new functions in the DSL, and
++ Dream sleep, in which we generate programs and data using those programs, and train the neural network to help find the programs given the data.
+
 
 
 
