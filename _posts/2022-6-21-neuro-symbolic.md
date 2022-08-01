@@ -163,11 +163,12 @@ And much like the tradeoff between compute-hungry but broadly-applicable learnin
 
 Most successful applications of program synthesis, like FlashFill in Excel, rely on the human experts to design a custom DSL, as well as a custom search algorithm. A [paper from Ellis et al.](https://arxiv.org/abs/2006.08381) proposes an alternative - learn a DSL, and learn how to write programs in it. Called DreamCoder, the algorithm alternates between three phases: 
 	
-+ Wake, in which new tasks are solved by searching for programs expressed in the current version of the learned DSL, guided by the current version of a neural network which guides the search
++ Wake, in which new tasks are solved by searching for programs expressed in the current version of the learned DSL, helped by the current version of a neural network which guides the search
 + Abstraction sleep, in which the learned DSL is expanded by looking at code snippets that were useful in solving the tasks during waking, and abstracting them into new functions in the DSL, and
 + Dream sleep, in which we generate programs and data using those programs, and train the neural network to help find the programs given the data.
 
-
+![dreamcoder]({{ site.url }}/images/dreamcoder.png "The three phases of DreamCoder.")
+[Credit: Ellis et al.](https://arxiv.org/abs/2006.08381)
 
 
 Programs as ASTs. Bottom-up search. Top down search and types.
