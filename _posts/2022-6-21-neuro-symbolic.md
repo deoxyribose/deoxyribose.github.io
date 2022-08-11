@@ -48,7 +48,7 @@ Using the illustration above, we can imagine scaling the model size as the set o
 I will argue that this never actually happens. As long as we use NNs, which are large piecewise-linear functions, as representations, 1. won't hold in general. Roughly speaking, any function can be approximated arbitrarily well as a piecewise linear function - but given a finite amount of pieces, the "arbitrarily well" part goes out the window.
 More importantly, as long as the loss we're minimizing is empirical risk, meaning we optimize training set performance, 2. and 3. won't hold. An empirical risk minimizer doesn't care what the NN is doing outside the training sample, so it has zero incentive to find a solution that generalizes everywhere. The optimizer will not allocate any pieces outside the training data where it gains nothing from it.
 
-Let's look at a concrete example. We'll fit MLPs, and symbolic regression models, to data from $f(x) = x^2 + \epsilon$, where $-50 \leq x \leq 100$ is sampled uniformly in the interval, and $\epsilon$ is Gaussian noise. First, let's look at how the two methods overfit on 10 training points.
+Let's look at a concrete example. I've fit MLPs, and symbolic regression models, to data from $$f(x) = x^2 + \epsilon$$, where $$-50 \leq x \leq 100$$ is sampled uniformly in the interval, and $$\epsilon$$ is Gaussian noise. First, let's look at how the two methods overfit on 10 training points.
 
 
 <div class="plot-container">
@@ -56,7 +56,12 @@ Let's look at a concrete example. We'll fit MLPs, and symbolic regression models
     </iframe>
 </div>
 
+Here's how the methods fit 10000 points:
 
+<div class="plot-container">
+    <iframe src="/plots/fit.html" height="315" width="560" allowfullscreen="" frameborder="0">
+    </iframe>
+</div>
 
 There is a potential way around these limitations, which corresponds to a [weaker version of the scaling hypothesis](https://www.gwern.net/docs/ai/scaling/2020-hasson.pdf).
 Proponents of this version acknowledge that NNs don't extrapolate, and their generalization ability is confined to an "interpolation zone". But given enough data to cover the relevant parts of the domain, the fact that we're not generalizing out of distribution won't be a problem - the shortcut solution will in practice be indistinguishable from the desired solution. 
