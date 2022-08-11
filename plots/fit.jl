@@ -14,7 +14,7 @@ using BSON: @save, @load
 Random.seed!(42)
 
 @kwdef mutable struct Args
-    η::Float64 = 3e-4       ## learning rate
+    η::Float64 = 2e-4       ## learning rate
     batchsize::Int = 256    ## batch size
     epochs::Int = 15000        ## number of epochs
     use_cuda::Bool = true   ## use gpu (if cuda available)
@@ -27,8 +27,8 @@ xs = []
 ys = []
 n = Int(floor(N / length(iid_intervals)))
 for interval in iid_intervals
-    x = rand(Float64, n) * (interval[2] - interval[1]) .+ interval[1]
-    y = x .^ 2 .+ randn(Float64, n)
+    x = rand(Float32, n) * (interval[2] - interval[1]) .+ interval[1]
+    y = x .^ 2 .+ randn(Float32, n)
     push!(xs, x)
     push!(ys, y)
 end
@@ -50,15 +50,15 @@ xs, ys = normalized_data[:, 1], normalized_data[:, 2]
 
 
 ###### Fitting with overparametrized MLP ######
-n_hidden_neurons = 64
+n_hidden_neurons = 16
 function build_model(; nin=(1, 1), nout=1)
     return Chain(Dense(prod(nin), n_hidden_neurons, Flux.relu),
         Dense(n_hidden_neurons, n_hidden_neurons, Flux.relu),
         #BatchNorm(n_hidden_neurons, relu),
-        Dropout(0.2),
+        #Dropout(0.5),
         Dense(n_hidden_neurons, n_hidden_neurons, Flux.relu),
         #BatchNorm(n_hidden_neurons, relu),
-        Dropout(0.2),
+        #Dropout(0.5),
         Dense(n_hidden_neurons, nout))
 end
 
@@ -147,32 +147,32 @@ model_cpu = model |> cpu
 ######  SymbolicRegression  ######
 
 
-# xs = reshape(xs, (1, size(xs)...))
+xs = reshape(xs, (1, size(xs)...))
 
-# xtrain = xs[:, 1:Int(N / 2)]
-# ytrain = ys[1:Int(N / 2)]
-# xtest = xs[:, Int(N / 2)+1:end]
-# ytest = ys[Int(N / 2)+1:end]
+xtrain = xs[:, 1:Int(N / 2)]
+ytrain = ys[1:Int(N / 2)]
+xtest = xs[:, Int(N / 2)+1:end]
+ytest = ys[Int(N / 2)+1:end]
 
-# options = SymbolicRegression.Options(
-#     binary_operators=(+, *, /, -),
-#     unary_operators=(cos, exp),
-#     npopulations=40
-# )
+options = SymbolicRegression.Options(
+    binary_operators=(+, *, /, -),
+    unary_operators=(cos, exp),
+    npopulations=40
+)
 
-# hall_of_fame = EquationSearch(xtrain, ytrain, niterations=100, options=options, numprocs=7)
+hall_of_fame = EquationSearch(xtrain, ytrain, niterations=100, options=options, numprocs=7)
 
-# dominating = calculate_pareto_frontier(xtrain, ytrain, hall_of_fame, options)
+dominating = calculate_pareto_frontier(xtrain, ytrain, hall_of_fame, options)
 
-# eqn = node_to_symbolic(dominating[end].tree, options)
+eqn = node_to_symbolic(dominating[end].tree, options)
 
-# @syms x1
+@syms x1
 
-# expression = eqn
+expression = eqn
 
-# fexp = build_function(expression, x1)
+fexp = build_function(expression, x1)
 
-# f = eval(fexp)
+f = eval(fexp)
 
 
 

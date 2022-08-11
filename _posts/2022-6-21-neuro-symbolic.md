@@ -63,7 +63,7 @@ Neither method is regularized properly, and with only 10 points, they both fit t
     </iframe>
 </div>
 
-Both methods predict test data, which is sampled from the same interval, much better now. But away from the training sample, outside the data distribution, the NN rapidly diverges from the true data generating function. That hasn't improved, despite overkill amounts of data, parameters and gradient updates (see [code here]()). The symbolic regression hasn't actually found the correct function either - it fit a second degree polynomial, but with non-zero coefficients for the constant and linear terms - but it extrapolates. 
+Both methods predict test data, sampled over the same interval, much better now. But away from the training sample, outside the data distribution, the NN rapidly diverges from the true data generating function. That hasn't improved, despite overkill amounts of data, parameters and gradient updates (see [code here](https://github.com/deoxyribose/deoxyribose.github.io/blob/master/plots/fit.jl)). The symbolic regression hasn't actually found the correct function either - it fit a second degree polynomial, but with non-zero coefficients for the constant and linear terms - but it extrapolates. 
 
 There is a potential way around these limitations, which corresponds to a [weaker version of the scaling hypothesis](https://www.gwern.net/docs/ai/scaling/2020-hasson.pdf).
 Proponents of this version acknowledge that NNs don't extrapolate, and their generalization ability is confined to an "interpolation zone". But given enough data to cover the relevant parts of the domain, the fact that we're not generalizing out of distribution won't be a problem - the shortcut solution will in practice be indistinguishable from the desired solution. 
