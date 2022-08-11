@@ -45,10 +45,10 @@ This requires that the desired solution
 
 Using the illustration above, we can imagine scaling the model size as the set of rules learnable by ML model #2 expanding, since more parameters means more representable functions. Scaling data and compute corresponds to the set of training and shortcut solutions contracting, since a larger dataset is fit by fewer rules than a small dataset. Visually, the scaling hypothesis requires that (1) the rules learnable by the NN eventually include the orange dot, and that (2 and 3) the blue and beige sets contract around it. 
 
-I will argue that this never actually happens. As long as we use NNs, which are large piecewise-linear functions, as representations, 1. won't hold in general. Roughly speaking, any function can be approximated arbitrarily well as a piecewise linear function - but given a finite amount of pieces, the "arbitrarily well" part goes out the window.
-More importantly, as long as the loss we're minimizing is empirical risk, meaning we optimize training set performance, 2. and 3. won't hold. An empirical risk minimizer doesn't care what the NN is doing outside the training sample, so it has zero incentive to find a solution that generalizes everywhere. The optimizer will not allocate any pieces outside the training data where it gains nothing from it.
+I will argue that this never actually happens. As long as we use NNs, which are large piecewise functions, as representations, 1. won't hold in general. Roughly speaking, any function can be approximated arbitrarily well as a piecewise function - but given a finite amount of pieces, the "arbitrarily well" part goes out the window.
+More importantly, as long as the loss we're minimizing is empirical risk, meaning we optimize training set performance, 2. and 3. won't hold. An empirical risk minimizer doesn't care what the NN is doing outside the training sample, so it has zero incentive to find a solution that generalizes everywhere. The optimizer will not allocate pieces outside the training data where it gains nothing from it.
 
-Let's look at a concrete example. I've fit MLPs, and symbolic regression models, to data from $$f(x) = x^2 + \epsilon$$, where $$-50 \leq x \leq 100$$ is sampled uniformly in the interval, and $$\epsilon$$ is Gaussian noise. First, let's look at how the two methods overfit on 10 training points.
+Let's look at a concrete example. I've fit MLPs, and symbolic regression models, to data from $$f(x) = x^2 + \epsilon$$, where $$-50 \leq x \leq 100$$ is sampled uniformly in the interval, and $$\epsilon$$ is Gaussian noise. First, let's look at how the two methods overfit on 8 training points.
 
 
 <div class="plot-container">
@@ -56,7 +56,7 @@ Let's look at a concrete example. I've fit MLPs, and symbolic regression models,
     </iframe>
 </div>
 
-Neither method is regularized properly, and with only 10 points, they both fit the noise. Here's how the methods fit 10000 points:
+Neither method is regularized properly, and with only 8 points, they both fit the noise. Here's how the methods fit 10000 points:
 
 <div class="plot-container">
     <iframe src="/plots/fit.html" height="315" width="560" allowfullscreen="" frameborder="0">
