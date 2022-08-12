@@ -12,7 +12,7 @@ I will argue for Marcus' position, but dive a little deeper than he does. I beli
 <div id="toc"></div>
 
 
-### The scaling hypothesis and the laziness of deep learning
+#### The scaling hypothesis and the laziness of deep learning
 
 The scaling hypothesis is that
 
@@ -35,8 +35,6 @@ set. Among those solutions, shortcuts fail to generalize to different data (o.o.
 intended solution does generalize.</center>
 
 So, the scaling hypothesis says that at large enough scale, the lazy, shortcut solution is the desired one. 
-
-#### Assumptions underlying the scaling hypothesis
 
 This requires that the desired solution
 1. Can be represented by a practically sized NN
@@ -225,8 +223,8 @@ We'd like to be able to synthesize graphics and physics engines, as well as thei
 
 We can then express these interventions as program-editing programs, which allows us to incorporate data from physical and simulated experiments, in the Bayesian synthesis process. The authors demonstrate how incorporating experimental data helps identify the correct causal model (or rather, concentrates posterior probability mass over the correct causal models), in a toy example. 
 
-The scientific revolution took off when people stopped being satisfied with the "more epicycles" approach to modelling, and started doing experiments. If history is to repeat itself, we should be prepared for it.
+The scientific revolution took off when people stopped being satisfied with the "more epicycles" approach to modelling, and started doing experiments. If history is to repeat itself in silico, we should be prepared for it.
 
-#### Implication for AI alignment
+#### Implications for AI alignment
 
 The intended audience of this post doesn't need convincing that [AI alignment is important](https://nintil.com/ai-safety/). But from what I've seen, there's considerable overlap between those who take AI alignment seriously, and those who think scaling deep learning will produce AGI. My own view on AI alignment is that it's probably only possible to do it in close concert with capabilities research. If we want AI systems to understand us, and [understand what we want](https://arxiv.org/abs/1606.03137), they will need to learn causal models of us, and why we want some things and not other things. They will need to be robust to distribution shift, and think in terms of hypotheticals and counterfactuals. I'm hoping, but obviously don't really know, that there will be powerful economic incentives to align AI systems in this way. Right now, we have a golden opportunity to get started on this before everyone else does.
