@@ -19,7 +19,6 @@
 
 
     {% if page.subtitle %}
-    <p id="page-subtitle" class="page__subtitle p-name" itemprop="headline">
-    {{ page.subtitle }}
-    </p>
+    <meta property="og:subtitle" content="{{ page.subtitle }}" />
+    <meta property="twitter:subtitle" content="{{ page.subtitle }}" />
     {% endif %}
