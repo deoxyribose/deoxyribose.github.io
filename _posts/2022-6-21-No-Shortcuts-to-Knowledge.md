@@ -1,6 +1,7 @@
 ---
 layout: post
-title: 
+title: "No shortcuts to knowledge"
+subtitle: "Why AI needs to ease up on scaling and learn how to code"
 katex: True
 ---
 

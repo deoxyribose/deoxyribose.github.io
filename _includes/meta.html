@@ -16,3 +16,10 @@
     <meta property="og:title" content="{{ page.title }}" />
     <meta property="twitter:title" content="{{ page.title }}" />
     {% endif %}
+
+
+    {% if page.subtitle %}
+    <p id="page-subtitle" class="page__subtitle p-name" itemprop="headline">
+    {{ page.subtitle }}
+    </p>
+    {% endif %}
