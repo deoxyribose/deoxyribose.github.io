@@ -229,3 +229,8 @@ The scientific revolution took off when people stopped being satisfied with the 
 #### Implications for AI alignment
 
 The intended audience of this post doesn't need convincing that [AI alignment is important](https://nintil.com/ai-safety/). But from what I've seen, there's considerable overlap between those who take AI alignment seriously, and those who think scaling deep learning will produce AGI. My own view on AI alignment is that it's probably only possible to do it in close concert with capabilities research. If we want AI systems to understand us, and [understand what we want](https://arxiv.org/abs/1606.03137), they will need to learn causal models of us, and why we want some things and not other things. They will need to be robust to distribution shift, and think in terms of hypotheticals and counterfactuals. I'm hoping, but obviously don't really know, that there will be powerful economic incentives to align AI systems in this way. Right now, we have a golden opportunity to get started on this before everyone else does.
+
+
+
+
+Thanks to EducationalCicada for suggestions and feedback!
