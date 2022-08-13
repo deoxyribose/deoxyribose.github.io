@@ -21,7 +21,7 @@ Random.seed!(42)
 end
 
 # create x^2 Data
-N = Int(20)
+N = Int(16)
 iid_intervals = ((-50, 100),)
 xs = []
 ys = []
@@ -179,7 +179,7 @@ f = eval(fexp)
 
 
 
-newxs = collect(range(-200, 200, 1000))
+newxs = collect(range(-60, 160, 1000))
 train_points = PlotlyJS.scatter(x=data[1:Int(N / 2), 1], y=data[1:Int(N / 2), 2], mode="markers", name="Training data, N = $(Int(N/2))")
 test_points = PlotlyJS.scatter(x=data[Int(N / 2)+1:end, 1], y=data[Int(N / 2)+1:end, 2], mode="markers", name="Test data, N = $(Int(N/2))")
 
