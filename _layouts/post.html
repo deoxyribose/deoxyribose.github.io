@@ -7,9 +7,9 @@ layout: default
 
   <div class="entry">
     {{ content }}
+    <div class="toc">{% include toc.html html=content h_min=3%}</div>
   </div>
   
-  <div class="toc">{% include toc.html html=content h_min=3%}</div>
 
   <div class="date">
     Written on {{ page.date | date: "%B %e, %Y" }}
