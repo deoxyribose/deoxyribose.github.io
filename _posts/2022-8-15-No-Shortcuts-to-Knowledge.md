@@ -1,12 +1,10 @@
 ---
 layout: post
 title: "No shortcuts to knowledge"
+subtitle: "Why AI needs to ease up on scaling and learn how to code"
 katex: True
-toc: True
 ---
 
-
-## Why AI needs to ease up on scaling and learn how to code
 
 Will scaling deep learning produce human-level generality, or do we need a new approach? You may have read the exchange between Scott Alexander and Gary Marcus, and felt that there are some good arguments on both sides, some bad ones, but few arguments that go beyond analogy and handwaving - arguments that would take what we know about deep learning and intelligence, and look at what that knowledge implies. If you haven't read the exchange, here it is: [SA](https://astralcodexten.substack.com/p/my-bet-ai-size-solves-flubs?s=w), [GM](https://garymarcus.substack.com/p/what-does-it-mean-when-an-ai-fails), [SA](https://astralcodexten.substack.com/p/somewhat-contra-marcus-on-ai-scaling?s=r), [GM](https://garymarcus.substack.com/p/does-ai-really-need-a-paradigm-shift?s=w#footnote-anchor-1). 
 
