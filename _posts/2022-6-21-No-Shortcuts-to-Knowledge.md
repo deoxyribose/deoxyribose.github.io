@@ -12,8 +12,6 @@ Will scaling deep learning produce human-level generality, or do we need a new a
 I will argue for Marcus' position, but dive a little deeper than he does. I believe that symbolic representations, specifically _programs_, and learning as _program synthesis_, can provide data efficient and flexible generalization, in a way that deep learning can't, no matter how much we scale it. I'll show how _probabilistic programs_ can represent causal models of the world, which deep learning can't do, and why causal models are essential to intelligence. But I'll start by examining the opposing view, that scaling deep learning is sufficient for general intelligence. To that end, I'll quote from [Gwern's thorough essay on the scaling hypothesis](https://www.gwern.net/Scaling-hypothesis).
 
 
-<div class="toc"></div>
-
 #### The scaling hypothesis and the laziness of deep learning
 
 The scaling hypothesis is that
