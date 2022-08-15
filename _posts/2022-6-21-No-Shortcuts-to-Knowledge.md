@@ -2,6 +2,7 @@
 layout: post
 title: "No shortcuts to knowledge"
 katex: True
+toc: True
 ---
 
 ## Why AI needs to ease up on scaling and learn how to code
