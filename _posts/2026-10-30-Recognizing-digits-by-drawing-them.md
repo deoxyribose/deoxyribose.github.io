@@ -21,7 +21,7 @@ Nielsen's best numbers are a small convnet with ±1 pixel translation augmentati
 
 As everyone knows, everything works on MNIST. Linear SVMs work on MNIST. A drug-addled, lobotomized rainworm works on MNIST. *Communism* works on MNIST. Clearly, I hand-wrote a generative model for a domain where the inductive bias fits perfectly, and there's not much else going on in the image. Of course it wins. Nobody hand-writes a renderer for cats (though it works great for [worms](https://arxiv.org/abs/2503.14525)). In contrast, CNN + augmentation has much weaker inductive biases, and can learn a much broader range of data, given labels. But here, no labels were used to fit anything, and nothing learned a feature; it's not quite a digit simulator, but it's close - and it can be fit to data at test time.
 
-### The idea in one picture
+### Classification by how far a program has to travel
 
 Fitting is unsupervised. The labels are used only afterwards, to group the fitted programs into ten piles. Classification is then: run the optimizer from each template and see which one can explain the image.
 
@@ -35,7 +35,7 @@ Importantly, **it's the optimization doing the work, not the training templates.
 
 **How you pool over a class matters.** Averaging the cost over all ten templates of a class gives 0.925, averaging the best two gives 0.960. Handwriting style is multi-modal, and the mean drags in nine irrelevant styles to vote on every digit. Often, the true class's best template fits better than the (mistaken) winner - the right answer is sitting in the fits and gets averaged away. You can [page through them]({{ site.url }}/rmnist/failures.html), or see the [full study]({{ site.url }}/rmnist/classify10.html).
 
-### Where it holds, and where it breaks
+### Thirteen corruptions, and where it breaks
 
 If this works because the model has knobs for the ways a digit can vary, it should survive those variations without being shown any. Thirteen corruptions, 1000 held-out test digits, three fixed models: the spline fitter, a faithful port of Nielsen's convnet - reproduced at 0.914 ± 0.004 against his 0.921 - and that convnet retrained with rotation and scale augmentation at exactly the magnitudes tested, which hands it the answer in advance.
 
@@ -49,7 +49,7 @@ The reason is not in the renderer but in the objective. The data term is a flat 
 
 Small test sets invite self-deception, and three separate times a setting that won on validation - a pose-weighted anchor, a staged fit, a tuned blend of energy and residual - failed to transfer to test. The only thing tuned for the numbers here is the anchor strength, on 40 validation digits.
 
-### What I actually think this is about
+### Learning simulators we can invert
 
 What did the work is a model of *how the image was made*, plus the ability to run it backwards. No discriminative objective, no pretraining, a hundred images.
 
