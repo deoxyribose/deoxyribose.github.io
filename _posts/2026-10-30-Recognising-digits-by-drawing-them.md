@@ -15,11 +15,11 @@ Here is one answer. I wrote a differentiable renderer that draws a digit as a si
 | best baseline (Nielsen) | 0.569 | 0.844 | 0.921 |
 | this | **0.825** | **0.935** | **0.960** |
 
-Nielsen's best numbers are a small convnet with ±1 pixel translation augmentation. His are measured on 10,000 validation images, mine on 200 test digits — so mine carry a standard error of about 1.5 points. Treat the RMNIST/10 gap as real but not precise, and the RMNIST/1 gap as the interesting one.
+Nielsen's best numbers are a small convnet with ±1 pixel translation augmentation. His are measured on 10,000 validation images, mine on 200 test digits, so mine carry a standard error of about 1.5 points. Treat the RMNIST/10 gap as real but not precise, and the RMNIST/1 gap as the interesting one.
 
 ## Why you should not care about MNIST
 
-The obvious dismissal is that I hand-wrote a generative model for the one domain where that is easy, and of course it wins. Half of that is right. Nobody hand-writes a renderer for cats. This is a toy, chosen because it is tractable, and it transfers to nothing by itself. The part that isn't toy is where the information came from, because it came from none of the usual places.
+The obvious dismissal is that I hand-wrote a generative model for the one domain where that is easy, and of course it wins. Half of that is right. Nobody hand-writes a renderer for cats. This is a toy, chosen because it is tractable, and it transfers to nothing by itself. The part that isn't toy is where the information came from. No labels were used to fit anything, and nothing learned a feature; what this method knows about digits, it knows because someone wrote down how a pen moves.
 
 ## The idea in one picture
 
@@ -43,7 +43,7 @@ If this works because the model has knobs for the ways a digit can vary, it shou
 
 ![Accuracy under thirteen corruptions]({{ site.url }}/images/rmnist_ood.png "Three fixed models on 1000 corrupted test digits. Nothing was retuned for any corruption.")
 
-Where the renderer has a parameter, it holds up. Rotate by 35° and the convnet falls to 0.52 while the fitter, told nothing, keeps 0.86. Shift by three pixels: 0.64 against 0.93. The augmented convnet recovers on the geometry it was augmented for, as it must, and pays for it elsewhere — teaching it rotation and scale cost it nine points on additive noise and, on a uniformly raised background, collapsed it to 0.12, where it answers "8" to 906 of 1000 digits.
+Where the renderer has a parameter, it holds up. Rotate by 35° and the convnet falls to 0.52 while the fitter, told nothing, keeps 0.86. Shift by three pixels: 0.64 against 0.93. The augmented convnet recovers on the geometry it was augmented for, as it must, and pays for it elsewhere: teaching it rotation and scale cost it nine points on additive noise and, on a uniformly raised background, collapsed it to 0.12, where it answers "8" to 906 of 1000 digits.
 
 But having a knob turns out not to predict robustness. Thinning the strokes *is* a knob — the brush has a width parameter, and it does adapt — yet accuracy falls to 0.58, the worst of the three. Dimming the ink to 45%, which the renderer genuinely cannot express, is worse still at 0.52, while both convnets barely notice. A raised background is equally inexpressible and costs the fitter nothing at all.
 
@@ -55,11 +55,15 @@ A note on honesty, since small test sets invite self-deception: three separate t
 
 ## What I actually think this is about
 
-Nothing here learned a feature. There was no discriminative objective, no pretraining, and 100 images. What did the work is a model of *how the image was made*, plus the ability to run it backwards.
+What did the work is a model of *how the image was made*, plus the ability to run it backwards. No discriminative objective, no pretraining, a hundred images.
 
-Once you can ask "what parameters would have produced this?", you get a distance between images for free, and it is a distance with structure built in. It knows a rotated 7 is a 7 — not because it saw rotated 7s, but because rotation is a knob. Nobody put that knob there to survive rotated test digits; it is there because that is how ink gets onto paper, and the invariance is a by-product. That is a different kind of generalisation from the statistical kind, though not a free pass: you stop having to guess the test distribution and start having to get the measurement right instead, and only the second question has a principled answer. And the model knows when it is lost, which may be the more valuable half — a program that cannot reach an image says so, loudly, in units of residual.
+Once you can ask "what parameters would have produced this?", you get a distance between images for free, and it is a distance with structure built in. It knows a rotated 7 is a 7 — not because it saw rotated 7s, but because rotation is a knob. Nobody put that knob there to survive rotated test digits; it is there because that is how ink gets onto paper, and the invariance is a by-product.
 
-Those are properties of having a causal model of image formation and being able to invert it, not properties of MNIST — which is why I think this is worth more than a benchmark result. We are suddenly quite good at *learning* simulators: video models, neural rendering, learned physics. Invert one at test time and you get the same free metric, the same explicit pose, the same ability to refuse, with the supervision budget going to how the world makes images rather than to one particular set of labels. What would break first is that a learned simulator is slow and non-convex to invert, and its latent knobs are not disentangled the way my seven transforms are. Mine works because the parameters mean something — half a day of design went into making translation cheap and knot-shuffling expensive. That is the hard part, and nothing here shows it is solvable.
+That is a different kind of generalisation from the statistical kind, though not a free pass: you stop having to guess the test distribution and start having to get the measurement right instead, and only the second question has a principled answer. And the model knows when it is lost, which may be the more valuable half — a program that cannot reach an image says so, loudly, in units of residual.
+
+Those are properties of having a causal model of image formation and being able to invert it, not properties of MNIST. Which is why I think this is worth more than a benchmark result. We are suddenly quite good at *learning* simulators: video models, neural rendering, learned physics. Invert one at test time and you get the same free metric, the same explicit pose, the same ability to refuse, with the supervision budget going to how the world makes images rather than to one particular set of labels.
+
+What would break first is that a learned simulator is slow and non-convex to invert, and its latent knobs are not disentangled the way my seven transforms are. Mine works because the parameters mean something — half a day of design went into making translation cheap and knot-shuffling expensive. That is the hard part, and nothing here shows it is solvable.
 
 Where I think this goes, with no evidence yet: three pieces, none of them sufficient alone. A network that proposes the initial parameters, so you pay for one fit instead of a hundred. A renderer treated as a *sketch* rather than a finished model. And a coding agent that edits the sketch when the residual says the current one cannot explain what it is looking at. Gradient descent handles the continuous parameters, the agent handles the discrete structure, and the residual says which of the two is failing. My model has exactly one stroke; hand it a Greek letter and it ought to be able to tell you that it needs a second one. That is the next experiment, and it is where the comparison with a convnet stops being about accuracy and starts being about whether a model can notice it is out of its depth at all.
 
