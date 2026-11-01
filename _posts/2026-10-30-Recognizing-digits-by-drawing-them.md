@@ -35,9 +35,9 @@ Importantly, **it's the optimization doing the work, not the training templates.
 
 **How you pool over a class matters.** Averaging the cost over all ten templates of a class gives 0.925, averaging the best two gives 0.960. Handwriting style is multi-modal, and the mean drags in nine irrelevant styles to vote on every digit. Often, the true class's best template fits better than the (mistaken) winner - the right answer is sitting in the fits and gets averaged away. You can [page through them]({{ site.url }}/rmnist/failures.html), or see the [full study]({{ site.url }}/rmnist/classify10.html).
 
-### Thirteen corruptions, and where it breaks
+### Thirteen distribution shifts, and where it breaks
 
-If this works because the model has knobs for the ways a digit can vary, it should survive those variations without being shown any. Thirteen corruptions, 1000 held-out test digits, three fixed models: the spline fitter, a faithful port of Nielsen's convnet - reproduced at 0.914 ± 0.004 against his 0.921 - and that convnet retrained with rotation and scale augmentation at exactly the magnitudes tested, which hands it the answer in advance.
+If this works because the model has knobs for the ways a digit can vary, it should generalize out of distribution: survive those variations without having been shown any. Thirteen corruptions, 1000 held-out test digits, three fixed models: the spline fitter, a faithful port of Nielsen's convnet - reproduced at 0.914 ± 0.004 against his 0.921 - and that convnet retrained with rotation and scale augmentation at exactly the magnitudes tested, which hands it the answer in advance.
 
 ![Accuracy under thirteen corruptions]({{ site.url }}/images/rmnist_ood.png "Three fixed models on 1000 corrupted test digits. Nothing was retuned for any corruption.")
 
